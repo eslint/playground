@@ -15,6 +15,8 @@ layout: base.njk
             </svg>
         </button>
 
+        <span class="visually-hidden" id="infobox">Changing configurations will apply the selected changes to the playground.</span>
+
         <div class="playground__config-options" id="playground__config-options">
             <h2 data-config-section-title>Share URL</h2>
             <div data-config-section></div>
@@ -72,7 +74,7 @@ layout: base.njk
 
     </main>
 
-    <section class="playground__console" aria-labelledby="playground__console-label">
+    <section class="playground__console" aria-labelledby="playground__console-label" aria-live="polite">
         <span id="playground__console-label" hidden>Console</span>
         Everything looks good 👍🏻
         <br>

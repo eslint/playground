@@ -160,7 +160,8 @@ var util = {
                 var $this = item;
                 let text = $this.innerText;
                 let headingButton = document.createElement("button");
-                headingButton.setAttribute("aria-expanded", "false");
+                if (_options.allCollapsed) headingButton.setAttribute("aria-expanded", "false");
+                else headingButton.setAttribute("aria-expanded", "true");
                 headingButton.setAttribute("data-config-section-toggle", "");
                 headingButton.setAttribute("id", accID + "__heading-" + index);
                 headingButton.setAttribute(

@@ -4,11 +4,11 @@
     grid-template-columns: auto 1fr;
     padding: 1rem;
     gap: .75rem;
-    margin-bottom: 1.5rem;
-    margin-block-end: 1.5rem;
+    margin-bottom: .5rem;
+    margin-block-end: .5rem;
     align-items: start;
     font-size: .875rem;
-    background-color: #fff;
+    background-color: var(--body-background-color);
     border-radius: var(--border-radius);
 
     &.alert--warning {
@@ -18,9 +18,17 @@
     &.alert--important {
         border: 1px solid var(--color-warning-300);
     }
+}
 
-    &.alert--tip {
-        border: 1px solid var(--color-success-300);
+[data-theme="dark"] {
+    .alert {
+        &.alert--warning {
+            border: 1px solid var(--color-rose-300);
+        }
+
+        &.alert--important {
+            border: 1px solid var(--color-warning-300);
+        }
     }
 }
 
@@ -45,8 +53,15 @@
     color: var(--color-warning-600);
 }
 
-.alert--tip {
-    color: var(--color-success-600);
+
+[data-theme="dark"] {
+    .alert--warning {
+        color: var(--color-rose-400);
+    }
+
+    .alert--important {
+        color: var(--color-warning-400);
+    }
 }
 
 .alert__type {
@@ -55,16 +70,21 @@
 
     .alert--warning & {
         color: var(--color-rose-700);
+
+        [data-theme="dark"] & {
+            color: var(--color-rose-300);
+        }
     }
 
     .alert--important & {
         color: var(--color-warning-700);
-    }
 
-    .alert--tip & {
-        color: var(--color-success-700);
+        [data-theme="dark"] & {
+            color: var(--color-warning-300);
+        }
     }
 }
+
 
 .alert__learn-more {
     display: block;
@@ -74,14 +94,26 @@
 
     .alert--warning & {
         color: var(--color-rose-700);
+
+        [data-theme="dark"] & {
+            color: var(--color-rose-300);
+        }
     }
 
     .alert--important & {
         color: var(--color-warning-700);
+
+        [data-theme="dark"] & {
+            color: var(--color-warning-300);
+        }
     }
 
     .alert--tip & {
         color: var(--color-success-700);
+
+        [data-theme="dark"] & {
+            color: var(--color-success-300);
+        }
     }
 }
 

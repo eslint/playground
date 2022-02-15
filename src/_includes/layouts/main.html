@@ -74,6 +74,9 @@ layout: base.njk
 
     <section class="playground__console" aria-labelledby="playground__console-label">
         <span id="playground__console-label" hidden>Console</span>
-        console here
+        {% from 'components/alert.macro.html' import warning, important %}
+
+        {{ warning() }}
+        {{ important() }}
     </section>
 </div>

@@ -201,6 +201,10 @@ ul.selected-options {
     position: relative;
     margin-bottom: .5rem;
     margin-block-end: .5rem;
+
+    .label__text {
+        margin: 0;
+    }
 }
 
 // hide the checkbox accessibly

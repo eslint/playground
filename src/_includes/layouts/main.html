@@ -4,26 +4,28 @@ layout: base.njk
 
 {% include "partials/header.html" %}
 
-<section class="playground__config" aria-labelledby="playground__config-toggle">
-    <button class="playground__config-toggle" id="playground__config-toggle" hidden>
-        <span>Playground Configuration</span>
-        <svg width="20" height="20" viewBox="20 20 60 60" aria-hidden="true" focusable="false">
-            <path id="ham-top" d="M30,37 L70,37 Z" stroke="currentColor"></path>
-            <path id="ham-middle" d="M30,50 L70,50 Z" stroke="currentColor"></path>
-            <path id="ham-bottom" d="M30,63 L70,63 Z" stroke="currentColor"></path>
-        </svg>
-    </button>
+<div class="playground-wrapper">
+    <section class="playground__config" aria-labelledby="playground__config-toggle">
+        <button class="playground__config-toggle" id="playground__config-toggle" hidden>
+            <span>Playground Configuration</span>
+            <svg width="20" height="20" viewBox="20 20 60 60" aria-hidden="true" focusable="false">
+                <path id="ham-top" d="M30,37 L70,37 Z" stroke="currentColor"></path>
+                <path id="ham-middle" d="M30,50 L70,50 Z" stroke="currentColor"></path>
+                <path id="ham-bottom" d="M30,63 L70,63 Z" stroke="currentColor"></path>
+            </svg>
+        </button>
 
-    <div class="playground__config-option" id="playground__config-options">
-        config options here
-    </div>
-</section>
+        <div class="playground__config-option" id="playground__config-options">
+            config options here
+        </div>
+    </section>
 
-<main id="main" tabindex="-1">
-    editor here
-</main>
+    <main class="playground__editor" id="main" tabindex="-1">
+        editor here
+    </main>
 
-<section class="playground__console" aria-labelledby="playground__console-label">
-    <h2 hidden>Console</h2>
-    console here
-</section>
+    <section class="playground__console" aria-labelledby="playground__console-label">
+        <span id="playground__console-label" hidden>Console</span>
+        console here
+    </section>
+</div>

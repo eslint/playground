@@ -53,11 +53,12 @@ html {
 
 body {
     position: relative;
-    margin: 0 auto;
     line-height: 1.5;
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    max-width: 1700px;
+    margin: 0 auto;
     background-color: var(--body-background-color);
     color: var(--body-text-color);
 }
@@ -87,10 +88,6 @@ body {
     }
 }
 
-.wrapper {
-    padding: 0 calc(1rem + 1vw);
-    flex: 1;
-}
 
 main {
     flex: 1;

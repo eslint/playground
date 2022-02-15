@@ -60,7 +60,7 @@
             config.setAttribute("data-open", "false");
             config_trigger.addEventListener("click", toggleconfig, false);
         } else {
-            config_trigger.setAttribute("hidden");
+            config_trigger.setAttribute("hidden", "");
             config_trigger.setAttribute("aria-expanded", "true");
             config.setAttribute("data-open", "true");
 

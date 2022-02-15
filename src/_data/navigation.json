@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "text": "Team",
+      "url": "https://eslint.org/team/"
+    },
+    {
+      "text": "Blog",
+      "url": "https://eslint.org/blog/"
+    },
+    {
+      "text": "Docs",
+      "url": "/"
+    },
+    {
+      "text": "Store",
+      "url": "https://eslint.threadless.com"
+    },
+    {
+      "text": "Playground",
+      "url": "https://playground.eslint.org"
+    }
+  ]
+}

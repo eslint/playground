@@ -44,13 +44,30 @@
         body = document.getElementsByTagName("body")[0],
         open = false;
 
-    if (config_trigger) {
-        config_trigger.removeAttribute("hidden");
-        config_trigger.setAttribute("aria-expanded", "false");
-        config.setAttribute("data-open", "false");
+    if (matchMedia) {
+        const mq = window.matchMedia("(max-width: 1023px)");
+        mq.addListener(WidthChange);
+        WidthChange(mq);
+    }
 
-        config.setAttribute("data-open", "false");
-        config_trigger.addEventListener("click", toggleconfig, false);
+     // media query change
+    function WidthChange(mq) {
+        if (mq.matches) {
+            config_trigger.removeAttribute("hidden");
+            config_trigger.setAttribute("aria-expanded", "false");
+            config.setAttribute("data-open", "false");
+
+            config.setAttribute("data-open", "false");
+            config_trigger.addEventListener("click", toggleconfig, false);
+        } else {
+            config_trigger.setAttribute("hidden");
+            config_trigger.setAttribute("aria-expanded", "true");
+            config.setAttribute("data-open", "true");
+
+            config.setAttribute("data-open", "true");
+            config_trigger.addEventListener("click", toggleconfig, false);
+        }
+
     }
 
     function toggleconfig(e) {

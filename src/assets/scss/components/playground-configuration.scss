@@ -37,14 +37,12 @@
     cursor: pointer;
     display: flex;
     width: 100%;
-    padding: .75rem 1.125rem;
-    padding: 0;
+    padding: .5rem 1rem;
     align-items: center;
     justify-content: space-between;
     gap: .5rem;
     font-weight: 500;
     border-radius: var(--border-radius);
-    color: var(--headings-color);
     color: var(--link-color);
 
     &:hover {

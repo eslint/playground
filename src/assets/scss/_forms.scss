@@ -180,7 +180,7 @@ ul.selected-options {
     padding: .25rem .5rem;
     color: inherit;
     border: 1px solid var(--divider-color);
-    background: var(--body-background-color);
+    background: var(--lighter-background-color);
     border-radius: 4px;
     cursor: pointer;
     margin: 0 .25rem .25rem 0;
@@ -190,3 +190,220 @@ ul.selected-options {
         margin-inline-start: .25rem;
     }
 }
+
+
+.c-checkbox {
+    margin-bottom: var(--spacing-3);
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    position: relative;
+    font-size: var(--fs-xs);
+}
+
+.c-checkbox--disabled {
+    opacity: .6;
+    color: var(--color-gray-5);
+}
+
+.c-checkbox--with-description {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    margin: 0;
+
+    padding: var(--spacing-4) 0;
+    border-bottom: 1px solid var(--color-gray-3);
+
+    .c-checkbox__label,
+    .c-checkbox__description {
+        display: block;
+        line-height: 1.4;
+    }
+
+    .c-checkbox__label {
+        font-weight: bold;
+        margin-bottom: var(--spacing-1);
+    }
+
+    .c-checkbox__text {
+        max-width: 75ch;
+    }
+}
+
+// hide the checkbox accessibly
+.c-checkbox input[type="checkbox"] {
+    /* remove the checkbox from the page flow, positioning it on top of the SVG */
+    position: absolute;
+    /* set same dimensions as the SVG */
+    width: 1em;
+    height: 1em;
+    /* hide it */
+    opacity: 0;
+}
+
+// basic styles for the svg
+.c-checkbox svg {
+    border-radius: 2px;
+    /* set SVG dimensions in ems; i.e. relative to the font size so that it scales with the size of the font. */
+    width: 1.5em;
+    height: 1.5em;
+
+    margin-right: var(--spacing-2);
+
+    fill: #fff;
+    color: var(--color-gray-6);
+
+    /* apply a transition to the elements inside the svg */
+    * {
+        transition: all 0.1s linear;
+    }
+}
+
+// style changes inside the svg when the checkbox is checked
+.c-checkbox input[type="checkbox"]:checked+svg {
+    .cb-bg {
+        fill: var(--color-tide);
+        color: var(--color-tide);
+    }
+
+    .cb-cm {
+        stroke: none;
+    }
+}
+
+.c-checkbox input[type="checkbox"][disabled]+svg,
+.c-checkbox input[type="checkbox"][aria-disabled]+svg {
+    .cb-bg {
+        fill: var(--color-gray-4);
+        color: var(--color-gray-5);
+    }
+
+    .cb-cm {
+        stroke: none;
+        fill: var(--color-gray-4);
+    }
+}
+
+.c-checkbox input[type="checkbox"]:focus+svg {
+    outline: 3px solid transparent;
+    outline-offset: 3px;
+
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--color-tide);
+}
+
+.c-checkbox input[type="checkbox"]:focus:not(:focus-visible)+svg {
+    outline: none;
+    box-shadow: none;
+}
+
+/* WHCM styles */
+.c-checkbox svg {
+    @media screen and (-ms-high-contrast: active) {
+        .cb-bg {
+            stroke: windowText;
+        }
+    }
+}
+
+@media screen and (-ms-high-contrast: active) {
+    .c-checkbox input[type="checkbox"]:checked~svg {
+        .cb-bg {
+            fill: windowText;
+        }
+
+        .cb-cm {
+            stroke: highlight;
+        }
+    }
+}
+
+
+/* CUSTOM CHECKBOX STYLES */
+
+
+.c-custom-checkbox {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    position: relative;
+    margin-bottom: .5rem;
+    margin-block-end: .5rem;
+}
+
+// hide the checkbox accessibly
+.c-custom-checkbox input[type="checkbox"] {
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    opacity: 0;
+    left: 0;
+    offset-inline-start: 0;
+}
+
+// basic styles for the svg
+.c-custom-checkbox__icon {
+    margin-right: .5rem;
+    margin-inline-end: .5rem;
+
+    * {
+        transition: all 0.1s linear;
+    }
+}
+
+.c-custom-checkbox__icon {
+    .cm {
+        stroke: transparent;
+    }
+}
+
+.c-custom-checkbox input[type="checkbox"]:checked ~ .c-custom-checkbox__icon {
+    .cm { stroke: var(--link-color); }
+    .border { stroke: var(--link-color); }
+}
+
+.c-custom-checkbox input[type="checkbox"]:focus ~ .c-custom-checkbox__icon {
+    outline: 2px solid var(--outline-color);
+    outline-offset: 3px;
+}
+
+.c-custom-checkbox input[type="checkbox"]:focus~.c-custom-checkbox__icon {
+    outline: 3px solid transparent;
+}
+
+.js-focus-visible .c-custom-checkbox input[type="checkbox"]:focus:not(.focus-visible)~.c-custom-checkbox__icon {
+    outline: 2px solid var(--outline-color);
+    outline-offset: 3px;
+}
+
+.c-custom-checkbox input[type="checkbox"]:focus:not(:focus-visible)~.c-custom-checkbox__icon {
+    outline: 2px solid var(--outline-color);
+    outline-offset: 3px;
+}
+
+.c-custom-checkbox input[type="checkbox"].focus-visible ~ .c-custom-checkbox__icon {
+    outline: 2px solid var(--outline-color);
+    outline-offset: 3px;
+}
+
+.c-custom-checkbox input[type="checkbox"]:focus-visible ~ .c-custom-checkbox__icon {
+    outline: 2px solid var(--outline-color);
+    outline-offset: 3px;
+}
+
+/* WHCM styles */
+// .c-custom-checkbox svg {
+//     @media screen and (-ms-high-contrast: active) {
+//         .cb-bg {
+//             stroke: windowText;
+//         }
+//     }
+// }
+
+// @media screen and (-ms-high-contrast: active) {
+//     .c-custom-checkbox input[type="checkbox"][aria-checked="true"]~svg {
+//         color: highlight;
+//     }
+// }

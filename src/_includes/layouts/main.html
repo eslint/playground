@@ -62,6 +62,15 @@ layout: base.njk
             <div class="playground__config-options__section">
                 <h2 data-config-section-title>Environments</h2>
                 <div data-config-section>
+                    <label class="c-custom-checkbox" for="env-select-all">
+                        <input type="checkbox" id="env-select-all">
+                        <span class="label__text">Enable all</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="none" class="c-custom-checkbox__icon">
+                            <rect x="0.5" y="0.5" width="15" height="15" rx="3.5" fill="var(--lightest-background-color)" />
+                            <path class="cm" d="M12 5L6.5 10.5L4 8" stroke="transparent" stroke-width="1.6666" stroke-linecap="round" stroke-linejoin="round" />
+                            <rect class="border" x="0.5" y="0.5" width="15" height="15" rx="3.5" stroke="var(--border-color)" />
+                        </svg>
+                    </label>
                     <div class="combo combo--multi-select">
                         <label id="environments-combo-label" class="combo-label visually-hidden">Select Environments</label>
                         <span id="combo-remove" hidden>remove</span>

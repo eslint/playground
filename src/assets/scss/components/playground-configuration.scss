@@ -2,13 +2,17 @@
     margin: 1rem 0;
 }
 
-[data-config-section-title],  {
+[data-config-section-title]  {
     font-size: .875rem;
     font-family: var(--text-font);
     color: inherit;
     font-weight: 400;
     line-height: 1.5;
     margin: 1rem 0;
+}
+
+[data-config-section] {
+
 }
 
 [data-config-section-toggle] {
@@ -34,15 +38,11 @@
     justify-content: space-between;
     gap: .5rem;
     font-weight: 500;
-    // border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
-    // background-color: var(--secondary-button-background-color);
-    // color: var(--secondary-button-text-color);
     color: var(--headings-color);
-    // box-shadow: 0 1px 2px rgba(16, 24, 40, 0.1);
+    color: var(--link-color);
 
     &:hover {
-        // background-color: var(--secondary-button-hover-color);
         color: var(--link-color);
     }
 

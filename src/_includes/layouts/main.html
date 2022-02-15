@@ -20,7 +20,38 @@ layout: base.njk
             <div data-config-section></div>
 
             <h2 data-config-section-title>Versioning and Config</h2>
-            <div data-config-section></div>
+            <div data-config-section>
+                <div>
+                    <label class="label--block" for="eslint-version">
+                        <span class="label__text">ESLint Version</span>
+                    </label>
+                    <select name="eslint-version" id="eslint-version" class="c-custom-select">
+                        <option value="one" selected>One</option>
+                        <option value="two">two</option>
+                        <option value="three">three</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="label--block" for="ecma-version">
+                        <span class="label__text">ECMA Version</span>
+                    </label>
+                    <select name="ecma-version" id="ecma-version" class="c-custom-select">
+                        <option value="one" selected>One</option>
+                        <option value="two">two</option>
+                        <option value="three">three</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="label--block" for="source-type">
+                        <span class="label__text">Source Type</span>
+                    </label>
+                    <select name="source-type" id="source-type" class="c-custom-select">
+                        <option value="one" selected>One</option>
+                        <option value="two">two</option>
+                        <option value="three">three</option>
+                    </select>
+                </div>
+            </div>
 
             <h2 data-config-section-title>Environments</h2>
             <div data-config-section></div>

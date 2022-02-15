@@ -178,7 +178,7 @@ var util = {
                 $this.addEventListener("click", function(e) {
                     e.preventDefault();
                     togglePanel($this);
-                });
+                }, true);
             });
         };
 
@@ -191,8 +191,8 @@ var util = {
                     "aria-labelledby",
                     accID + "__item-" + config
                 );
-                if (_options.allCollapsed) $this.setAttribute("aria-hidden", "true");
-                else $this.setAttribute("aria-hidden", "false");
+                if (_options.allCollapsed) $this.setAttribute("hidden", "");
+                else $this.removeAttribute("hidden");
             });
         };
 
@@ -201,10 +201,10 @@ var util = {
 
             if (toggleButton.getAttribute("aria-expanded") == "true") {
                 toggleButton.setAttribute("aria-expanded", "false");
-                thepanel.setAttribute("aria-hidden", "true");
+                thepanel.setAttribute("hidden", "");
             } else {
                 toggleButton.setAttribute("aria-expanded", "true");
-                thepanel.setAttribute("aria-hidden", "false");
+                thepanel.removeAttribute("hidden");
             }
         };
 
@@ -220,6 +220,6 @@ var util = {
 var config = document.getElementById('playground__config-options');
 if (config) {
     config = new CollapsibleConfig(config, {
-        allCollapsed: false
+        allCollapsed: true
     });
 }

@@ -663,7 +663,11 @@ Multiselect.prototype.updateMenuState = function(open, callFocus = true) {
 
 // init multiselect
 if(document.querySelector('.js-multiselect')) {
-  const multiselectEl = document.querySelector('.js-multiselect');
-  const multiselectComponent = new Multiselect(multiselectEl, options);
-  multiselectComponent.init();
+  const multiselectEl = document.querySelectorAll('.js-multiselect');
+
+  multiselectEl.forEach(select => {
+    const multiselectComponent = new Multiselect(select, options);
+    multiselectComponent.init();
+  })
+
 }

@@ -33,13 +33,9 @@ pre[class*="language-"] {
 
 /* Code blocks */
 pre[class*="language-"] {
-    // padding: 1.5rem;
-    // margin: 1.5rem 0;
+    margin: 0;
     overflow: auto;
-    background-color: var(--color-neutral-50);
-    border-radius: var(--border-radius);
-
-    background-color: var(--lightest-background-color);
+    background-color: inherit;
     color: var(--color-neutral-900);
 
     [data-theme="dark"] & {
@@ -49,7 +45,7 @@ pre[class*="language-"] {
 
 :not(pre)>code[class*="language-"],
 pre[class*="language-"] {
-    background-color: var(--lightest-background-color);
+    background-color: inherit;
 }
 
 /* Inline code */

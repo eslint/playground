@@ -143,8 +143,8 @@ var util = {
     var CollapsibleConfig = function(inst, options) {
         var _options = Object.assign(CollapsibleConfigOptions, options);
         var el = inst;
-        var configToggles = el.querySelectorAll(".playground__config-options [data-config-section-title]"); // only top-most level
-        var configPanels = el.querySelectorAll(".playground__config-options [data-config-section]"); // the list
+        var configToggles = el.querySelectorAll(".playground__config-options [data-config-section-title]");
+        var configPanels = el.querySelectorAll(".playground__config-options [data-config-section]");
         var accID = util.generateID("c-config-");
 
         var init = function() {
@@ -158,7 +158,6 @@ var util = {
         var setupconfigToggles = function(configToggles) {
             Array.from(configToggles).forEach(function(item, index) {
                 var $this = item;
-
                 let text = $this.innerText;
                 let headingButton = document.createElement("button");
                 headingButton.setAttribute("aria-expanded", "false");
@@ -169,15 +168,13 @@ var util = {
                     accID + "__panel-" + index
                 );
                 headingButton.innerText = text;
-
                 $this.innerHTML = "";
-
                 $this.appendChild(headingButton);
                 headingButton.innerHTML += _options.icon;
 
-                $this.addEventListener("click", function(e) {
+                headingButton.addEventListener("click", function(e) {
                     e.preventDefault();
-                    togglePanel($this);
+                    togglePanel(headingButton);
                 }, true);
             });
         };
@@ -186,7 +183,7 @@ var util = {
             Array.from(configPanels).forEach(function(item, config) {
                 let $this = item;
 
-                $this.setAttribute("id", accID + "__list-" + config);
+                $this.setAttribute("id", accID + "__panel-" + config);
                 $this.setAttribute(
                     "aria-labelledby",
                     accID + "__item-" + config
@@ -197,7 +194,7 @@ var util = {
         };
 
         var togglePanel = function(toggleButton) {
-            var thepanel = toggleButton.nextElementSibling;
+            var thepanel = toggleButton.parentNode.nextElementSibling;
 
             if (toggleButton.getAttribute("aria-expanded") == "true") {
                 toggleButton.setAttribute("aria-expanded", "false");

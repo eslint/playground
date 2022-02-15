@@ -129,15 +129,17 @@ input {
     cursor: pointer;
     color: var(--body-text-color);
 
-    &:hover {
-        background-color: var(--lighter-background-color);
+    &:hover, &:focus, &.option-current {
+        background-color: var(--color-primary-700);
+        color: #fff;
     }
 
     &[aria-selected="true"] {
         background-color: var(--lightest-background-color);
 
-        &:hover {
-            background-color: var(--lighter-background-color);
+        &:hover, &:focus, &.option-current {
+            background-color: var(--color-primary-700);
+            color: #fff;
         }
     }
 }

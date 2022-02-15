@@ -87,6 +87,11 @@ body {
     }
 }
 
+.wrapper {
+    padding: 0 calc(1rem + 1vw);
+    flex: 1;
+}
+
 main {
     flex: 1;
 
@@ -249,13 +254,6 @@ ol {
         padding-left: 1.5rem;
         padding-inline-start: 1.5rem;
     }
-}
-
-.docs-main ul,
-.post-main ul,
-.docs-main ol,
-.post-main ol {
-    margin: 1rem 0;
 }
 
 ul[role="list"] {

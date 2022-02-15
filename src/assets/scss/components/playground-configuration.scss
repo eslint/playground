@@ -8,7 +8,7 @@
     color: inherit;
     font-weight: 400;
     line-height: 1.5;
-    margin: 1rem 0;
+    margin: 0;
 }
 
 [data-config-section] {
@@ -104,6 +104,11 @@
     }
 }
 
+.playground__config-options__section {
+    border-bottom: 1px solid var(--divider-color);
+    padding: .5rem 1rem;
+}
+
 
 /* Styles for the accordion icon */
 .config-js .config-icon {
@@ -119,11 +124,3 @@
     -ms-transform: rotate(180deg);
     transform: rotate(180deg);
 }
-
-// .config-js [aria-hidden="true"] {
-//     display: none;
-// }
-
-// .config-js [aria-hidden="false"] {
-//     display: block;
-// }

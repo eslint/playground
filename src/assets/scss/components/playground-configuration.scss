@@ -24,12 +24,18 @@
     gap: .5rem;
     font-family: var(--text-font);
     color: inherit;
+    color: var(--color-neutral-700);
     font-weight: 400;
     line-height: 1.5;
     padding: 0;
 
     &[aria-expanded="true"] {
         margin-bottom: .5rem;
+    }
+
+    .title-toggle &[aria-expanded="true"] {
+        margin-bottom: 1rem;
+        color: var(--body-text-color);
     }
 }
 

@@ -24,37 +24,42 @@ layout: base.njk
             </div>
 
             <div class="playground__config-options__section">
-                <h2 data-config-section-title>Versioning and Config</h2>
+                <h2 data-config-section-title class="title-toggle">Versioning and Config</h2>
                 <div data-config-section>
-                    <div>
-                        <label class="label--block" for="eslint-version">
+                    <div class="c-field-group">
+                        <label class="c-field" for="eslint-version">
                             <span class="label__text">ESLint Version</span>
+                            <select name="eslint-version" id="eslint-version" class="c-custom-select">
+                                <option value="one" selected>One</option>
+                                <option value="two">two</option>
+                                <option value="three">three</option>
+                            </select>
                         </label>
-                        <select name="eslint-version" id="eslint-version" class="c-custom-select">
-                            <option value="one" selected>One</option>
-                            <option value="two">two</option>
-                            <option value="three">three</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="label--block" for="ecma-version">
+                        <label class="c-field" for="ecma-version">
                             <span class="label__text">ECMA Version</span>
+                            <select name="ecma-version" id="ecma-version" class="c-custom-select">
+                                <option value="one" selected>One</option>
+                                <option value="two">two</option>
+                                <option value="three">three</option>
+                            </select>
                         </label>
-                        <select name="ecma-version" id="ecma-version" class="c-custom-select">
-                            <option value="one" selected>One</option>
-                            <option value="two">two</option>
-                            <option value="three">three</option>
-                        </select>
                     </div>
-                    <div>
-                        <label class="label--block" for="source-type">
-                            <span class="label__text">Source Type</span>
-                        </label>
+                    <label class="c-field" for="source-type">
+                        <span class="label__text">Source Type</span>
                         <select name="source-type" id="source-type" class="c-custom-select">
                             <option value="one" selected>One</option>
                             <option value="two">two</option>
                             <option value="three">three</option>
                         </select>
+                    </label>
+                    <div class="combo">
+                        <label id="ecma-combo-label" class="label__text">ECMA Features</label>
+                        <span id="combo-remove" hidden>remove</span>
+                        <ul role="list" class="selected-options pills" id="ecma-combo-selected"></ul>
+                        <div class="combo js-multiselect">
+                            <input aria-activedescendant="" autocomplete="off" aria-autocomplete="none" aria-controls="listbox3" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="ecma-combo-label combo-selected" id="ecma-combo" class="combo-input c-field__input custom-select" role="combobox" type="text" />
+                            <div class="combo-menu" role="listbox" id="listbox3"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -62,7 +67,7 @@ layout: base.njk
             <div class="playground__config-options__section">
                 <h2 data-config-section-title>Environments</h2>
                 <div data-config-section>
-                    <label class="c-checkbox" for="env-select-all">
+                    <label class="c-checkbox c-field" for="env-select-all">
                         <input type="checkbox" id="env-select-all">
                         <span class="label__text">Enable all</span>
                         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="none" class="c-checkbox__icon">
@@ -71,7 +76,7 @@ layout: base.njk
                             <rect class="border" x="0.5" y="0.5" width="15" height="15" rx="3.5" stroke="var(--border-color)" />
                         </svg>
                     </label>
-                    <div class="combo combo--multi-select">
+                    <div class="combo">
                         <label id="environments-combo-label" class="combo-label visually-hidden">Select Environments</label>
                         <span id="combo-remove" hidden>remove</span>
                         <ul role="list" class="selected-options pills" id="environments-combo-selected"></ul>

@@ -39,8 +39,8 @@
 })();
 
 (function() {
-    var config_trigger = document.getElementById("config-toggle"),
-        config = document.getElementById("js-config-list"),
+    var config_trigger = document.getElementById("playground__config-toggle"),
+        config = document.getElementById("playground__config-options"),
         body = document.getElementsByTagName("body")[0],
         open = false;
 
@@ -68,26 +68,26 @@
 
 
 (function() {
-    var switchers = document.querySelectorAll('.switcher'),
-        fallbacks = document.querySelectorAll('.switcher-fallback');
+    // var switchers = document.querySelectorAll('.switcher'),
+    //     fallbacks = document.querySelectorAll('.switcher-fallback');
 
-    if (fallbacks != null) {
-        fallbacks.forEach(el => {
-            el.setAttribute('hidden', '');
-        });
-    }
+    // if (fallbacks != null) {
+    //     fallbacks.forEach(el => {
+    //         el.setAttribute('hidden', '');
+    //     });
+    // }
 
-    if (switchers != null) {
-        switchers.forEach(element => {
-            element.removeAttribute('hidden');
-            const select = element.querySelector('select');
+    // if (switchers != null) {
+    //     switchers.forEach(element => {
+    //         element.removeAttribute('hidden');
+    //         const select = element.querySelector('select');
 
-            select.addEventListener('change', function() {
-                var selected = this.options[this.selectedIndex];
-                url = selected.getAttribute('data-url');
+    //         select.addEventListener('change', function() {
+    //             var selected = this.options[this.selectedIndex];
+    //             url = selected.getAttribute('data-url');
 
-                window.location.href = url;
-            })
-        });
-    }
+    //             window.location.href = url;
+    //         })
+    //     });
+    // }
 })();

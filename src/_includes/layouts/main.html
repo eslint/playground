@@ -56,7 +56,17 @@ layout: base.njk
             </div>
 
             <h2 data-config-section-title>Environments</h2>
-            <div data-config-section></div>
+            <div data-config-section>
+                <div class="combo combo--multi-select">
+                    <label id="combo-label" class="combo-label visually-hidden">Select Environments</label>
+                    <span id="combo-remove" hidden>remove</span>
+                    <ul role="list" class="selected-options pills" id="combo-selected"></ul>
+                    <div class="combo js-multiselect">
+                        <input aria-activedescendant="" autocomplete="off" aria-autocomplete="none" aria-controls="listbox3" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="combo-label combo-selected" id="combo" class="combo-input c-field__input custom-select" role="combobox" type="text" />
+                        <div class="combo-menu" role="listbox" id="listbox3"></div>
+                    </div>
+                </div>
+            </div>
 
             <h2 data-config-section-title>Rules</h2>
             <div data-config-section></div>

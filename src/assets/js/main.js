@@ -108,3 +108,118 @@
     //     });
     // }
 })();
+
+// add utilities
+var util = {
+    keyCodes: {
+        UP: 38,
+        DOWN: 40,
+        LEFT: 37,
+        RIGHT: 39,
+        HOME: 36,
+        END: 35,
+        ENTER: 13,
+        SPACE: 32,
+        DELETE: 46,
+        TAB: 9,
+    },
+
+    generateID: function(base) {
+        return base + Math.floor(Math.random() * 999);
+    },
+
+    getDirectChildren: function(elm, selector) {
+        return Array.prototype.filter.call(elm.children, function(child) {
+            return child.matches(selector);
+        });
+    },
+};
+
+(function(w, doc, undefined) {
+    var CollapsibleConfigOptions = {
+        allCollapsed: false,
+        icon: '<svg class="config-icon" width="12" height="8" aria-hidden="true" focusable="false" viewBox="0 0 12 8"><g fill="none"><path fill="currentColor" d="M1.41.59l4.59 4.58 4.59-4.58 1.41 1.41-6 6-6-6z"/><path d="M-6-8h24v24h-24z"/></g></svg>',
+    };
+    var CollapsibleConfig = function(inst, options) {
+        var _options = Object.assign(CollapsibleConfigOptions, options);
+        var el = inst;
+        var configToggles = el.querySelectorAll(".playground__config-options [data-config-section-title]"); // only top-most level
+        var configPanels = el.querySelectorAll(".playground__config-options [data-config-section]"); // the list
+        var accID = util.generateID("c-config-");
+
+        var init = function() {
+            el.classList.add("config-js");
+
+            setupconfigToggles(configToggles);
+            setupconfigPanels(configPanels);
+        };
+
+
+        var setupconfigToggles = function(configToggles) {
+            Array.from(configToggles).forEach(function(item, index) {
+                var $this = item;
+
+                let text = $this.innerText;
+                let headingButton = document.createElement("button");
+                headingButton.setAttribute("aria-expanded", "false");
+                headingButton.setAttribute("data-config-section-toggle", "");
+                headingButton.setAttribute("id", accID + "__heading-" + index);
+                headingButton.setAttribute(
+                    "aria-controls",
+                    accID + "__panel-" + index
+                );
+                headingButton.innerText = text;
+
+                $this.innerHTML = "";
+
+                $this.appendChild(headingButton);
+                headingButton.innerHTML += _options.icon;
+
+                $this.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    togglePanel($this);
+                });
+            });
+        };
+
+        var setupconfigPanels = function(configPanels) {
+            Array.from(configPanels).forEach(function(item, config) {
+                let $this = item;
+
+                $this.setAttribute("id", accID + "__list-" + config);
+                $this.setAttribute(
+                    "aria-labelledby",
+                    accID + "__item-" + config
+                );
+                if (_options.allCollapsed) $this.setAttribute("aria-hidden", "true");
+                else $this.setAttribute("aria-hidden", "false");
+            });
+        };
+
+        var togglePanel = function(toggleButton) {
+            var thepanel = toggleButton.nextElementSibling;
+
+            if (toggleButton.getAttribute("aria-expanded") == "true") {
+                toggleButton.setAttribute("aria-expanded", "false");
+                thepanel.setAttribute("aria-hidden", "true");
+            } else {
+                toggleButton.setAttribute("aria-expanded", "true");
+                thepanel.setAttribute("aria-hidden", "false");
+            }
+        };
+
+
+        init.call(this);
+        return this;
+    }; // CollapsibleConfig()
+
+    w.CollapsibleConfig = CollapsibleConfig;
+})(window, document);
+
+// init
+var config = document.getElementById('playground__config-options');
+if (config) {
+    config = new CollapsibleConfig(config, {
+        allCollapsed: false
+    });
+}

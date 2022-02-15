@@ -1,30 +1,55 @@
+.playground__config__download-btn {
+    margin: 1rem 0;
+}
+
+[data-config-section-title],  {
+    font-size: .875rem;
+    font-family: var(--text-font);
+    color: inherit;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 1rem 0;
+}
+
+[data-config-section-toggle] {
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    font-family: var(--text-font);
+    color: inherit;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
 .playground__config-toggle {
     cursor: pointer;
     display: flex;
     width: 100%;
     padding: .75rem 1.125rem;
+    padding: 0;
     align-items: center;
     justify-content: space-between;
     gap: .5rem;
     font-weight: 500;
-    border: 1px solid var(--border-color);
+    // border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
-    background-color: var(--secondary-button-background-color);
-    color: var(--secondary-button-text-color);
-    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.1);
+    // background-color: var(--secondary-button-background-color);
+    // color: var(--secondary-button-text-color);
+    color: var(--headings-color);
+    // box-shadow: 0 1px 2px rgba(16, 24, 40, 0.1);
 
     &:hover {
-        background-color: var(--secondary-button-hover-color);
-    }
-
-    @media all and (min-width: 1023px) {
-        display: none;
+        // background-color: var(--secondary-button-hover-color);
+        color: var(--link-color);
     }
 
     svg {
         width: 1.5em;
         height: 1.5em;
-        color: inherit;
+        color: var(--color-neutral-400);
         fill: none;
         stroke-width: 4;
         stroke-linecap: round;
@@ -59,4 +84,46 @@
             transform: rotate(-41deg);
         }
     }
+}
+
+.playground__config-options {
+    &[data-open="false"] {
+        display: none;
+
+        @media all and (min-width: 1023px) {
+            display: block;
+        }
+    }
+
+    &[data-open="true"] {
+        display: block;
+
+        @media all and (min-width: 1023px) {
+            display: block;
+        }
+    }
+}
+
+
+/* Styles for the accordion icon */
+.config-js .config-icon {
+    display: block !important;
+    width: 0.75rem;
+    height: 0.5rem;
+    transform-origin: 50% 50%;
+    transition: all 0.1s linear;
+    color: inherit;
+}
+
+.config-js [aria-expanded="true"] .config-icon {
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.config-js [aria-hidden="true"] {
+    display: none;
+}
+
+.config-js [aria-hidden="false"] {
+    display: block;
 }

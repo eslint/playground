@@ -48,8 +48,9 @@
     color: var(--color-neutral-400);
     font-size: var(--step-1);
     font-weight: 500;
+    margin-top: -2px;
 
-    @media all and (max-width: 640px) {
+    @media all and (max-width: 480px) {
         display: none;
     }
 }

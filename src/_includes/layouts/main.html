@@ -127,8 +127,12 @@ layout: base.njk
 
     </main>
 
-    <section class="playground__console" aria-labelledby="playground__console-label" aria-live="polite">
+    <section class="playground__console" aria-labelledby="playground__console-label">
         <span id="playground__console-label" hidden>Console</span>
+        <!-- the contents of this live region should update as the warnings and errors logged are updated. It announces to screen readers what has been logged so that they can check them out, instead of announcing each and every warning or error, which can easily turn into a bad experience. -->
+        <div class="console-announcements" aria-live="polite" aria-atomic="true">
+            2 warnings and one error logged in the console.
+        </div>
         Everything looks good 👍🏻
         <br>
         <br>

@@ -29,6 +29,10 @@
     line-height: 1.5;
     padding: 0;
 
+    [data-theme="dark"] & {
+        color: var(--color-neutral-100);
+    }
+
     &[aria-expanded="true"] {
         margin-bottom: .5rem;
     }
@@ -99,15 +103,15 @@
         display: none;
 
         @media all and (min-width: 1023px) {
-            display: block;
+            display: flex;
         }
     }
 
     &[data-open="true"] {
-        display: block;
+        display: flex;
 
         @media all and (min-width: 1023px) {
-            display: block;
+            display: flex;
         }
     }
 }
@@ -123,6 +127,8 @@
     display: block !important;
     width: 0.75rem;
     height: 0.5rem;
+    margin-right: .5rem;
+    margin-inline-end: .5rem;
     transform-origin: 50% 50%;
     transition: all 0.1s linear;
     color: inherit;

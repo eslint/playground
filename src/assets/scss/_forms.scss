@@ -126,7 +126,7 @@ input {
     overflow-y: scroll;
     left: 0;
     position: absolute;
-    top: calc(100% + 1rem);
+    top: calc(100% + .25rem);
     width: 100%;
     z-index: 100;
 }

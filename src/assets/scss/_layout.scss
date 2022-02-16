@@ -21,10 +21,12 @@
 
     display: flex;
     flex-direction: column;
+    background-color: var(--lightest-background-color);
 
     @media all and (min-width: 1023px) {
         border-left: 1px solid var(--divider-color);
         border-inline-end: 1px solid var(--divider-color);
+        background-color: inherit;
     }
 }
 

@@ -1,0 +1,140 @@
+---
+layout: base.njk
+---
+
+{% include "partials/header.html" %}
+
+<div class="playground-wrapper">
+    <section class="playground__config" aria-labelledby="playground__config-toggle">
+        <button class="playground__config-toggle" id="playground__config-toggle" hidden>
+            <span>Playground Configuration</span>
+            <svg width="20" height="20" viewBox="20 20 60 60" aria-hidden="true" focusable="false">
+                <path id="ham-top" d="M30,37 L70,37 Z" stroke="currentColor"></path>
+                <path id="ham-middle" d="M30,50 L70,50 Z" stroke="currentColor"></path>
+                <path id="ham-bottom" d="M30,63 L70,63 Z" stroke="currentColor"></path>
+            </svg>
+        </button>
+
+        <span class="visually-hidden" id="infobox">Changing configurations will apply the selected changes to the playground.</span>
+
+        <div class="playground__config-options" id="playground__config-options">
+            <div class="playground__config-options__section">
+                <h2 data-config-section-title>Share URL</h2>
+                <div data-config-section></div>
+            </div>
+
+            <div class="playground__config-options__section">
+                <h2 data-config-section-title class="title-toggle">Versioning and Config</h2>
+                <div data-config-section>
+                    <div class="c-field-group">
+                        <label class="c-field" for="eslint-version">
+                            <span class="label__text">ESLint Version</span>
+                            <select name="eslint-version" id="eslint-version" class="c-custom-select">
+                                <option value="one" selected>One</option>
+                                <option value="two">two</option>
+                                <option value="three">three</option>
+                            </select>
+                        </label>
+                        <label class="c-field" for="ecma-version">
+                            <span class="label__text">ECMA Version</span>
+                            <select name="ecma-version" id="ecma-version" class="c-custom-select">
+                                <option value="one" selected>One</option>
+                                <option value="two">two</option>
+                                <option value="three">three</option>
+                            </select>
+                        </label>
+                    </div>
+                    <label class="c-field" for="source-type">
+                        <span class="label__text">Source Type</span>
+                        <select name="source-type" id="source-type" class="c-custom-select">
+                            <option value="one" selected>One</option>
+                            <option value="two">two</option>
+                            <option value="three">three</option>
+                        </select>
+                    </label>
+                    <div class="combo">
+                        <label id="ecma-combo-label" class="label__text">ECMA Features</label>
+                        <span id="combo-remove" hidden>remove</span>
+                        <ul role="list" class="selected-options pills" id="ecma-combo-selected"></ul>
+                        <div class="combo js-multiselect">
+                            <input aria-activedescendant="" autocomplete="off" aria-autocomplete="none" aria-controls="listbox3" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="ecma-combo-label combo-selected" id="ecma-combo" class="combo-input c-field__input custom-select" role="combobox" type="text" />
+                            <div class="combo-menu" role="listbox" id="listbox3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="playground__config-options__section">
+                <h2 data-config-section-title>Environments</h2>
+                <div data-config-section>
+                    <label class="c-checkbox c-field" for="env-select-all">
+                        <input type="checkbox" id="env-select-all">
+                        <span class="label__text">Enable all</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="none" class="c-checkbox__icon">
+                            <rect x="0.5" y="0.5" width="15" height="15" rx="3.5" fill="var(--lightest-background-color)" />
+                            <path class="cm" d="M12 5L6.5 10.5L4 8" stroke="transparent" stroke-width="1.6666" stroke-linecap="round" stroke-linejoin="round" />
+                            <rect class="border" x="0.5" y="0.5" width="15" height="15" rx="3.5" stroke="var(--border-color)" />
+                        </svg>
+                    </label>
+                    <div class="combo">
+                        <label id="environments-combo-label" class="combo-label visually-hidden">Select Environments</label>
+                        <span id="combo-remove" hidden>remove</span>
+                        <ul role="list" class="selected-options pills" id="environments-combo-selected"></ul>
+                        <div class="combo js-multiselect">
+                            <input aria-activedescendant="" autocomplete="off" aria-autocomplete="none" aria-controls="listbox3" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="environments-combo-label combo-selected" id="environments-combo" class="combo-input c-field__input custom-select" role="combobox" type="text" />
+                            <div class="combo-menu" role="listbox" id="listbox3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="playground__config-options__section">
+                <h2 data-config-section-title>Rules</h2>
+                <div data-config-section></div>
+            </div>
+
+            <div class="playground__config-options__section">
+                <h2 data-config-section-title>Plugins</h2>
+                <div data-config-section>
+                    <label class="c-checkbox c-field" for="plugins-select-all">
+                        <input type="checkbox" id="plugins-select-all">
+                        <span class="label__text">Install plugins</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="none" class="c-checkbox__icon">
+                            <rect x="0.5" y="0.5" width="15" height="15" rx="3.5" fill="var(--lightest-background-color)" />
+                            <path class="cm" d="M12 5L6.5 10.5L4 8" stroke="transparent" stroke-width="1.6666" stroke-linecap="round" stroke-linejoin="round" />
+                            <rect class="border" x="0.5" y="0.5" width="15" height="15" rx="3.5" stroke="var(--border-color)" />
+                        </svg>
+                    </label>
+                    <div class="combo">
+                        <label id="plugins-combo-label" class="combo-label visually-hidden">Select Environments</label>
+                        <span id="combo-remove" hidden>remove</span>
+                        <ul role="list" class="selected-options pills" id="plugins-combo-selected"></ul>
+                        <div class="combo js-multiselect">
+                            <input aria-activedescendant="" autocomplete="off" aria-autocomplete="none" aria-controls="listbox3" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="plugins-combo-label combo-selected" id="plugins-combo" class="combo-input c-field__input custom-select" role="combobox" type="text" />
+                            <div class="combo-menu" role="listbox" id="listbox3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="/" download class="c-btn c-btn--primary playground__config__download-btn">Download this config file</a>
+        </div>
+    </section>
+
+    <main class="playground__editor" id="main" tabindex="-1">
+
+        {{ content | safe }}
+
+    </main>
+
+    <section class="playground__console" aria-labelledby="playground__console-label" aria-live="polite">
+        <span id="playground__console-label" hidden>Console</span>
+        Everything looks good 👍🏻
+        <br>
+        <br>
+        {% from 'components/alert.macro.html' import warning, important %}
+
+        {{ warning() }}
+        {{ important() }}
+    </section>
+</div>

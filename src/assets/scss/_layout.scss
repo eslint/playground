@@ -1,0 +1,35 @@
+.playground-wrapper {
+    @media all and (min-width: 1023px) {
+        display: grid;
+        grid-template-columns: minmax(0, 3fr) minmax(250px, 1fr);
+        grid-template-rows: 80vh 20vh;
+    }
+}
+
+.playground__console {
+    padding: 1rem;
+    border-top: 1px solid var(--divider-color);
+    grid-column: 1 / 2;
+    grid-row: 2;
+}
+
+.playground__editor {
+    padding: 1rem;
+    grid-column: 1 / 2;
+    grid-row: 1;
+    min-height: 80vh;
+}
+
+.playground__config {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+    border-bottom: 1px solid var(--divider-color);
+    border-block-end: 1px solid var(--divider-color);
+
+    @media all and (min-width: 1023px) {
+        border-left: 1px solid var(--divider-color);
+        border-inline-end: 1px solid var(--divider-color);
+        border-bottom: none;
+        border-block-end: none;
+    }
+}

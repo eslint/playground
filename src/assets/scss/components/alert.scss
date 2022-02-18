@@ -202,6 +202,7 @@
     cursor: pointer;
     border-bottom: 1px solid currentColor;
     border-block-end: 1px solid currentColor;
+    transition: background-color .1s linear;
 
     &:last-of-type {
         border: none;

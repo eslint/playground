@@ -138,7 +138,6 @@ layout: base.njk
             {{ content | safe }}
 
             {% from 'components/popup.macro.html' import popup, popup_with_options %}
-            {{ popup() }}
             {{ popup_with_options() }}
         </main>
         <section class="playground__console" aria-labelledby="playground__console-label">

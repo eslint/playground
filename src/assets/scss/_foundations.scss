@@ -342,7 +342,7 @@ nav {
 
 
 [data-toggle] {
-    &[aria-expanded="false"]+[data-panel] {
+    &[aria-expanded="false"] ~ [data-panel] {
         display: none;
     }
 

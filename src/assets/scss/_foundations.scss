@@ -338,3 +338,19 @@ nav {
         outline-offset: 3px;
     }
 }
+
+
+
+[data-toggle] {
+    &[aria-expanded="false"]+[data-panel] {
+        display: none;
+    }
+
+    svg {
+        transition: all .1s linear;
+    }
+
+    &[aria-expanded="true"] svg {
+        transform: rotate(180deg);
+    }
+}

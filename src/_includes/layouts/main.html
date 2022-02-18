@@ -143,14 +143,10 @@ layout: base.njk
             <div class="playground__console-announcements visually-hidden" aria-live="polite" aria-atomic="true">
                 2 warnings and 1 error logged to the console.
             </div>
-            {% from 'components/alert.macro.html' import warning, important %}
+            {% from 'components/alert.macro.html' import warning, important, alert_with_options %}
             {{ warning() }}
             {{ important() }}
-            {{ warning() }}
-            {{ important() }}
-            {{ important() }}
-            {{ important() }}
-            {{ important() }}
+            {{ alert_with_options() }}
         </section>
     </div>
 </div>

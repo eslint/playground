@@ -1,7 +1,40 @@
 (function() {
+    var getNextSibling = function(elem, selector) {
+        var sibling = elem.nextElementSibling;
+        // If the sibling matches our selector, use it
+        // If not, jump to the next sibling and continue the loop
+        while (sibling) {
+            if (sibling.matches(selector)) return sibling;
+            sibling = sibling.nextElementSibling
+        }
+    };
+
+    var triggers = document.querySelectorAll("[data-toggle]");
+
+    if (triggers) {
+        triggers.forEach(trigger => {
+            trigger.removeAttribute('hidden');
+            open = false;
+            panel = getNextSibling(trigger, '[data-panel]');
+            trigger.addEventListener("click", () => {
+                if (!open) {
+                    trigger.setAttribute("aria-expanded", "true");
+                    panel.removeAttribute("hidden");
+                    open = true;
+                } else {
+                    trigger.setAttribute("aria-expanded", "false");
+                    panel.setAttribute("hidden", "");
+                    open = false;
+                }
+            }, false);
+        })
+    }
+})();
+
+
+(function() {
     var nav_trigger = document.getElementById("nav-toggle"),
         nav = document.getElementById("nav-panel"),
-        body = document.getElementsByTagName("body")[0],
         open = false;
 
     if (matchMedia) {
@@ -50,7 +83,7 @@
         WidthChange(mq);
     }
 
-     // media query change
+    // media query change
     function WidthChange(mq) {
         if (mq.matches) {
             config_trigger.removeAttribute("hidden");

@@ -1,5 +1,5 @@
 {%- macro warning(params) -%}
-<aside role="note" class="alert alert--error">
+<article aria-roledescription="Error" class="alert alert--error">
     <div class="alert__content">
         <div class="alert__position">
             <svg class="alert__icon" aria-hidden="true" focusable="false" width="19" height="20" viewBox="0 0 19 20" fill="none">
@@ -16,11 +16,11 @@
     <button class="alert__fix-btn">
         Fix
     </button>
-</aside>
+</article>
 {%- endmacro -%}
 
 {%- macro important(params) -%}
-<aside role="note" class="alert alert--warning">
+<article aria-roledescription="Warning" class="alert alert--warning">
     <div class="alert__content">
         <div class="alert__position">
             <svg class="alert__icon" aria-hidden="true" focusable="false" width="21" height="18" viewBox="0 0 21 18" fill="none">
@@ -37,11 +37,11 @@
     <button class="alert__fix-btn">
         Fix
     </button>
-</aside>
+</article>
 {%- endmacro -%}
 
 {%- macro alert_with_options(params) -%}
-<aside role="note" class="alert alert--warning alert--with-options">
+<article aria-roledescription="Warning" class="alert alert--warning alert--with-options">
     <div class="alert__content">
         <div class="alert__position">
             <svg class="alert__icon" aria-hidden="true" focusable="false" width="21" height="18" viewBox="0 0 21 18" fill="none">
@@ -67,9 +67,9 @@
         <li class="alert__fix-options__item" role="menuitem" tabindex="-1">Fix using another another option</li>
         <li class="alert__fix-options__item" role="menuitem" tabindex="-1">ignore this message</li>
     </ul>
-</aside>
+</article>
 
-<aside role="note" class="alert alert--error alert--with-options">
+<article aria-roledescription="Error" class="alert alert--error alert--with-options">
     <div class="alert__content">
         <div class="alert__position">
             <svg class="alert__icon" aria-hidden="true" focusable="false" width="21" height="18" viewBox="0 0 21 18" fill="none">
@@ -96,5 +96,5 @@
         <li class="alert__fix-options__item" role="menuitem" tabindex="-1">ignore this message</li>
         <li class="alert__fix-options__item" role="menuitem" tabindex="-1">Fix using this option</li>
     </ul>
-</aside>
+</article>
 {%- endmacro -%}

@@ -37,6 +37,8 @@
     height: 290px;
     overflow-y: auto;
     resize: vertical;
+    position: relative;
+    z-index: 10;
 }
 
 .playground__editor {

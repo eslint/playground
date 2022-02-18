@@ -1,5 +1,6 @@
 .popup {
     position: absolute;
+    z-index: 5;
     left: 5rem;
     top: 15rem;
     font-family: var(--mono-font);

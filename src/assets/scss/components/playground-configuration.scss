@@ -152,11 +152,11 @@
     background-color: var(--lightest-background-color);
     border-radius: var(--border-radius);
     border: 1px solid var(--border-color);
-    padding: .625rem calc(.5rem + 1vw) .625rem .875rem;
-    white-space: nowrap;
-    overflow-x: auto;
+    padding-right: calc(.625rem + 1vw);
+
     max-width: 100%;
     color: var(--headings-color);
+    position: relative;
 
     [data-theme="dark"] & {
         background-color: var(--color-neutral-700);
@@ -169,16 +169,24 @@
     input {
         all: unset;
         color: inherit;
+        padding: .625rem calc(.625rem + 1vw) .625rem .875rem;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow: hidden;
 
         &::selection {
-            background-color: #fff;
-            color: var(--body-text-color);
+            background-color: var(--color-brand);
+            color: #fff;
         }
     }
 }
 
 .share-url__btn {
     padding: 0;
+    position: absolute;
+    right: .625rem;
+    top: 50%;
+    transform: translateY(-50%);
 
     .c-icon {
         color: var(--body-text-color);

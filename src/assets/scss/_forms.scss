@@ -1,3 +1,35 @@
+::-webkit-input-placeholder {
+    color: var(--color-neutral-500);
+    font-size: .875rem;
+}
+
+::-moz-placeholder {
+    color: var(--color-neutral-500);
+    font-size: .875rem;
+}
+
+::placeholder {
+    color: var(--color-neutral-500);
+    font-size: .875rem;
+}
+
+[data-theme="dark"] {
+    ::-webkit-input-placeholder {
+        color: var(--color-neutral-400);
+        font-size: .875rem;
+    }
+
+    ::-moz-placeholder {
+        color: var(--color-neutral-400);
+        font-size: .875rem;
+    }
+
+    ::placeholder {
+        color: var(--color-neutral-400);
+        font-size: .875rem;
+    }
+}
+
 .c-custom-select {
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -36,6 +68,10 @@
     line-height: 1.5;
     margin-bottom: .25rem;
     margin-block-end: .25rem;
+
+    [data-theme="dark"] & {
+        color: var(--color-neutral-100);
+    }
 }
 
 input {
@@ -126,7 +162,7 @@ input {
     overflow-y: scroll;
     left: 0;
     position: absolute;
-    top: calc(100% + 1rem);
+    top: calc(100% + .25rem);
     width: 100%;
     z-index: 100;
 }

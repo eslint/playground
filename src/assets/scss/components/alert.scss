@@ -201,6 +201,8 @@
     margin: 0;
     flex: 1 0 min-content;
     cursor: pointer;
+    display: flex;
+    align-items: center;
     border-bottom: 1px solid currentColor;
     border-block-end: 1px solid currentColor;
     transition: background-color .1s linear;

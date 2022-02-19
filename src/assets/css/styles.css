@@ -1417,6 +1417,8 @@ a.c-btn {
   margin: 0;
   flex: 1 0 min-content;
   cursor: pointer;
+  display: flex;
+  align-items: center;
   border-bottom: 1px solid currentColor;
   border-block-end: 1px solid currentColor;
   transition: background-color .1s linear; }
@@ -1507,6 +1509,8 @@ a.c-btn {
   border-block-end: 1px solid var(--color-neutral-600);
   padding: .75rem;
   margin: 0;
+  display: flex;
+  align-items: center;
   flex: 1 0 min-content;
   cursor: pointer;
   transition: background-color .1s linear; }

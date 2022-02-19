@@ -755,6 +755,7 @@ code .highlight-line:before {
 
 .footer {
   padding: 1rem;
+  padding-bottom: 2rem;
   font-size: .875rem; }
   .footer .social-icons,
   .footer .copyright {

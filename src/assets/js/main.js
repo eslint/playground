@@ -68,7 +68,7 @@ var getClosest = function (elem, selector) {
         popup_fix_buttons.forEach(trigger => {
             trigger.removeAttribute('hidden');
             popup = getClosest(trigger, '.popup');
-            panel = popup.querySelector('.popup__fix-options');
+            panel = popup.querySelector('#js-popup-fix-options');
             panel.setAttribute('hidden', '');
             let open = false;
 

@@ -26,7 +26,7 @@
 
         <!-- keyboard functionality needs to be implemented to make this menu accessible ‼️
          Implementation details: https://w3c.github.io/aria-practices/examples/menu-button/menu-button-actions.html -->
-        <button class="popup__fix-btn" aria-expanded="false" aria-haspopup="true" id="ANOTHER_UNIQUE_BUTTON_ID" data-toggle hidden>
+        <button class="popup__fix-btn" aria-expanded="false" aria-haspopup="true" id="ANOTHER_UNIQUE_BUTTON_ID" hidden>
             <span>Fix</span>
             <svg width="12" height="8" aria-hidden="true" focusable="false" viewBox="0 0 12 8">
                 <g fill="none">
@@ -36,7 +36,7 @@
             </svg>
         </button>
     </div>
-    <ul class="popup__fix-options" role="menu" aria-labelledby="ANOTHER_UNIQUE_BUTTON_ID" id="js-fix-options" data-panel>
+    <ul class="popup__fix-options" role="menu" aria-labelledby="ANOTHER_UNIQUE_BUTTON_ID" id="js-popup-fix-options">
         <li class="popup__fix-options__item" role="menuitem" tabindex="-1">Fix using this option</li>
         <li class="popup__fix-options__item" role="menuitem" tabindex="-1">Fix using another option</li>
         <li class="popup__fix-options__item" role="menuitem" tabindex="-1">Fix using another another option</li>

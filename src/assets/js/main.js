@@ -39,13 +39,14 @@ var getClosest = function (elem, selector) {
 (function() {
     var triggers = document.querySelectorAll("[data-toggle]");
 
-    if (triggers) {
+    // if (triggers) {
         triggers.forEach(trigger => {
             trigger.removeAttribute('hidden');
-            panel = getNextSibling(trigger, '[data-panel]');
-            let open = false;
+            let panel = getNextSibling(trigger, '[data-panel]');
+            var open = false;
 
             trigger.addEventListener("click", () => {
+
                 if (!open) {
                     trigger.setAttribute("aria-expanded", "true");
                     panel.removeAttribute("hidden");
@@ -57,7 +58,7 @@ var getClosest = function (elem, selector) {
                 }
             }, false);
         })
-    }
+    // }
 })();
 
 // the popups have a similar pattern to the previous toggle+panel pattern, but the toggle and panel are _not_ siblings n the DOM (for styling purposes), so this script specifically handles the popup option panels
@@ -67,10 +68,10 @@ var getClosest = function (elem, selector) {
     if (popup_fix_buttons) {
         popup_fix_buttons.forEach(trigger => {
             trigger.removeAttribute('hidden');
-            popup = getClosest(trigger, '.popup');
-            panel = popup.querySelector('#js-popup-fix-options');
+            let popup = getClosest(trigger, '.popup');
+            let panel = popup.querySelector('#js-popup-fix-options');
             panel.setAttribute('hidden', '');
-            let open = false;
+            var open = false;
 
             trigger.addEventListener("click", () => {
                 if (!open) {

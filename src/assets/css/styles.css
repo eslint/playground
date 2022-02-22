@@ -432,11 +432,21 @@ body {
     offset-block-start: 2px; }
 
 main {
-  flex: 1; }
+  flex: 1;
+  outline-offset: -2px; }
   main:focus {
     outline: none; }
   main:target {
-    outline: none; }
+    outline-offset: -4px;
+    animation: showOutline 2s linear; }
+
+@keyframes showOutline {
+  0% {
+    outline: 4px solid #fff; }
+  50% {
+    outline: 4px solid var(--link-color); }
+  100% {
+    outline: 4px solid #fff; } }
 
 hr {
   border: none;
@@ -1621,7 +1631,11 @@ a.c-btn {
   color: inherit;
   font-weight: 400;
   line-height: 1.5;
-  margin: 0; }
+  margin: 0;
+  margin-bottom: 1rem;
+  margin-block-end: 1rem; }
+  .config-js [data-config-section-title] {
+    margin: 0; }
 
 [data-config-section-toggle] {
   cursor: pointer;
@@ -1768,6 +1782,37 @@ a.c-btn {
   .share-url__announcement[data-fades-out] {
     opacity: 0; }
 
+.playground__config-options__section--rules {
+  font-size: .875rem; }
+
+.add-rule-btn {
+  color: var(--link-color);
+  margin: 1rem 0;
+  margin-block-start: 1rem;
+  border: none;
+  padding: 0;
+  font-size: inherit; }
+
+ul.config__added-rules {
+  margin: 0;
+  padding: 0;
+  font-family: var(--mono-font); }
+  ul.config__added-rules li {
+    margin: 0 0 1rem 0; }
+    ul.config__added-rules li:last-of-type {
+      margin: 0; }
+
+.config__added-rules__rule-name {
+  font: inherit;
+  margin: 0 0 .25rem 0; }
+
+.config__added-rules__rule-content {
+  padding: .625rem .875rem;
+  box-shadow: var(--shadow-xs);
+  border: 1px solid var(--border-color);
+  color: var(--headings-color);
+  border-radius: var(--border-radius); }
+
 @media all and (min-width: 1023px) {
   .grid {
     display: grid;
@@ -1801,6 +1846,9 @@ a.c-btn {
   font: inherit;
   font-family: var(--text-font);
   margin: 0; }
+
+.code {
+  font-family: var(--mono-font); }
 
 .color-brand {
   color: var(--link-color); }

@@ -98,9 +98,40 @@ layout: base.njk
                             </div>
                         </div>
                     </div>
-                    <div class="playground__config-options__section">
+                    <div class="playground__config-options__section playground__config-options__section--rules">
                         <h2 data-config-section-title>Rules</h2>
-                        <div data-config-section></div>
+                        <div data-config-section>
+                            <label for="rules" class="combo-label"><span class="label__text">Choose a rule</span></label>
+                            <div class="combo js-combobox">
+                                <input
+                                        aria-activedescendant=""
+                                        aria-autocomplete="none"
+                                        aria-controls="rules_list"
+                                        aria-expanded="false"
+                                        aria-haspopup="listbox"
+                                        id="rules"
+                                        class="combo-input custom-select c-field__input code"
+                                        role="combobox"
+                                        type="text"
+                                        />
+                                <div class="combo-menu" role="listbox" id="rules_list"></div>
+                            </div>
+                            <button role="button" class="c-btn c-btn--ghost add-rule-btn">Add this rule</button>
+                            <ul class="config__added-rules" role="list">
+                                <li class="config__added-rules__item">
+                                    <h3 class="config__added-rules__rule-name">accessor-pairs</h3>
+                                    <div class="config__added-rules__rule-content">
+                                        { setWithoutGet: true, getWithoutSet: false, enforceForClassMembers: true }
+                                    </div>
+                                </li>
+                                <li class="config__added-rules__item">
+                                    <h3 class="config__added-rules__rule-name">array-bracket-newline</h3>
+                                    <div class="config__added-rules__rule-content">
+                                        "always"
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="playground__config-options__section">
                         <h2 data-config-section-title>Plugins</h2>
@@ -134,7 +165,7 @@ layout: base.njk
     </div>
 
     <div class="playground__main">
-        <main class="playground__editor" id="main" tabindex="-1" contenteditable="true" aria-label="Editor">
+        <main class="playground__editor" id="main" tabindex="0" contenteditable="true" aria-label="Editor">
             {{ content | safe }}
 
             {% from 'components/popup.macro.html' import popup, popup_with_options %}

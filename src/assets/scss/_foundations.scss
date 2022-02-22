@@ -102,13 +102,29 @@ body {
 
 main {
     flex: 1;
+    outline-offset: -2px;
+    // caret-shape: block;
 
     &:focus {
         outline: none;
+        // outline: 2px solid var(--link-color);
     }
 
     &:target {
-        outline: none;
+        outline-offset: -4px;
+        animation: showOutline 2s linear;
+    }
+}
+
+@keyframes showOutline {
+    0% {
+        outline: 4px solid #fff;
+    }
+    50% {
+        outline: 4px solid var(--link-color);
+    }
+    100% {
+        outline: 4px solid #fff;
     }
 }
 

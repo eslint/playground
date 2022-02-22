@@ -86,7 +86,7 @@ var getClosest = function (elem, selector) {
                     panel.setAttribute("hidden", "");
                     open = false;
                 }
-            }, true);
+            }, false);
         })
     }
 })();

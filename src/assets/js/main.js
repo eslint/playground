@@ -75,6 +75,7 @@ var getClosest = function (elem, selector) {
 
             trigger.addEventListener("click", (e) => {
                 e.preventDefault();
+                e.
 
                 if (!open) {
                     trigger.setAttribute("aria-expanded", "true");
@@ -85,7 +86,7 @@ var getClosest = function (elem, selector) {
                     panel.setAttribute("hidden", "");
                     open = false;
                 }
-            }, false);
+            }, true);
         })
     }
 })();

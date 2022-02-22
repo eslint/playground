@@ -1466,6 +1466,18 @@ a.c-btn {
   max-width: 500px; }
   .popup p {
     margin: 0; }
+  .js-focus-visible .popup *:focus:not(.focus-visible) {
+    outline: 1px solid transparent;
+    box-shadow: none; }
+  .popup *:focus:not(:focus-visible) {
+    outline: 1px solid transparent;
+    box-shadow: none; }
+  .popup *.focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px; }
+  .popup *:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px; }
 
 .popup__content {
   position: relative;

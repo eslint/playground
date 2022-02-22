@@ -99,6 +99,9 @@
 }
 
 .playground__config-options {
+    position: relative;
+    z-index: 30;
+
     &[data-open="false"] {
         display: none;
 

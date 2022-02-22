@@ -65,17 +65,19 @@
   .playground__config-toggle[aria-expanded="true"] #ham-bottom {
     transform: rotate(-41deg); }
 
-.playground__config-options[data-open="false"] {
-  display: none; }
-  @media all and (min-width: 1023px) {
-    .playground__config-options[data-open="false"] {
-      display: flex; } }
-
-.playground__config-options[data-open="true"] {
-  display: flex; }
-  @media all and (min-width: 1023px) {
-    .playground__config-options[data-open="true"] {
-      display: flex; } }
+.playground__config-options {
+  position: relative;
+  z-index: 30; }
+  .playground__config-options[data-open="false"] {
+    display: none; }
+    @media all and (min-width: 1023px) {
+      .playground__config-options[data-open="false"] {
+        display: flex; } }
+  .playground__config-options[data-open="true"] {
+    display: flex; }
+    @media all and (min-width: 1023px) {
+      .playground__config-options[data-open="true"] {
+        display: flex; } }
 
 .playground__config-options__section {
   border-bottom: 1px solid var(--divider-color);

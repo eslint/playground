@@ -117,15 +117,16 @@ layout: base.njk
                                 <div class="combo-menu" role="listbox" id="rules_list"></div>
                             </div>
                             <button role="button" class="c-btn c-btn--ghost add-rule-btn">Add this rule</button>
-                            <ul class="config__added-rules" role="list">
+                            <ul class="config__added-rules" role="list" aria-labelledby="added-rules-label">
+                                <h3 id="added-rules-label" hidden> Added rules</h3>
                                 <li class="config__added-rules__item">
-                                    <h3 class="config__added-rules__rule-name">accessor-pairs</h3>
+                                    <h4 class="config__added-rules__rule-name">accessor-pairs</h4>
                                     <div class="config__added-rules__rule-content" contenteditable="true">
                                         { setWithoutGet: true, getWithoutSet: false, enforceForClassMembers: true }
                                     </div>
                                 </li>
                                 <li class="config__added-rules__item">
-                                    <h3 class="config__added-rules__rule-name">array-bracket-newline</h3>
+                                    <h4 class="config__added-rules__rule-name">array-bracket-newline</h4>
                                     <div class="config__added-rules__rule-content" contenteditable="true">
                                         "always"
                                     </div>

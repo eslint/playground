@@ -1,16 +1,24 @@
-::-webkit-input-placeholder {
+input::-webkit-input-placeholder {
     color: var(--color-neutral-500);
     font-size: .875rem;
+    opacity: 1;
 }
 
-::-moz-placeholder {
+input::-moz-placeholder {
     color: var(--color-neutral-500);
     font-size: .875rem;
+    opacity: 1;
+}
+input:-moz-placeholder {
+    color: var(--color-neutral-500);
+    font-size: .875rem;
+    opacity: 1;
 }
 
-::placeholder {
+input::placeholder {
     color: var(--color-neutral-500);
     font-size: .875rem;
+    opacity: 1;
 }
 
 [data-theme="dark"] {

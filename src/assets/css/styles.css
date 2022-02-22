@@ -780,17 +780,25 @@ code .highlight-line:before {
 .copyright p {
   margin: 0; }
 
-::-webkit-input-placeholder {
+input::-webkit-input-placeholder {
   color: var(--color-neutral-500);
-  font-size: .875rem; }
+  font-size: .875rem;
+  opacity: 1; }
 
-::-moz-placeholder {
+input::-moz-placeholder {
   color: var(--color-neutral-500);
-  font-size: .875rem; }
+  font-size: .875rem;
+  opacity: 1; }
 
-::placeholder {
+input:-moz-placeholder {
   color: var(--color-neutral-500);
-  font-size: .875rem; }
+  font-size: .875rem;
+  opacity: 1; }
+
+input::placeholder {
+  color: var(--color-neutral-500);
+  font-size: .875rem;
+  opacity: 1; }
 
 [data-theme="dark"] ::-webkit-input-placeholder {
   color: var(--color-neutral-400);

@@ -17,7 +17,7 @@
     display: grid;
     align-items: center;
     gap: 0 2rem;
-    grid-template-columns: 1fr minmax(0, auto);
+    grid-template-columns: 1fr auto;
     padding: .75rem;
     border-radius: var(--border-radius);
     background-color: var(--color-neutral-800);
@@ -25,7 +25,7 @@
 
     a {
         color: var(--color-neutral-400);
-        white-space: nowrap;
+        // white-space: nowrap;
     }
 
     [data-theme="dark"] & {

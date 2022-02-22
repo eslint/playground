@@ -67,7 +67,8 @@
 
 .playground__config-options {
   position: relative;
-  z-index: 30; }
+  z-index: 30;
+  background-color: var(--body-background-color); }
   .playground__config-options[data-open="false"] {
     display: none; }
     @media all and (min-width: 1023px) {

@@ -713,11 +713,15 @@ code .highlight-line:before {
   border-top: 4px solid var(--link-color);
   border-bottom: 1px solid var(--divider-color);
   border-block-start: 4px solid var(--link-color);
-  border-block-end: 1px solid var(--divider-color); }
+  border-block-end: 1px solid var(--divider-color);
+  position: relative;
+  z-index: 40;
+  background-color: var(--body-background-color); }
   .site-header .wrapper {
     display: grid;
     align-items: start;
-    padding: 0 1rem; }
+    padding: 0 1rem;
+    position: relative; }
     @media all and (min-width: 1024px) {
       .site-header .wrapper {
         justify-content: space-between; } }
@@ -732,7 +736,9 @@ code .highlight-line:before {
   grid-row: 1;
   padding: .5rem 0;
   text-decoration: none;
-  font-family: var(--mono-font); }
+  font-family: var(--mono-font);
+  position: relative;
+  z-index: 50; }
 
 .logo svg {
   display: inline-block;
@@ -1675,7 +1681,8 @@ a.c-btn {
 
 .playground__config-options {
   position: relative;
-  z-index: 30; }
+  z-index: 30;
+  background-color: var(--body-background-color); }
   .playground__config-options[data-open="false"] {
     display: none; }
     @media all and (min-width: 1023px) {

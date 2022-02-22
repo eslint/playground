@@ -1088,6 +1088,10 @@ ul.selected-options {
   overflow: auto;
   flex: 1; }
 
+.playground__config-and-footer {
+  height: calc(100vh - 75px);
+  overflow-y: auto; }
+
 .playground__config {
   flex: 1;
   border-bottom: 1px solid var(--divider-color);
@@ -1667,7 +1671,8 @@ a.c-btn {
   justify-content: space-between;
   gap: .5rem;
   font-weight: 500;
-  color: var(--link-color); }
+  color: var(--link-color);
+  border-bottom: 1px solid var(--divider-color); }
   .playground__config-toggle:hover {
     color: var(--link-color); }
   .playground__config-toggle svg {

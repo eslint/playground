@@ -74,6 +74,9 @@ var getClosest = function (elem, selector) {
             var open = false;
 
             trigger.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
                 if (!open) {
                     trigger.setAttribute("aria-expanded", "true");
                     panel.removeAttribute("hidden");

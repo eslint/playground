@@ -167,7 +167,8 @@
   margin-block-start: 1rem;
   border: none;
   padding: 0;
-  font-size: inherit; }
+  font-size: inherit;
+  border-radius: 0; }
 
 ul.config__added-rules {
   margin: 0;

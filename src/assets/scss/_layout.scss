@@ -48,8 +48,10 @@
 }
 
 .playground__config-and-footer {
-    height: calc(100vh - 75px);
-    overflow-y: auto;
+    @media all and (min-width: 1023px) {
+        height: calc(100vh - 75px);
+        overflow-y: auto;
+    }
 }
 
 .playground__config {

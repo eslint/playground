@@ -43,8 +43,7 @@
   justify-content: space-between;
   gap: .5rem;
   font-weight: 500;
-  color: var(--link-color);
-  border-bottom: 1px solid var(--divider-color); }
+  color: var(--link-color); }
   .playground__config-toggle:hover {
     color: var(--link-color); }
   .playground__config-toggle svg {

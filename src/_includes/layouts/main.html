@@ -134,7 +134,7 @@ layout: base.njk
     </div>
 
     <div class="playground__main">
-        <main class="playground__editor" id="main" tabindex="-1" contenteditable="true" aria-label="Editor">
+        <main class="playground__editor" id="main" tabindex="-1" aria-label="Editor">
             {{ content | safe }}
 
             {% from 'components/popup.macro.html' import popup, popup_with_options %}

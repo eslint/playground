@@ -1,5 +1,9 @@
+/* Accessible select, editable select, and multi-select dropdowns
+ * Source: https://www.24a11y.com/2019/select-your-poison-part-2/
+*/
+
 /*
- * Helper constants and functions
+ * Helper constants and function
  */
 
 // make it easier for ourselves by putting some values in objects

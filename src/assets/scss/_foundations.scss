@@ -102,13 +102,29 @@ body {
 
 main {
     flex: 1;
+    outline-offset: -2px;
+    // caret-shape: block;
 
     &:focus {
         outline: none;
+        // outline: 2px solid var(--link-color);
     }
 
     &:target {
-        outline: none;
+        outline-offset: -4px;
+        animation: showOutline 2s linear;
+    }
+}
+
+@keyframes showOutline {
+    0% {
+        outline: 4px solid #fff;
+    }
+    50% {
+        outline: 4px solid var(--link-color);
+    }
+    100% {
+        outline: 4px solid #fff;
     }
 }
 
@@ -336,5 +352,21 @@ nav {
     *.focus-visible {
         transition: outline-offset .15s linear;
         outline-offset: 3px;
+    }
+}
+
+
+
+[data-toggle] {
+    &[aria-expanded="false"] ~ [data-panel] {
+        display: none;
+    }
+
+    svg {
+        transition: all .1s linear;
+    }
+
+    &[aria-expanded="true"] svg {
+        transform: rotate(180deg);
     }
 }

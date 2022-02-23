@@ -1,7 +1,99 @@
+// helper functions
+// get an element's next sibling that matches a selector
+var getNextSibling = function(elem, selector) {
+    var sibling = elem.nextElementSibling;
+    while (sibling) {
+        if (sibling.matches(selector)) return sibling;
+        sibling = sibling.nextElementSibling
+    }
+};
+
+// get an element's closest ancestor that matches a selector
+var getClosest = function (elem, selector) {
+	// Element.matches() polyfill
+	if (!Element.prototype.matches) {
+	    Element.prototype.matches =
+	        Element.prototype.matchesSelector ||
+	        Element.prototype.mozMatchesSelector ||
+	        Element.prototype.msMatchesSelector ||
+	        Element.prototype.oMatchesSelector ||
+	        Element.prototype.webkitMatchesSelector ||
+	        function(s) {
+	            var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+	                i = matches.length;
+	            while (--i >= 0 && matches.item(i) !== this) {}
+	            return i > -1;
+	        };
+	}
+
+	// Get the closest matching element
+	for ( ; elem && elem !== document; elem = elem.parentNode ) {
+		if ( elem.matches( selector ) ) return elem;
+	}
+	return null;
+
+};
+
+// general function that handles all toggles and panels that are created as siblings in the DOM, and have the data-toggle and data-panel set on them
+// for example: the alerts that show up in the console use this pattern
+(function() {
+    var triggers = document.querySelectorAll("[data-toggle]");
+
+    // if (triggers) {
+        triggers.forEach(trigger => {
+            trigger.removeAttribute('hidden');
+            let panel = getNextSibling(trigger, '[data-panel]');
+            var open = false;
+
+            trigger.addEventListener("click", () => {
+
+                if (!open) {
+                    trigger.setAttribute("aria-expanded", "true");
+                    panel.removeAttribute("hidden");
+                    open = true;
+                } else {
+                    trigger.setAttribute("aria-expanded", "false");
+                    panel.setAttribute("hidden", "");
+                    open = false;
+                }
+            }, false);
+        })
+    // }
+})();
+
+// the popups have a similar pattern to the previous toggle+panel pattern, but the toggle and panel are _not_ siblings n the DOM (for styling purposes), so this script specifically handles the popup option panels
+(function() {
+    var popup_fix_buttons = document.querySelectorAll(".popup__fix-btn");
+
+    if (popup_fix_buttons) {
+        popup_fix_buttons.forEach(trigger => {
+            trigger.removeAttribute('hidden');
+            let popup = getClosest(trigger, '.popup');
+            let panel = popup.querySelector('#js-popup-fix-options');
+            panel.setAttribute('hidden', '');
+            var open = false;
+
+            trigger.addEventListener("click", (e) => {
+                e.stopPropagation();
+
+                if (!open) {
+                    trigger.setAttribute("aria-expanded", "true");
+                    panel.removeAttribute("hidden");
+                    open = true;
+                } else {
+                    trigger.setAttribute("aria-expanded", "false");
+                    panel.setAttribute("hidden", "");
+                    open = false;
+                }
+            }, false);
+        })
+    }
+})();
+
+// main nav responsive behavior (open/close using the nav button)
 (function() {
     var nav_trigger = document.getElementById("nav-toggle"),
         nav = document.getElementById("nav-panel"),
-        body = document.getElementsByTagName("body")[0],
         open = false;
 
     if (matchMedia) {
@@ -38,6 +130,7 @@
     }
 })();
 
+// the mobile toggle behavior for the playground configuration
 (function() {
     var config_trigger = document.getElementById("playground__config-toggle"),
         config = document.getElementById("playground__config-options"),
@@ -50,7 +143,7 @@
         WidthChange(mq);
     }
 
-     // media query change
+    // media query change
     function WidthChange(mq) {
         if (mq.matches) {
             config_trigger.removeAttribute("hidden");
@@ -83,7 +176,7 @@
     }
 })();
 
-// add utilities
+//  helpful utilities
 var util = {
     keyCodes: {
         UP: 38,
@@ -109,6 +202,8 @@ var util = {
     },
 };
 
+// make sections in the config section collapsible
+// enhances the headings in the config sections into buttons and handles the toggling of their respective panels
 (function(w, doc, undefined) {
     var CollapsibleConfigOptions = {
         allCollapsed: false,

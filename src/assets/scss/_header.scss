@@ -4,11 +4,15 @@
     border-bottom: 1px solid var(--divider-color);
     border-block-start: 4px solid var(--link-color);
     border-block-end: 1px solid var(--divider-color);
+    position: relative;
+    z-index: 40;
+    background-color: var(--body-background-color);
 
     .wrapper {
         display: grid;
         align-items: start;
         padding: 0 1rem;
+        position: relative;
 
         @media all and (min-width: 1024px) {
             justify-content: space-between;
@@ -27,6 +31,8 @@
     padding: .5rem 0;
     text-decoration: none;
     font-family: var(--mono-font);
+    position: relative;
+    z-index: 50;
 }
 
 .logo svg {

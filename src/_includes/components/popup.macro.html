@@ -1,0 +1,46 @@
+{%- macro popup(params) -%}
+<div class="popup" contenteditable="false">
+    <div class="popup__content">
+        <p class="popup__text">'a' is constant and maybe some more text just to test how it'll wrap</p>
+        <div class="popup__refs">
+            <a href="#">no-const-assign</a>
+        </div>
+    </div>
+
+    <button class="popup__fix-btn">
+        <span>Fix</span>
+    </button>
+</div>
+{%- endmacro -%}
+
+
+{%- macro popup_with_options(params) -%}
+<div class="popup" contenteditable="false">
+    <div class="popup__content">
+        <div class="popup__main">
+            <p class="popup__text">'a' is constant</p>
+            <div class="popup__refs">
+                <a href="#">padding-line-between-statements</a>
+            </div>
+        </div>
+
+        <!-- keyboard functionality needs to be implemented to make this menu accessible ‼️
+         Implementation details: https://w3c.github.io/aria-practices/examples/menu-button/menu-button-actions.html -->
+        <button class="popup__fix-btn" aria-expanded="false" aria-haspopup="true" id="ANOTHER_UNIQUE_BUTTON_ID" hidden>
+            <span>Fix</span>
+            <svg width="12" height="8" aria-hidden="true" focusable="false" viewBox="0 0 12 8">
+                <g fill="none">
+                    <path fill="currentColor" d="M1.41.59l4.59 4.58 4.59-4.58 1.41 1.41-6 6-6-6z" />
+                    <path d="M-6-8h24v24h-24z" />
+                </g>
+            </svg>
+        </button>
+    </div>
+    <ul class="popup__fix-options" role="menu" aria-labelledby="ANOTHER_UNIQUE_BUTTON_ID" id="js-popup-fix-options">
+        <li class="popup__fix-options__item" role="menuitem" tabindex="-1">Fix using this option</li>
+        <li class="popup__fix-options__item" role="menuitem" tabindex="-1">Fix using another option</li>
+        <li class="popup__fix-options__item" role="menuitem" tabindex="-1">Fix using another another option</li>
+        <li class="popup__fix-options__item" role="menuitem" tabindex="-1">ignore this message</li>
+    </ul>
+</div>
+{%- endmacro -%}

@@ -1,16 +1,24 @@
-::-webkit-input-placeholder {
+input::-webkit-input-placeholder {
     color: var(--color-neutral-500);
     font-size: .875rem;
+    opacity: 1;
 }
 
-::-moz-placeholder {
+input::-moz-placeholder {
     color: var(--color-neutral-500);
     font-size: .875rem;
+    opacity: 1;
+}
+input:-moz-placeholder {
+    color: var(--color-neutral-500);
+    font-size: .875rem;
+    opacity: 1;
 }
 
-::placeholder {
+input::placeholder {
     color: var(--color-neutral-500);
     font-size: .875rem;
+    opacity: 1;
 }
 
 [data-theme="dark"] {
@@ -111,8 +119,8 @@ input {
 .combo {
     display: block;
     position: relative;
-    margin-bottom: 1rem;
-    margin-block-end: 1rem;
+    // margin-bottom: 1rem;
+    // margin-block-end: 1rem;
 }
 
 .combo-input {

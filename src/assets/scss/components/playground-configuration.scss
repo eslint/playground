@@ -9,6 +9,12 @@
     font-weight: 400;
     line-height: 1.5;
     margin: 0;
+    margin-bottom: 1rem;
+    margin-block-end: 1rem;
+
+    .config-js & {
+        margin: 0;
+    }
 }
 
 [data-config-section] {
@@ -99,6 +105,10 @@
 }
 
 .playground__config-options {
+    position: relative;
+    z-index: 30;
+    background-color: var(--body-background-color);
+
     &[data-open="false"] {
         display: none;
 
@@ -118,7 +128,7 @@
 
 .playground__config-options__section {
     border-bottom: 1px solid var(--divider-color);
-    padding: .5rem 1rem;
+    padding: 1rem;
 }
 
 
@@ -152,11 +162,11 @@
     background-color: var(--lightest-background-color);
     border-radius: var(--border-radius);
     border: 1px solid var(--border-color);
-    padding: .625rem calc(.5rem + 1vw) .625rem .875rem;
-    white-space: nowrap;
-    overflow-x: auto;
+    padding-right: calc(.625rem + 1vw);
+
     max-width: 100%;
     color: var(--headings-color);
+    position: relative;
 
     [data-theme="dark"] & {
         background-color: var(--color-neutral-700);
@@ -169,16 +179,24 @@
     input {
         all: unset;
         color: inherit;
+        padding: .625rem calc(.625rem + 1vw) .625rem .875rem;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow: hidden;
 
         &::selection {
-            background-color: #fff;
-            color: var(--body-text-color);
+            background-color: var(--color-brand);
+            color: #fff;
         }
     }
 }
 
 .share-url__btn {
     padding: 0;
+    position: absolute;
+    right: .625rem;
+    top: 50%;
+    transform: translateY(-50%);
 
     .c-icon {
         color: var(--body-text-color);
@@ -215,4 +233,49 @@
     &[data-fades-out] {
         opacity: 0;
     }
+}
+
+.playground__config-options__section--rules {
+    font-size: .875rem;
+}
+
+.add-rule-btn {
+    color: var(--link-color);
+    margin: 1rem 0;
+    margin-block-start: 1rem;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+    border-radius: 0;
+}
+
+ul.config__added-rules {
+    margin: 0;
+    padding: 0;
+    font-family: var(--mono-font);
+
+    li {
+        margin: 0 0 1rem 0;
+
+        &:last-of-type {
+            margin: 0;
+        }
+    }
+}
+
+.config__added-rules__item {
+
+}
+
+.config__added-rules__rule-name {
+    font: inherit;
+    margin: 0 0 .25rem 0;
+}
+
+.config__added-rules__rule-content {
+    padding: .625rem .875rem;
+    box-shadow: var(--shadow-xs);
+    border: 1px solid var(--border-color);
+    color: var(--headings-color);
+    border-radius: var(--border-radius);
 }

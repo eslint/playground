@@ -1,22 +1,33 @@
 .alert {
     position: relative;
     font-family: var(--mono-font);
-    display: flex;
+    display: grid;
+    gap: 0 2rem;
+    grid-template-columns: 1fr auto;
     margin-bottom: .5rem;
     margin-block-end: .5rem;
-    overflow: hidden;
     font-size: .875rem;
     border: 1px solid currentColor;
     border-radius: var(--border-radius);
 
-    &.alert--warning {
+    &.alert--error {
         background-color: var(--color-rose-25);
         color: var(--color-rose-600);
+
+        .alert__fix-options__item:hover {
+            background-color: var(--color-rose-50);
+            color: var(--color-rose-700);
+        }
     }
 
-    &.alert--important {
+    &.alert--warning {
         background-color: var(--color-warning-25);
         color: var(--color-warning-600);
+
+        .alert__fix-options__item:hover {
+            background-color: var(--color-warning-50);
+            color: var(--color-warning-700);
+        }
     }
 
     a {
@@ -26,14 +37,24 @@
 
 [data-theme="dark"] {
     .alert {
-        &.alert--warning {
+        &.alert--error {
             background-color: var(--color-rose-900);
             color: var(--color-rose-300);
+
+            .alert__fix-options__item:hover {
+                background-color: var(--color-rose-800);
+                color: var(--color-rose-200);
+            }
         }
 
-        &.alert--important {
+        &.alert--warning {
             background-color: var(--color-warning-900);
             color: var(--color-warning-400);
+
+            .alert__fix-options__item:hover {
+                background-color: var(--color-warning-800);
+                color: var(--color-warning-200);
+            }
         }
     }
 }
@@ -43,7 +64,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: .5rem;
-
     flex: 1;
     padding: .5rem;
 }
@@ -82,7 +102,7 @@
     font-weight: 500;
     margin-bottom: .25rem;
 
-    .alert--warning & {
+    .alert--error & {
         color: var(--color-rose-700);
 
         [data-theme="dark"] & {
@@ -90,7 +110,7 @@
         }
     }
 
-    .alert--important & {
+    .alert--warning & {
         color: var(--color-warning-700);
 
         [data-theme="dark"] & {
@@ -104,10 +124,16 @@
     align-items: center;
     font-family: var(--text-font);
     padding: .5rem .75rem;
+    margin: 0;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
     font-weight: 500;
+    gap: .75rem;
 
+    &[aria-expanded="true"] {
+        border-radius: 0 var(--border-radius) 0 0;
+    }
 
-    .alert--warning & {
+    .alert--error & {
         border-left: 1px solid var(--color-rose-300);
         border-inline-start: 1px solid var(--color-rose-300);
         color: var(--color-rose-700);
@@ -120,8 +146,17 @@
             background-color: var(--color-rose-900);
         }
     }
+    .alert--error &:hover {
+        color: var(--color-rose-800);
+        background-color: var(--color-rose-200);
 
-    .alert--important & {
+        [data-theme="dark"] & {
+            color: var(--color-rose-100);
+            background-color: var(--color-rose-800);
+        }
+    }
+
+    .alert--warning & {
         color: var(--color-warning-700);
         border-left: 1px solid var(--color-warning-300);
         border-inline-start: 1px solid var(--color-warning-300);
@@ -134,4 +169,63 @@
             background-color: var(--color-warning-800);
         }
     }
+
+    .alert--warning &:hover {
+        color: var(--color-warning-800);
+        background-color: var(--color-warning-200);
+
+        [data-theme="dark"] & {
+            color: var(--color-warning-100);
+            background-color: var(--color-warning-800);
+        }
+    }
+}
+
+
+.alert__fix-options {
+    grid-column: 1 / -1;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    border-top: inherit;
+    border-block-start: inherit;
+
+    @media all and (min-width: 800px) {
+        display: flex;
+    }
+}
+
+.alert__fix-options__item {
+    padding: .75rem;
+    margin: 0;
+    flex: 1 0 min-content;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid currentColor;
+    border-block-end: 1px solid currentColor;
+    transition: background-color .1s linear;
+
+    &:last-of-type {
+        border: none;
+        border-radius: 0 0 var(--border-radius) var(--border-radius);
+    }
+
+    @media all and (min-width: 800px) {
+        border: none;
+        border-right: 1px solid currentColor;
+        border-inline-end: 1px solid currentColor;
+
+        &:first-of-type {
+            border-radius: 0 0 0 var(--border-radius);
+        }
+
+        &:last-of-type {
+            border: none;
+            border-radius: 0 0 var(--border-radius) 0;
+        }
+    }
+
+
 }

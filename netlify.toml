@@ -1,6 +1,6 @@
 [build]
   publish = "_site"
-  command = "npx @11ty/eleventy"
+  command = "npm run build"
   # or it could say: command = "npm run build"
 
 

@@ -13,7 +13,7 @@
         "watch:eleventy": "eleventy --serve --port=2024",
         "watch:webpack": "webpack watch --mode=development",
         "build:sass": "node-sass src/assets/scss -o src/assets/css",
-        "build:eleventy": "@11ty/eleventy",
+        "build:eleventy": "eleventy --quiet",
         "build:webpack": "webpack --mode=production",
         "start": "node tools/dev-server.js",
         "build": "npm-run-all build:sass --parallel build:*   --parallel images"

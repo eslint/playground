@@ -131,50 +131,50 @@ var getClosest = function (elem, selector) {
 })();
 
 // the mobile toggle behavior for the playground configuration
-(function() {
-    var config_trigger = document.getElementById("playground__config-toggle"),
-        config = document.getElementById("playground__config-options"),
-        body = document.getElementsByTagName("body")[0],
-        open = false;
+// (function() {
+//     var config_trigger = document.getElementById("playground__config-toggle"),
+//         config = document.getElementById("playground__config-options"),
+//         body = document.getElementsByTagName("body")[0],
+//         open = false;
 
-    if (matchMedia) {
-        const mq = window.matchMedia("(max-width: 1023px)");
-        mq.addListener(WidthChange);
-        WidthChange(mq);
-    }
+//     if (matchMedia) {
+//         const mq = window.matchMedia("(max-width: 1023px)");
+//         mq.addListener(WidthChange);
+//         WidthChange(mq);
+//     }
 
-    // media query change
-    function WidthChange(mq) {
-        if (mq.matches) {
-            config_trigger.removeAttribute("hidden");
-            config_trigger.setAttribute("aria-expanded", "false");
-            config.setAttribute("data-open", "false");
+//     // media query change
+//     function WidthChange(mq) {
+//         if (mq.matches) {
+//             config_trigger.removeAttribute("hidden");
+//             config_trigger.setAttribute("aria-expanded", "false");
+//             config.setAttribute("data-open", "false");
 
-            config.setAttribute("data-open", "false");
-            config_trigger.addEventListener("click", toggleconfig, false);
-        } else {
-            config_trigger.setAttribute("hidden", "");
-            config_trigger.setAttribute("aria-expanded", "true");
-            config.setAttribute("data-open", "true");
+//             config.setAttribute("data-open", "false");
+//             config_trigger.addEventListener("click", toggleconfig, false);
+//         } else {
+//             config_trigger.setAttribute("hidden", "");
+//             config_trigger.setAttribute("aria-expanded", "true");
+//             config.setAttribute("data-open", "true");
 
-            config.setAttribute("data-open", "true");
-            config_trigger.addEventListener("click", toggleconfig, false);
-        }
+//             config.setAttribute("data-open", "true");
+//             config_trigger.addEventListener("click", toggleconfig, false);
+//         }
 
-    }
+//     }
 
-    function toggleconfig(e) {
-        if (!open) {
-            this.setAttribute("aria-expanded", "true");
-            config.setAttribute("data-open", "true");
-            open = true;
-        } else {
-            this.setAttribute("aria-expanded", "false");
-            config.setAttribute("data-open", "false");
-            open = false;
-        }
-    }
-})();
+//     function toggleconfig(e) {
+//         if (!open) {
+//             this.setAttribute("aria-expanded", "true");
+//             config.setAttribute("data-open", "true");
+//             open = true;
+//         } else {
+//             this.setAttribute("aria-expanded", "false");
+//             config.setAttribute("data-open", "false");
+//             open = false;
+//         }
+//     }
+// })();
 
 //  helpful utilities
 var util = {

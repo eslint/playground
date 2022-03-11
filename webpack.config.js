@@ -26,6 +26,17 @@ module.exports = {
                     configFile: path.resolve(__dirname, ".babelrc")
                 }
             },
+            {
+                test: /\.css$/u,
+                use: [
+                    {
+                        loader: "style-loader"
+                    },
+                    {
+                        loader: "css-loader"
+                    },
+                ]
+            },
         ]
     },
     stats: "errors-only"

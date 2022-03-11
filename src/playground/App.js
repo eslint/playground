@@ -1,8 +1,9 @@
 import React from "react";
+import Editor from "./components/Editor";
 
 const App = () => (
-    <div className="playground-wrapper">
-        Hello REACT
+    <div>
+        <Editor/>
     </div>
 );
 

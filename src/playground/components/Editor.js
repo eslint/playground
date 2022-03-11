@@ -1,6 +1,6 @@
 import React from "react";
 import Footer from "./Footer";
-import MonacoEditor from '@uiw/react-monacoeditor';
+
 
 export default function Editor() {
     return (

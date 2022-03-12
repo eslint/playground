@@ -16,6 +16,10 @@ export default function Alert({ type, message, options, ...props}) {
                 <div className="alert__text">'foo' is assigned a value but never used (<a href="#">no-unused-vars</a>)</div>
             </div>
 
+            {/*
+                keyboard functionality needs to be implemented to make this menu accessible ‼️
+                Implementation details: https://w3c.github.io/aria-practices/examples/menu-button/menu-button-actions.html
+            */}
             {options ? (
             <>
                     <button className="alert__fix-btn" aria-expanded="false" aria-haspopup="true" id="UNIQUE_BUTTON_ID_2" data-toggle hidden>

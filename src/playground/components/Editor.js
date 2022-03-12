@@ -1,3 +1,4 @@
+import CodeEditor from "./CodeEditor";
 import React from "react";
 import Alert from "./Alert";
 import Footer from "./Footer";
@@ -168,8 +169,7 @@ export default function Editor() {
 
             <div className="playground__main">
                 <main className="playground__editor" id="main" tabindex="0" contenteditable="true" aria-label="Editor">
-                    // CODE IS HERE
-                    <Popup options />
+                    <CodeEditor text="hiiii" />
                 </main>
                 <section className="playground__console" aria-labelledby="playground__console-label">
                     <div className="playground__console-announcements visually-hidden" aria-live="polite" aria-atomic="true">
@@ -179,7 +179,7 @@ export default function Editor() {
                     <Alert type="warning" />
                     <Alert type="warning" options={true} />
                     <Alert type="error" options={true} />
-                </section>
+                </section> 
             </div>
         </div>
     );

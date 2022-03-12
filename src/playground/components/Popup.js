@@ -7,7 +7,7 @@ export default function Popup({options, ...props}) {
         <div className="popup" contenteditable="false">
             <div className="popup__content">
                 <div className="popup__main">
-                    <p className="popup__text">'a' is constant</p>
+                    <p className="popup__text">'a' is constant and maybe some more text just to test how it'll wrap</p>
                     <div className="popup__refs">
                         <a href="#">padding-line-between-statements</a>
                     </div>
@@ -28,7 +28,6 @@ export default function Popup({options, ...props}) {
                             <span>Fix</span>
                         </button>
                 )}
-
             </div>
             {showOptions && (
                 <ul className="popup__fix-options" role="menu" aria-labelledby="ANOTHER_UNIQUE_BUTTON_ID" id="js-popup-fix-options">

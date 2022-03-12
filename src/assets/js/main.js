@@ -61,35 +61,6 @@ var getClosest = function (elem, selector) {
     // }
 })();
 
-// the popups have a similar pattern to the previous toggle+panel pattern, but the toggle and panel are _not_ siblings n the DOM (for styling purposes), so this script specifically handles the popup option panels
-(function() {
-    var popup_fix_buttons = document.querySelectorAll(".popup__fix-btn");
-
-    if (popup_fix_buttons) {
-        popup_fix_buttons.forEach(trigger => {
-            trigger.removeAttribute('hidden');
-            let popup = getClosest(trigger, '.popup');
-            let panel = popup.querySelector('#js-popup-fix-options');
-            panel.setAttribute('hidden', '');
-            var open = false;
-
-            trigger.addEventListener("click", (e) => {
-                e.stopPropagation();
-
-                if (!open) {
-                    trigger.setAttribute("aria-expanded", "true");
-                    panel.removeAttribute("hidden");
-                    open = true;
-                } else {
-                    trigger.setAttribute("aria-expanded", "false");
-                    panel.setAttribute("hidden", "");
-                    open = false;
-                }
-            }, false);
-        })
-    }
-})();
-
 // main nav responsive behavior (open/close using the nav button)
 (function() {
     var nav_trigger = document.getElementById("nav-toggle"),

@@ -1,6 +1,7 @@
 import React from "react";
 import Alert from "./Alert";
 import Footer from "./Footer";
+import Popup from "./Popup";
 
 export default function Editor() {
     return (
@@ -168,9 +169,7 @@ export default function Editor() {
             <div className="playground__main">
                 <main className="playground__editor" id="main" tabindex="0" contenteditable="true" aria-label="Editor">
                     // CODE IS HERE
-
-                    {/* {% from 'components/popup.macro.html' import popup, popup_with_options %}
-                    {{ popup_with_options() }} */}
+                    <Popup options />
                 </main>
                 <section className="playground__console" aria-labelledby="playground__console-label">
                     <div className="playground__console-announcements visually-hidden" aria-live="polite" aria-atomic="true">

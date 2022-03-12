@@ -38,7 +38,6 @@ export default function Alert({ type, message, options, ...props}) {
                         Fix
                     </button>
             )}
-            
         </article>
     )
 }

@@ -1,8 +1,8 @@
 import React from "react";
 import ThemeSwitcher from "./ThemeSwitcher";
-import SocialIcons
- from "./SocialIcons";
-export default function Editor() {
+import SocialIcons from "./SocialIcons";
+
+export default function Footer() {
     return (
         <footer className="footer">
             <SocialIcons/>

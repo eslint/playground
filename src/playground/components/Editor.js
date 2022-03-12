@@ -1,13 +1,13 @@
 import React from "react";
+import Alert from "./Alert";
 import Footer from "./Footer";
-
 
 export default function Editor() {
     return (
-        <div class="playground-wrapper">
-            <div class="playground__config-and-footer">
-                <section class="playground__config" aria-labelledby="playground__config-toggle">
-                    <button class="playground__config-toggle" id="playground__config-toggle" hidden>
+        <div className="playground-wrapper">
+            <div className="playground__config-and-footer">
+                <section className="playground__config" aria-labelledby="playground__config-toggle">
+                    <button className="playground__config-toggle" id="playground__config-toggle" hidden>
                         <span>Configuration</span>
                         <svg width="20" height="20" viewBox="20 20 60 60" aria-hidden="true" focusable="false">
                             <path id="ham-top" d="M30,37 L70,37 Z" stroke="currentColor"></path>
@@ -15,14 +15,14 @@ export default function Editor() {
                             <path id="ham-bottom" d="M30,63 L70,63 Z" stroke="currentColor"></path>
                         </svg>
                     </button>
-                    <span class="visually-hidden" id="infobox">Changing configurations will apply the selected changes to the playground.</span>
-                    <div class="playground__config-options" id="playground__config-options">
-                        <div class="playground__config-options__sections">
-                            <div class="playground__config-options__section">
+                    <span className="visually-hidden" id="infobox">Changing configurations will apply the selected changes to the playground.</span>
+                    <div className="playground__config-options" id="playground__config-options">
+                        <div className="playground__config-options__sections">
+                            <div className="playground__config-options__section">
                                 <h2 data-config-section-title>Share URL</h2>
                                 <div data-config-section>
-                                    <div class="share-url-wrapper">
-                                        <div class="share-url">
+                                    <div className="share-url-wrapper">
+                                        <div className="share-url">
                                             <input type="text" id="code-snippet" value="https://play.eslint.org/A5do85Ip" aria-readonly="true" readonly tabindex="-1"/>
                                             <button class ="share-url__btn" id="copyBtn" aria-labelledby="copy-button-label" hidden>
                                             <span hidden id="copy-button-label">Copy URL to clipboard</span>
@@ -31,54 +31,54 @@ export default function Editor() {
                                             </svg>
                                             </button>
                                         </div>
-                                        <span id="share-url__announcement" class="share-url__announcement" aria-live="polite" aria-atomic="true"></span>
+                                        <span id="share-url__announcement" className="share-url__announcement" aria-live="polite" aria-atomic="true"></span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="playground__config-options__section">
-                                <h2 data-config-section-title class="title-toggle">Versioning and Config</h2>
+                            <div className="playground__config-options__section">
+                                <h2 data-config-section-title className="title-toggle">Versioning and Config</h2>
                                 <div data-config-section>
-                                    <div class="c-field-group">
-                                        <label class="c-field" for="eslint-version">
-                                            <span class="label__text">ESLint Version</span>
-                                            <select name="eslint-version" id="eslint-version" class="c-custom-select">
+                                    <div className="c-field-group">
+                                        <label className="c-field" for="eslint-version">
+                                            <span className="label__text">ESLint Version</span>
+                                            <select name="eslint-version" id="eslint-version" className="c-custom-select">
                                                 <option value="one" selected>One</option>
                                                 <option value="two">two</option>
                                                 <option value="three">three</option>
                                             </select>
                                         </label>
-                                        <label class="c-field" for="ecma-version">
-                                            <span class="label__text">ECMA Version</span>
-                                            <select name="ecma-version" id="ecma-version" class="c-custom-select">
+                                        <label className="c-field" for="ecma-version">
+                                            <span className="label__text">ECMA Version</span>
+                                            <select name="ecma-version" id="ecma-version" className="c-custom-select">
                                                 <option value="one" selected>One</option>
                                                 <option value="two">two</option>
                                                 <option value="three">three</option>
                                             </select>
                                         </label>
                                     </div>
-                                    <label class="c-field" for="source-type">
-                                        <span class="label__text">Source Type</span>
-                                        <select name="source-type" id="source-type" class="c-custom-select">
+                                    <label className="c-field" for="source-type">
+                                        <span className="label__text">Source Type</span>
+                                        <select name="source-type" id="source-type" className="c-custom-select">
                                             <option value="one" selected>One</option>
                                             <option value="two">two</option>
                                             <option value="three">three</option>
                                         </select>
                                     </label>
-                                    <div class="combo">
-                                        <label id="ecma-combo-label" class="label__text">ECMA Features</label>
+                                    <div className="combo">
+                                        <label id="ecma-combo-label" className="label__text">ECMA Features</label>
                                         <span id="combo-remove" hidden>remove</span>
-                                        <ul role="list" class="selected-options pills" id="ecma-combo-selected"></ul>
-                                        <div class="combo js-multiselect">
-                                            <input aria-activedescendant="" autocomplete="off" aria-autocomplete="none" aria-controls="listbox3" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="ecma-combo-label combo-selected" id="ecma-combo" class="combo-input c-field__input custom-select" role="combobox" type="text" placeholder="Choose features" />
-                                            <div class="combo-menu" role="listbox" id="listbox3"></div>
+                                        <ul role="list" className="selected-options pills" id="ecma-combo-selected"></ul>
+                                        <div className="combo js-multiselect">
+                                            <input aria-activedescendant="" autocomplete="off" aria-autocomplete="none" aria-controls="listbox3" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="ecma-combo-label combo-selected" id="ecma-combo" className="combo-input c-field__input custom-select" role="combobox" type="text" placeholder="Choose features" />
+                                            <div className="combo-menu" role="listbox" id="listbox3"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="playground__config-options__section">
+                            <div className="playground__config-options__section">
                                 <h2 data-config-section-title>Environments</h2>
                                 <div data-config-section>
-                                    {/* <!-- <label class="c-checkbox c-field" for="env-select-all">
+                                    {/* <!-- <label className="c-checkbox c-field" for="env-select-all">
                                         <input type="checkbox" id="env-select-all">
                                         <span class ="label__text">Enable all</span>
                                         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="none" class ="c-checkbox__icon">
@@ -87,22 +87,22 @@ export default function Editor() {
                                         <rect class ="border" x="0.5" y="0.5" width="15" height="15" rx="3.5" stroke="var(--border-color)" />
                                         </svg>
                                     </label> --> */}
-                                    <div class="combo">
-                                        <label id="environments-combo-label" class="combo-label visually-hidden">Select Environments</label>
+                                    <div className="combo">
+                                        <label id="environments-combo-label" className="combo-label visually-hidden">Select Environments</label>
                                         <span id="combo-remove" hidden>remove</span>
-                                        <ul role="list" class="selected-options pills" id="environments-combo-selected"></ul>
-                                        <div class="combo js-multiselect">
-                                            <input aria-activedescendant="" autocomplete="off" aria-autocomplete="none" aria-controls="listbox3" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="environments-combo-label combo-selected" id="environments-combo" class="combo-input c-field__input custom-select" role="combobox" type="text" placeholder="Choose enviroments" />
-                                            <div class="combo-menu" role="listbox" id="listbox3"></div>
+                                        <ul role="list" className="selected-options pills" id="environments-combo-selected"></ul>
+                                        <div className="combo js-multiselect">
+                                            <input aria-activedescendant="" autocomplete="off" aria-autocomplete="none" aria-controls="listbox3" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="environments-combo-label combo-selected" id="environments-combo" className="combo-input c-field__input custom-select" role="combobox" type="text" placeholder="Choose enviroments" />
+                                            <div className="combo-menu" role="listbox" id="listbox3"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="playground__config-options__section playground__config-options__section--rules">
+                            <div className="playground__config-options__section playground__config-options__section--rules">
                                 <h2 data-config-section-title>Rules</h2>
                                 <div data-config-section>
-                                    <label for="rules" class="combo-label"><span class="label__text">Choose a rule</span></label>
-                                    <div class="combo js-combobox">
+                                    <label for="rules" className="combo-label"><span className="label__text">Choose a rule</span></label>
+                                    <div className="combo js-combobox">
                                         <input
                                             aria-activedescendant=""
                                             aria-autocomplete="none"
@@ -110,34 +110,34 @@ export default function Editor() {
                                             aria-expanded="false"
                                             aria-haspopup="listbox"
                                             id="rules"
-                                            class="combo-input custom-select c-field__input code"
+                                            className="combo-input custom-select c-field__input code"
                                             role="combobox"
                                             type="text"
                                         />
-                                        <div class="combo-menu" role="listbox" id="rules_list"></div>
+                                        <div className="combo-menu" role="listbox" id="rules_list"></div>
                                     </div>
-                                    <button role="button" class="c-btn c-btn--ghost add-rule-btn">Add this rule</button>
-                                    <ul class="config__added-rules" role="list" aria-labelledby="added-rules-label">
+                                    <button role="button" className="c-btn c-btn--ghost add-rule-btn">Add this rule</button>
+                                    <ul className="config__added-rules" role="list" aria-labelledby="added-rules-label">
                                         <h3 id="added-rules-label" hidden> Added rules</h3>
-                                        <li class="config__added-rules__item">
-                                            <h4 class="config__added-rules__rule-name">accessor-pairs</h4>
-                                            <div class="config__added-rules__rule-content" contenteditable="true">
+                                        <li className="config__added-rules__item">
+                                            <h4 className="config__added-rules__rule-name">accessor-pairs</h4>
+                                            <div className="config__added-rules__rule-content" contenteditable="true">
                                                 {/* {setWithoutGet: true, getWithoutSet: false, enforceForClassMembers: true } */}
                                             </div>
                                         </li>
-                                        <li class="config__added-rules__item">
-                                            <h4 class="config__added-rules__rule-name">array-bracket-newline</h4>
-                                            <div class="config__added-rules__rule-content" contenteditable="true">
+                                        <li className="config__added-rules__item">
+                                            <h4 className="config__added-rules__rule-name">array-bracket-newline</h4>
+                                            <div className="config__added-rules__rule-content" contenteditable="true">
                                                 "always"
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="playground__config-options__section">
+                            <div className="playground__config-options__section">
                                 <h2 data-config-section-title>Plugins</h2>
                                 <div data-config-section>
-                                    {/* <!-- <label class="c-checkbox c-field" for="plugins-select-all">
+                                    {/* <!-- <label className="c-checkbox c-field" for="plugins-select-all">
                                         <input type="checkbox" id="plugins-select-all">
                                         <span class ="label__text">Install plugins</span>
                                         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="none" class ="c-checkbox__icon">
@@ -146,18 +146,18 @@ export default function Editor() {
                                         <rect class ="border" x="0.5" y="0.5" width="15" height="15" rx="3.5" stroke="var(--border-color)" />
                                         </svg>
                                     </label> --> */}
-                                    <div class="combo">
-                                        <label id="plugins-combo-label" class="combo-label visually-hidden">Select plugins</label>
+                                    <div className="combo">
+                                        <label id="plugins-combo-label" className="combo-label visually-hidden">Select plugins</label>
                                         <span id="combo-remove" hidden>remove</span>
-                                        <ul role="list" class="selected-options pills" id="plugins-combo-selected"></ul>
-                                        <div class="combo js-multiselect">
-                                            <input aria-activedescendant="" autocomplete="off" aria-autocomplete="none" aria-controls="listbox3" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="plugins-combo-label combo-selected" id="plugins-combo" class="combo-input c-field__input custom-select" role="combobox" type="text" placeholder="Choose plugins" />
-                                            <div class="combo-menu" role="listbox" id="listbox3"></div>
+                                        <ul role="list" className="selected-options pills" id="plugins-combo-selected"></ul>
+                                        <div className="combo js-multiselect">
+                                            <input aria-activedescendant="" autocomplete="off" aria-autocomplete="none" aria-controls="listbox3" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="plugins-combo-label combo-selected" id="plugins-combo" className="combo-input c-field__input custom-select" role="combobox" type="text" placeholder="Choose plugins" />
+                                            <div className="combo-menu" role="listbox" id="listbox3"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="/" download class="c-btn c-btn--primary playground__config__download-btn">Download this config file</a>
+                            <a href="/" download className="c-btn c-btn--primary playground__config__download-btn">Download this config file</a>
                         </div>
                         <Footer/>
                     </div>
@@ -165,26 +165,23 @@ export default function Editor() {
 
             </div>
 
-            <div class="playground__main">
-                <main class="playground__editor" id="main" tabindex="0" contenteditable="true" aria-label="Editor">
+            <div className="playground__main">
+                <main className="playground__editor" id="main" tabindex="0" contenteditable="true" aria-label="Editor">
                     // CODE IS HERE
 
                     {/* {% from 'components/popup.macro.html' import popup, popup_with_options %}
                     {{ popup_with_options() }} */}
                 </main>
-                <section class="playground__console" aria-labelledby="playground__console-label">
-                    {/* <span id="playground__console-label" hidden>Console</span>
-                    <!-- the contents of this live region should update as the warnings and errors logged are updated. It announces to screen readers what has been logged so that they can check them out, instead of announcing each and every warning or error, which can easily turn into a bad experience. -->
-                    <div class="playground__console-announcements visually-hidden" aria-live="polite" aria-atomic="true">
+                <section className="playground__console" aria-labelledby="playground__console-label">
+                    <div className="playground__console-announcements visually-hidden" aria-live="polite" aria-atomic="true">
                         2 warnings and 1 error logged to the console.
                     </div>
-                    {% from 'components/alert.macro.html' import warning, important, alert_with_options %}
-                    {{ warning() }}
-                    {{ important() }}
-                    {{ alert_with_options() }} */}
+                    <Alert type="error" />
+                    <Alert type="warning" />
+                    <Alert type="warning" options={true} />
+                    <Alert type="error" options={true} />
                 </section>
             </div>
         </div>
-
     );
-}
+};

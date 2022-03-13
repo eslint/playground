@@ -36,7 +36,11 @@ export default function Alert({ type, text, message, onFix, options, ...props}) 
                 </div>
                 <div className="alert__text">
                     {alertMessage}
-                    {ruleId && (<a href={`https://eslint.org/docs/rules/${ruleId}`} target="_blank">{ruleId}</a>)}
+                    {ruleId && (
+                        <>
+                            &#40;<a href={`https://eslint.org/docs/rules/${ruleId}`} target="_blank">{ruleId}</a>&#41;
+                        </>
+                    )}
                 </div>
             </div>
 
@@ -58,7 +62,7 @@ export default function Alert({ type, text, message, onFix, options, ...props}) 
                     </ul>
             </>
             ) : (
-                    <button onClick={onFix} disabled={true} className="alert__fix-btn">
+                    <button onClick={onFix} className="alert__fix-btn">
                         Fix
                     </button>
             )}

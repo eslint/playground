@@ -16,7 +16,7 @@
         "build:eleventy": "eleventy --quiet",
         "build:webpack": "webpack --mode=production",
         "start": "node tools/dev-server.js",
-        "build": "npm-run-all build:sass --parallel build:*   --parallel images"
+        "build": "npm-run-all install:playground build:sass build:webpack build:eleventy --parallel images"
     },
     "devDependencies": {
         "@11ty/eleventy": "^0.11.1",

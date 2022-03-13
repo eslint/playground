@@ -47,8 +47,8 @@ export default function CodeEditor({codeValue, onValueChange, ...props}) {
             textareaId="codeArea"
             className="editor"
             style={{
-                fontFamily: '"Fira code", "Fira Mono", monospace',
-                fontSize: 18,
+                fontFamily: `var(--mono-font), Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace`,
+                fontSize: "1em",
                 outline: 0
             }}
         />

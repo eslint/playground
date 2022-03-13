@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Alert({ type, message, options, ...props}) {
+export default function Alert({ type, message, onFix, options, ...props}) {
     const { line, column, message: alertMessage, ruleId } = message;
 
     return (
@@ -41,7 +41,7 @@ export default function Alert({ type, message, options, ...props}) {
                     </ul>
             </>
             ) : (
-                    <button className="alert__fix-btn">
+                    <button onClick={onFix} className="alert__fix-btn">
                         Fix
                     </button>
             )}

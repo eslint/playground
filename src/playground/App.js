@@ -6,6 +6,8 @@ import Footer from "./components/Footer";
 import Popup from "./components/Popup";
 import CodeEditor from "./components/CodeEditor";
 import linterModule from "./node_modules/eslint/lib/linter/linter";
+import ruleFixer from "./node_modules/eslint/lib/linter/rule-fixer";
+import FixTracker from "./node_modules/eslint/lib/rules/utils/fix-tracker";
 
 const linter = new linterModule.Linter();
 const rules = linter.getRules();
@@ -26,7 +28,8 @@ const hasLocalStorage = function () {
 };
 
 const App = () => {
-const [text, setText] = useState("const a = 'b'");
+    const [text, setText] = useState(`/* eslint quotes: ["error", "double"] */
+const a = 'b';`);
 const [fix, setFix] = useState(false);
 const [options, setOptions] = useState({
     parserOptions: {
@@ -53,6 +56,7 @@ const lint = () => {
         if (messages && messages.length > 0 && messages[0].fatal) {
             fatalMessage = messages[0];
         }
+
         return {
             messages,
             output,
@@ -68,14 +72,20 @@ const lint = () => {
 }
 
 const { messages, output, fatalMessage, error } = lint();
-console.log(output);
 const isInvalidAutofix = fatalMessage && text !== output;
 const sourceCode = linter.getSourceCode();
 
-const onFix = () => {
-    setFix(true);
-    setText(output);
-};
+const onFix = (message) => {
+    const { fix } = message;
+
+    if (fix && message.fix) {
+        const result = new FixTracker(ruleFixer, sourceCode)
+            .retainRange(message.fix.range)
+            .replaceTextRange(message.fix.range, message.fix.text);
+
+        setText(sourceCode.text.substr(0, fix.range[0]) + result.text + text.substr(fix.range[1]));
+    }
+}
 
 return (
     <div className="playground-wrapper">
@@ -244,7 +254,10 @@ return (
                 <CodeEditor
                     codeValue={text}
                     errors={messages}
-                    onValueChange={(value) => setText(value)}
+                    onValueChange={(value) => {
+                        setFix(false);
+                        setText(value);
+                    }}
                     getIndexFromLoc={sourceCode && sourceCode.getIndexFromLoc.bind(sourceCode)}
                 />
             </main>
@@ -253,12 +266,15 @@ return (
                     2 warnings and 1 error logged to the console.
                 </div>
 
+                {
+                    isInvalidAutofix && <Alert type="error" text={`Invalid autofix! ${fatalMessage.message}`} />
+                }
                 {messages.length > 0 && messages.map((message) => (
                     <Alert 
-                        key={message.message}
+                        key={`${message.ruleId}-${message.line}-${message.column}`}
                         type={message.severity === 2 ? 'error' : 'warning'}
                         message={message}
-                        onFix={onFix}
+                        onFix={() => onFix(message)}
                     />
                 ))}
             </section>

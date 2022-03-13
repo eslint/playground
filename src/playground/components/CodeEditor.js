@@ -8,14 +8,6 @@ import "prismjs/themes/prism.css";
 
 import "../css/editor.css";
 
-
-const code = `function add(a, b) {
-  return a + b;
-}
-
-const a = 123;
-`;
-
 function debounce(func, wait, immediate) {
     let timeout;
 

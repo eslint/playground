@@ -4,7 +4,8 @@ import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
-import "prismjs/themes/prism.css";
+// TODO: Fix theme for light & dark mode toggle
+// import "prismjs/themes/prism.css";
 
 import "../css/editor.css";
 
@@ -30,7 +31,6 @@ function debounce(func, wait, immediate) {
     };
 }
 
-
 const hightlightWithLineNumbers = (input, language) =>
     highlight(input, language)
         .split("\n")
@@ -54,4 +54,3 @@ export default function CodeEditor({codeValue, onValueChange, ...props}) {
         />
     );
 }
-

@@ -1,6 +1,8 @@
 import React from "react";
 
 export default function Alert({ type, message, options, ...props}) {
+    const { line, column, message: alertMessage, ruleId } = message;
+
     return (
         <article aria-roledescription={type} className={`alert alert--${type}`}>
             <div className="alert__content">
@@ -10,10 +12,15 @@ export default function Alert({ type, message, options, ...props}) {
                     </svg>
                     <span className="visually-hidden">Error</span>
                     <a href="#" className="alert__line-number">
-                        <span className="visually-hidden">Line </span><span className="line-number">1</span><span aria-hidden="true">:</span><span className="visually-hidden">Column </span><span className="colun-number">5</span>
+                        <span className="line-number">{line}</span>
+                        <span aria-hidden="true">:</span>
+                        <span className="colun-number">{column}</span>
                     </a>
                 </div>
-                <div className="alert__text">'foo' is assigned a value but never used (<a href="#">no-unused-vars</a>)</div>
+                <div className="alert__text">
+                    {alertMessage}
+                    (<a href={`https://eslint.org/docs/rules/${ruleId}`} target="_blank">{ruleId}</a>)
+                </div>
             </div>
 
             {/*

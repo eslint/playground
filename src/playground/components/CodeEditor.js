@@ -45,13 +45,11 @@ const hightlightWithLineNumbers = (input, language) =>
         .map((line, i) => `<span class='editorLineNumber'>${i + 1}</span>${line}`)
         .join("\n");
 
-export default function CodeEditor() {
-    const [codeValue, setCodeValue] = useState(code);
-
+export default function CodeEditor({codeValue, onValueChange, ...props}) {
     return (
         <Editor
             value={codeValue}
-            onValueChange={code => setCodeValue(code)}
+            onValueChange={onValueChange}
             highlight={code => hightlightWithLineNumbers(code, languages.js)}
             padding={10}
             textareaId="codeArea"

@@ -1,10 +1,107 @@
-import CodeEditor from "./CodeEditor";
-import React from "react";
+import "regenerator-runtime/runtime";
+
+import React, { useState } from "react";
 import Alert from "./Alert";
 import Footer from "./Footer";
 import Popup from "./Popup";
+import CodeEditor from "./CodeEditor";
+import linterModule from "../node_modules/eslint/lib/linter/linter";
+
+const linter = new linterModule.Linter();
+const rules = linter.getRules();
+const ruleNames = Array.from(rules.keys());
+const docs = Array.from(rules.entries()).reduce((result, [key, value]) => {
+    result[key] = value.meta;
+    return result;
+}, {});
+
+const ENV_NAMES = [
+    "browser",
+    "node",
+    "commonjs",
+    "shared-node-browser",
+    "worker",
+    "amd",
+    "mocha",
+    "jasmine",
+    "jest",
+    "phantomjs",
+    "jquery",
+    "qunit",
+    "prototypejs",
+    "shelljs",
+    "meteor",
+    "mongo",
+    "protractor",
+    "applescript",
+    "nashorn",
+    "serviceworker",
+    "atomtest",
+    "embertest",
+    "webextensions",
+    "es6",
+    "es2017",
+    "es2020",
+    "es2021",
+    "greasemonkey"
+];
+
+const hasLocalStorage = function () {
+    try {
+        window.localStorage.setItem("localStorageTest", "foo");
+        window.localStorage.removeItem("localStorageTest");
+        return true;
+    } catch {
+        return false;
+    }
+};
 
 export default function Editor() {
+    const [text, setText] = useState("const a = 'b'");
+    const [fix, setFix] = useState(false);
+    const [options, setOptions] = useState({
+        parserOptions: {
+            ecmaVersion: "latest",
+            sourceType: "script",
+            ecmaFeatures: {}
+        },
+        rules: [...rules.entries()].reduce((result, [ruleId, rule]) => {
+            if (rule.meta.docs.recommended) {
+                result[ruleId] = 2;
+            }
+            return result;
+        }, {}),
+        env: {
+            es6: true
+        }
+    });
+
+    const lint = () => {
+        try {
+            const { messages, output } = linter.verifyAndFix(text, options, { fix });
+            let fatalMessage;
+
+            if (messages && messages.length > 0 && messages[0].fatal) {
+                fatalMessage = messages[0];
+            }
+            return {
+                messages,
+                output,
+                fatalMessage
+            };
+        } catch (error) {
+            return {
+                messages: [],
+                output: text,
+                error
+            };
+        }
+    }
+
+    const { messages, output, fatalMessage, error } = lint();
+    const isInvalidAutofix = fatalMessage && text !== output;
+    const sourceCode = linter.getSourceCode();
+
     return (
         <div className="playground-wrapper">
             <div className="playground__config-and-footer">
@@ -169,16 +266,22 @@ export default function Editor() {
 
             <div className="playground__main">
                 <main className="playground__editor" id="main" tabindex="0" contenteditable="true" aria-label="Editor">
-                    <CodeEditor text="hiiii" />
+                    <CodeEditor 
+                        codeValue={text}
+                        errors={messages}
+                        onValueChange={(value) => setText(value)}
+                        getIndexFromLoc={sourceCode && sourceCode.getIndexFromLoc.bind(sourceCode)}
+                    />
                 </main>
                 <section className="playground__console" aria-labelledby="playground__console-label">
                     <div className="playground__console-announcements visually-hidden" aria-live="polite" aria-atomic="true">
                         2 warnings and 1 error logged to the console.
                     </div>
-                    <Alert type="error" />
-                    <Alert type="warning" />
-                    <Alert type="warning" options={true} />
-                    <Alert type="error" options={true} />
+
+                    {messages.length > 0 && messages.map((message) => (
+                        <Alert type={message.severity === 2 ? 'error' : 'warning'} message={message} />
+                    ))}
+
                 </section> 
             </div>
         </div>

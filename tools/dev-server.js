@@ -17,7 +17,6 @@ const fs = require("fs");
 const { spawn } = require("child_process");
 const express = require("express");
 const morgan = require("morgan");
-const chokidar = require("chokidar");
 
 const fsPromises = fs.promises;
 

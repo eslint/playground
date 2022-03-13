@@ -16,7 +16,7 @@
         "build:eleventy": "eleventy --quiet",
         "build:webpack": "webpack --mode=production",
         "start": "node tools/dev-server.js",
-        "build": "npm-run-all install:playground build:sass build:webpack build:eleventy --parallel images"
+        "build": "npm-run-all install:playground build:eleventy build:sass build:webpack --parallel images"
     },
     "devDependencies": {
         "@11ty/eleventy": "^0.11.1",
@@ -27,7 +27,6 @@
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-react": "^7.16.7",
         "babel-loader": "^8.2.3",
-        "chokidar": "^3.5.3",
         "cross-env": "^7.0.3",
         "css-loader": "^6.7.1",
         "dom-parser": "^0.1.6",

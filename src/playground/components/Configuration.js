@@ -94,7 +94,7 @@ export default function Configuration() {
                         <li className="config__added-rules__item">
                             <h4 className="config__added-rules__rule-name">accessor-pairs</h4>
                             <div className="config__added-rules__rule-content" contenteditable="true">
-                                {/* {setWithoutGet: true, getWithoutSet: false, enforceForClassMembers: true } */}
+                                {`{setWithoutGet: true, getWithoutSet: false, enforceForClassMembers: true }`}
                             </div>
                         </li>
                         <li className="config__added-rules__item">

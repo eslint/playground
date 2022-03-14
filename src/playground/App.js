@@ -107,7 +107,7 @@ const App = () => {
                 .retainRange(message.fix.range)
                 .replaceTextRange(message.fix.range, message.fix.text);
 
-            setText(sourceCode.text.substr(0, fix.range[0]) + result.text + text.substr(fix.range[1]));
+            setText(sourceCode.text.slice(0, fix.range[0]) + result.text + text.slice(fix.range[1]));
         }
     }
 

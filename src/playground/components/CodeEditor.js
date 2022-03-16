@@ -37,7 +37,7 @@ const hightlightWithLineNumbers = (input, language) =>
         .map((line, i) => `<span class='editorLineNumber'>${i + 1}</span>${line}`)
         .join("\n");
 
-export default function CodeEditor({codeValue, onValueChange, ...props}) {
+export default function CodeEditor({codeValue, onValueChange,  ...props}) {
     return (
         <Editor
             value={codeValue}

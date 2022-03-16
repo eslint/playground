@@ -23,7 +23,7 @@ const getUrlState = () => {
     try {
         return JSON.parse(Unicode.decodeFromBase64(window.location.hash.replace(/^#/u, "")));
     } catch {
-        return null;
+        return {};
     }
 };
 
@@ -38,13 +38,13 @@ const hasLocalStorage = () => {
 };
 
 const App = () => {
-    const storedState = JSON.parse(window.localStorage.getItem("linterDemoState") || null);
-    const urlState = getUrlState();
-    const [text, setText] = useState(`/* eslint quotes: ["error", "double"] */\nconst a = 'b';`);
+    const { text: storedText, options: storedOptions } = JSON.parse(window.localStorage.getItem("linterDemoState") || "{}");
+    const { text: urlText, options: urlOptions } = getUrlState();
+    const [text, setText] = useState(urlText || storedText || `/* eslint quotes: ["error", "double"] */\nconst a = 'b';`);
     const [fix, setFix] = useState(false);
 
     const [options, setOptions] = useState(
-        urlState || storedState || {
+        urlOptions || {
             parserOptions: {
                 ecmaVersion: "latest",
                 sourceType: "script",
@@ -85,8 +85,8 @@ const App = () => {
         }
     }
 
-    const storeState = () => {
-        const serializedState = JSON.stringify({ text: this.state.text, options: this.state.options });
+    const storeState = (textValue) => {
+        const serializedState = JSON.stringify({ text: textValue, options });
 
         if (hasLocalStorage()) {
             window.localStorage.setItem("linterDemoState", serializedState);
@@ -107,7 +107,9 @@ const App = () => {
                 .retainRange(message.fix.range)
                 .replaceTextRange(message.fix.range, message.fix.text);
 
-            setText(sourceCode.text.slice(0, fix.range[0]) + result.text + text.slice(fix.range[1]));
+            const fixedCode = sourceCode.text.slice(0, fix.range[0]) + result.text + text.slice(fix.range[1])
+            setText(fixedCode);
+            storeState(fixedCode);
         }
     }
 
@@ -140,6 +142,7 @@ const App = () => {
                         onValueChange={(value) => {
                             setFix(false);
                             setText(value);
+                            storeState(value);
                         }}
                         getIndexFromLoc={sourceCode && sourceCode.getIndexFromLoc.bind(sourceCode)}
                     />

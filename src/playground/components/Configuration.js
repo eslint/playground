@@ -5,7 +5,7 @@ export default function Configuration() {
     return (
         <div className="playground__config-options__sections">
             <div className="playground__config-options__section">
-                <ShareURL url="https://play.eslint.org/A5do85Ip"/>
+                <ShareURL url={window.location}/>
             </div>
             <div className="playground__config-options__section">
                 <h2 data-config-section-title className="title-toggle">Versioning and Config</h2>

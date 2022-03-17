@@ -52,7 +52,7 @@ const App = () => {
             },
             rules: [...rules.entries()].reduce((result, [ruleId, rule]) => {
                 if (rule.meta.docs.recommended) {
-                    result[ruleId] = 2;
+                    result[ruleId] = ["error"];
                 }
                 return result;
             }, {}),
@@ -127,7 +127,12 @@ const App = () => {
                     </button>
                     <span className="visually-hidden" id="infobox">Changing configurations will apply the selected changes to the playground.</span>
                     <div className="playground__config-options" id="playground__config-options">
-                        <Configuration/>
+                        <Configuration
+                            ruleNames={ruleNames}
+                            options={options}
+                            docs={docs}
+                            eslintVersion={linter.version}
+                        />
                         <Footer />
                     </div>
                 </section>

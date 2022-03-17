@@ -1,7 +1,7 @@
 export const ECMA_FEATURES = [
     "jsx",
     "globalReturn",
-    "impliedtrict"
+    "impliedStrict"
 ];
 
 export const ENV_NAMES = [

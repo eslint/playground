@@ -97,17 +97,18 @@ export default function Configuration({ docs, eslintVersion, options, ruleNames,
                             <li className="config__added-rules__item">
                                 <h4 className="config__added-rules__rule-name">{ruleName}</h4>
                                 <div className="config__added-rules__rule-content" contenteditable="true">
-                                    {options.rules[ruleName]}
+                                    {JSON.stringify(options.rules[ruleName])}
                                 </div>
                             </li>
                         ))}
                     </ul>
                 </div>
             </div>
-            <div className="playground__config-options__section">
+            {/* TODO: Add Plugins */}
+            {/* <div className="playground__config-options__section">
                 <h2 data-config-section-title>Plugins</h2>
                 <div data-config-section>
-                    {/* <!-- <label className="c-checkbox c-field" for="plugins-select-all">
+                     <!-- <label className="c-checkbox c-field" for="plugins-select-all">
                                             <input type="checkbox" id="plugins-select-all">
                                             <span class ="label__text">Install plugins</span>
                                             <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="none" class ="c-checkbox__icon">
@@ -115,7 +116,7 @@ export default function Configuration({ docs, eslintVersion, options, ruleNames,
                                             <path class ="cm" d="M12 5L6.5 10.5L4 8" stroke="transparent" stroke-width="1.6666" stroke-linecap="round" stroke-linejoin="round" />
                                             <rect class ="border" x="0.5" y="0.5" width="15" height="15" rx="3.5" stroke="var(--border-color)" />
                                             </svg>
-                                        </label> --> */}
+                                        </label> --> 
                     <div className="combo">
                         <label id="plugins-combo-label" className="combo-label visually-hidden">Select plugins</label>
                         <span id="combo-remove" hidden>remove</span>
@@ -126,8 +127,16 @@ export default function Configuration({ docs, eslintVersion, options, ruleNames,
                         </div>
                     </div>
                 </div>
-            </div>
-            <a href="/" download className="c-btn c-btn--primary playground__config__download-btn">Download this config file</a>
+            </div> */}
+            <a 
+                href={
+                    `data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(options, null, 4))}`
+                }
+                download=".eslintrc.json"
+                className="c-btn c-btn--primary playground__config__download-btn"
+            >
+                Download this config file
+            </a>
         </div>
     )
 }

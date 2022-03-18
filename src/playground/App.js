@@ -1,6 +1,6 @@
 import "regenerator-runtime/runtime";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import Alert from "./components/Alert";
 import Footer from "./components/Footer";
 import Popup from "./components/Popup";
@@ -40,11 +40,11 @@ const hasLocalStorage = () => {
 const App = () => {
     const { text: storedText, options: storedOptions } = JSON.parse(window.localStorage.getItem("linterDemoState") || "{}");
     const { text: urlText, options: urlOptions } = getUrlState();
+
     const [text, setText] = useState(urlText || storedText || `/* eslint quotes: ["error", "double"] */\nconst a = 'b';`);
     const [fix, setFix] = useState(false);
-
     const [options, setOptions] = useState(
-        urlOptions || {
+        urlOptions || storedOptions || {
             parserOptions: {
                 ecmaVersion: "latest",
                 sourceType: "script",

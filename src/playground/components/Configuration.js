@@ -10,7 +10,6 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
     const envNamesOptions = ENV_NAMES.map((envName) => ({ value: envName, label: envName }));
     const ruleNamesOptions = ruleNames.map((ruleName) => ({ value: ruleName, label: ruleName }));
 
-    //console.log(options);
     return (
         <div className="playground__config-options__sections">
             <div className="playground__config-options__section">
@@ -35,9 +34,9 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                                 isSearchable={false}
                                 defaultValue={ECMAVersionsOptions.filter((ecmaVersion) => options.parserOptions.ecmaVersion === ecmaVersion.value)}
                                 options={ECMAVersionsOptions}
-                                onChange={selected =>{
+                                onChange={selected => {
                                     options.parserOptions.ecmaVersion = selected.value;
-                                    onUpdate(options);
+                                    onUpdate(Object.assign({}, options));
                                 }}
                             />
                             {/* <select name="ecma-version" id="ecma-version" className="c-custom-select">
@@ -53,7 +52,7 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                             options={sourceTypeOptions}
                             onChange={selected => {
                                 options.parserOptions.sourceType = selected.value;
-                                onUpdate(options);
+                                onUpdate(Object.assign({}, options));
                             }}
                         />
                         {/* <select name="source-type" id="source-type" className="c-custom-select">
@@ -72,8 +71,8 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                                 options.parserOptions.ecmaFeatures = {};
                                 selectedOptions.forEach((selected) => {
                                     options.parserOptions.ecmaFeatures[selected.value] = true;
-                                })
-                                onUpdate(options);
+                                });
+                                onUpdate(Object.assign({}, options));
                             }}
                         />
                         {/* <span id="combo-remove" hidden>remove</span>
@@ -120,7 +119,7 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                     </button>
                     <ul className="config__added-rules" role="list" aria-labelledby="added-rules-label">
                         {options.rules && Object.keys(options.rules).reverse().map((ruleName) => (
-                            <li className="config__added-rules__item">
+                            <li key={ruleName} className="config__added-rules__item">
                                 <h4 className="config__added-rules__rule-name">{ruleName}</h4>
                                 <div className="config__added-rules__rule-content" contenteditable="true">
                                     {JSON.stringify(options.rules[ruleName])}

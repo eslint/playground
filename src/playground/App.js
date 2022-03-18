@@ -1,6 +1,6 @@
 import "regenerator-runtime/runtime";
 
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState } from "react";
 import Alert from "./components/Alert";
 import Footer from "./components/Footer";
 import Popup from "./components/Popup";
@@ -146,7 +146,7 @@ const App = () => {
             </div>
 
             <div className="playground__main">
-                <main className="playground__editor" id="main" tabindex="0" contenteditable="true" aria-label="Editor">
+                <main className="playground__editor" id="main" tabIndex="0" aria-label="Editor">
                     <CodeEditor
                         codeValue={text}
                         errors={messages}

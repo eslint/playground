@@ -4,7 +4,7 @@ export default function Popup({options, ...props}) {
     const [showOptions, setShowOptions] = useState(false);
 
     return (
-        <div className="popup" contenteditable="false">
+        <div className="popup" contentEditable="false">
             <div className="popup__content">
                 <div className="popup__main">
                     <p className="popup__text">'a' is constant and maybe some more text just to test how it'll wrap</p>
@@ -31,10 +31,10 @@ export default function Popup({options, ...props}) {
             </div>
             {showOptions && (
                 <ul className="popup__fix-options" role="menu" aria-labelledby="ANOTHER_UNIQUE_BUTTON_ID" id="js-popup-fix-options">
-                    <li className="popup__fix-options__item" role="menuitem" tabindex="-1">Fix using this option</li>
-                    <li className="popup__fix-options__item" role="menuitem" tabindex="-1">Fix using another option</li>
-                    <li className="popup__fix-options__item" role="menuitem" tabindex="-1">Fix using another another option</li>
-                    <li className="popup__fix-options__item" role="menuitem" tabindex="-1">ignore this message</li>
+                    <li className="popup__fix-options__item" role="menuitem" tabIndex="-1">Fix using this option</li>
+                    <li className="popup__fix-options__item" role="menuitem" tabIndex="-1">Fix using another option</li>
+                    <li className="popup__fix-options__item" role="menuitem" tabIndex="-1">Fix using another another option</li>
+                    <li className="popup__fix-options__item" role="menuitem" tabIndex="-1">ignore this message</li>
                 </ul>
             )}
         </div>

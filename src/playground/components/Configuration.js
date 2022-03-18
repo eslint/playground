@@ -3,14 +3,14 @@ import Select from "react-select";
 import ShareURL from "./ShareURL";
 import { ECMA_FEATURES, ECMA_VERSIONS, SOURCE_TYPES, ENV_NAMES } from "../utils/constants";
 
-export default function Configuration({ docs, eslintVersion, options, ruleNames, ...props }) {
+export default function Configuration({ docs, eslintVersion, onUpdate, options, ruleNames, ...props }) {
     const sourceTypeOptions = SOURCE_TYPES.map((sourceType) => ({ value: sourceType, label: sourceType }));
     const ECMAFeaturesOptions = ECMA_FEATURES.map((ecmaFeature) => ({ value: ecmaFeature, label: ecmaFeature }));
-    const ECMAVersionsOptions = ECMA_VERSIONS.map((ecmaVersion) => ({ value: ecmaVersion, label: ecmaVersion }));
+    const ECMAVersionsOptions = ECMA_VERSIONS.map((ecmaVersion) => ({ value: ecmaVersion === "latest" ? ecmaVersion : Number(ecmaVersion), label: ecmaVersion }));
     const envNamesOptions = ENV_NAMES.map((envName) => ({ value: envName, label: envName }));
     const ruleNamesOptions = ruleNames.map((ruleName) => ({ value: ruleName, label: ruleName }));
 
-    console.log(options);
+    //console.log(options);
     return (
         <div className="playground__config-options__sections">
             <div className="playground__config-options__section">
@@ -35,6 +35,10 @@ export default function Configuration({ docs, eslintVersion, options, ruleNames,
                                 isSearchable={false}
                                 defaultValue={ECMAVersionsOptions.filter((ecmaVersion) => options.parserOptions.ecmaVersion === ecmaVersion.value)}
                                 options={ECMAVersionsOptions}
+                                onChange={selected =>{
+                                    options.parserOptions.ecmaVersion = selected.value;
+                                    onUpdate(options);
+                                }}
                             />
                             {/* <select name="ecma-version" id="ecma-version" className="c-custom-select">
                                 {ECMA_VERSIONS.map((ECMAVerseion) => (<option value={ECMAVerseion}>{ECMAVerseion}</option>))}
@@ -45,8 +49,12 @@ export default function Configuration({ docs, eslintVersion, options, ruleNames,
                         <span className="label__text">Source Type</span>
                         <Select
                             isSearchable={false}
-                            defaultValue={sourceTypeOptions[0]}
+                            defaultValue={sourceTypeOptions.filter((sourceTypeOption) => options.parserOptions.sourceType === sourceTypeOption.value) }
                             options={sourceTypeOptions}
+                            onChange={selected => {
+                                options.parserOptions.sourceType = selected.value;
+                                onUpdate(options);
+                            }}
                         />
                         {/* <select name="source-type" id="source-type" className="c-custom-select">
                             {SOURCE_TYPES.map((sourceType) => (<option value={sourceType}>{sourceType}</option>))}
@@ -56,9 +64,17 @@ export default function Configuration({ docs, eslintVersion, options, ruleNames,
                         <label id="ecma-combo-label" className="label__text">ECMA Features</label>
                         <Select
                             isClearable
+                            isMulti
                             defaultValue={ECMAFeaturesOptions.filter((ecmaFeatureName) => options.parserOptions.ecmaFeatures[ecmaFeatureName.value])}
                             isSearchable={false}
                             options={ECMAFeaturesOptions}
+                            onChange={selectedOptions => {
+                                options.parserOptions.ecmaFeatures = {};
+                                selectedOptions.forEach((selected) => {
+                                    options.parserOptions.ecmaFeatures[selected.value] = true;
+                                })
+                                onUpdate(options);
+                            }}
                         />
                         {/* <span id="combo-remove" hidden>remove</span>
                         <ul role="list" className="selected-options pills" id="ecma-combo-selected"></ul>
@@ -73,10 +89,16 @@ export default function Configuration({ docs, eslintVersion, options, ruleNames,
                 <h2 data-config-section-title>Environments</h2>
                 <div data-config-section>
                     <Select
-                        isSearchable={false}
                         isMulti
                         defaultValue={envNamesOptions.filter((envName) => options.env[envName.value])}
                         options={envNamesOptions}
+                        onChange={selectedOptions => {
+                            options.env = {};
+                            selectedOptions.forEach((selected) => {
+                                options.env[selected.value] = true;
+                            })
+                            onUpdate(options);
+                        }}
                     />
                 </div>
             </div>
@@ -87,13 +109,17 @@ export default function Configuration({ docs, eslintVersion, options, ruleNames,
                     <Select
                         isClearable
                         isSearchable
+                        onChange={selected => {
+                            options.rules[selected.value] = ["error"];
+                            onUpdate(options);
+                        }}
                         options={ruleNamesOptions}
                     />
                     <button role="button" className="c-btn c-btn--ghost add-rule-btn">
                         Add this rule
                     </button>
                     <ul className="config__added-rules" role="list" aria-labelledby="added-rules-label">
-                        {options.rules && Object.keys(options.rules).map((ruleName) => (
+                        {options.rules && Object.keys(options.rules).reverse().map((ruleName) => (
                             <li className="config__added-rules__item">
                                 <h4 className="config__added-rules__rule-name">{ruleName}</h4>
                                 <div className="config__added-rules__rule-content" contenteditable="true">

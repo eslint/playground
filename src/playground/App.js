@@ -1,6 +1,6 @@
 import "regenerator-runtime/runtime";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Alert from "./components/Alert";
 import Footer from "./components/Footer";
 import Popup from "./components/Popup";
@@ -85,8 +85,8 @@ const App = () => {
         }
     }
 
-    const storeState = (textValue) => {
-        const serializedState = JSON.stringify({ text: textValue, options });
+    const storeState = ({ newText, newOptions }) => {
+        const serializedState = JSON.stringify({ text: newText || text, options: newOptions || options });
 
         if (hasLocalStorage()) {
             window.localStorage.setItem("linterDemoState", serializedState);
@@ -109,9 +109,14 @@ const App = () => {
 
             const fixedCode = sourceCode.text.slice(0, fix.range[0]) + result.text + text.slice(fix.range[1])
             setText(fixedCode);
-            storeState(fixedCode);
+            storeState({ newText: fixedCode});
         }
     }
+
+    const updateOptions = (newOptions) => {
+        setOptions(newOptions);
+        storeState({ newOptions });
+    };
 
     return (
         <div className="playground-wrapper">
@@ -130,6 +135,7 @@ const App = () => {
                         <Configuration
                             ruleNames={ruleNames}
                             options={options}
+                            onUpdate={updateOptions}
                             docs={docs}
                             eslintVersion={linter.version}
                         />
@@ -147,7 +153,7 @@ const App = () => {
                         onValueChange={(value) => {
                             setFix(false);
                             setText(value);
-                            storeState(value);
+                            storeState({ newText: value});
                         }}
                         getIndexFromLoc={sourceCode && sourceCode.getIndexFromLoc.bind(sourceCode)}
                     />

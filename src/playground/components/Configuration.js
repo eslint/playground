@@ -194,7 +194,7 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                         role="button"
                         className="c-btn c-btn--ghost add-rule-btn"
                         onClick={() => {
-                            if (ruleNames.include(selectedRule)) {
+                            if (ruleNames.includes(selectedRule)) {
                                 options.rules[selectedRule] = ["error"];
                                 onUpdate(Object.assign({}, options));
                                 ruleInputRef.current.setValue("");

@@ -1,6 +1,7 @@
 import React from "react";
 
 import Editor from "react-simple-code-editor";
+
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
@@ -31,13 +32,14 @@ function debounce(func, wait, immediate) {
     };
 }
 
-const hightlightWithLineNumbers = (input, language) =>
-    highlight(input, language)
+const hightlightWithLineNumbers = (input, language) => {
+    return highlight(input, language)
         .split("\n")
         .map((line, i) => `<span class='editorLineNumber'>${i + 1}</span>${line}`)
         .join("\n");
+};
 
-export default function CodeEditor({codeValue, onValueChange,  ...props}) {
+export default function CodeEditor({codeValue, onValueChange, errors,  ...props}) {
     return (
         <Editor
             value={codeValue}

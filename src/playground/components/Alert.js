@@ -62,9 +62,11 @@ export default function Alert({ type, text, message, onFix, options, ...props}) 
                     </ul>
                 </>
             ) : (
-                fix && (<button onClick={onFix} className="alert__fix-btn">
-                    Fix
-                </button>)
+                fix && (
+                    <button onClick={onFix} className="alert__fix-btn">
+                        Fix
+                    </button>
+                )
             )}
         </article>
     )

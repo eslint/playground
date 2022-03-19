@@ -3,6 +3,89 @@ import Select from "react-select";
 import ShareURL from "./ShareURL";
 import { ECMA_FEATURES, ECMA_VERSIONS, SOURCE_TYPES, ENV_NAMES } from "../utils/constants";
 
+const customStyles = {
+    singleValue: (styles) => ({
+        ...styles,
+        color: "var(--body-text-color)",
+    }),
+    control: (styles) => {
+        return {
+            ...styles,
+            backgroundColor: 'var(--body-background-color)',
+            border: '1px solid var(--border-color)',
+            color: "var(--body-text-color)",
+            padding: 0,
+            ':hover': {
+                ...styles[':hover'],
+                borderColor: "var(--color-primary-700)"
+            },
+            ':focus': {
+                borderColor: "var(--color-primary-700)"
+            },
+            ':active': {
+                borderColor: "var(--color-primary-700)"
+            },
+        }
+    },
+    option: (styles) => {
+        return {
+            ...styles,
+            backgroundColor: "var(--body-background-color)",
+            color: "var(--body-text-color)",
+            cursor: 'pointer',
+            border: '1px solid var(--border-color)',
+            margin: '-4px 0 -4px 0',
+            ':hover': {
+                ...styles[':hover'],
+                backgroundColor: "var(--color-primary-700)",
+                color: "white",
+            },
+            ':active': {
+                ...styles[':active'],
+                backgroundColor: "var(--color-primary-700)"
+            },
+        };
+    },
+    input: (styles) => {
+        console.log(styles);
+        return {
+            ...styles,
+            color: "var(--body-text-color)",
+            caretShape: "underscore",
+        };
+    },
+    multiValue: (styles) => {
+        return {
+            ...styles,
+            color: "var(--body-text-color)",
+            backgroundColor: "var(--lighter-background-color)",
+            border: '1px solid var(--border-color)',
+        };
+    },
+    multiValueLabel: (styles) => ({
+        ...styles,
+        color: "var(--headings-color)",
+        backgroundColor: "var(--lighter-background-color)"
+    }),
+    multiValueRemove: (styles) => {
+       return {
+           ...styles,
+           color: "var(--headings-color)",
+           cursor: "pointer",
+           backgroundColor: "var(--lighter-background-color)",
+       }
+    },
+};
+
+const customTheme = (theme) => ({
+    ...theme,
+    colors: {
+        ...theme.colors,
+        primary25: 'var(--color-primary-500)',
+        primary: 'var(--color-primary-700)',
+    },
+});
+
 export default function Configuration({ docs, eslintVersion, onUpdate, options, ruleNames, ...props }) {
     const sourceTypeOptions = SOURCE_TYPES.map((sourceType) => ({ value: sourceType, label: sourceType }));
     const ECMAFeaturesOptions = ECMA_FEATURES.map((ecmaFeature) => ({ value: ecmaFeature, label: ecmaFeature }));
@@ -24,16 +107,13 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                         <label className="c-field" htmlFor="eslint-version">
                             <span className="label__text">ESLint Version</span>
                             <span className="label__text">{`v${eslintVersion}`}</span>
-                            {/* <select name="eslint-version" id="eslint-version" className="c-custom-select">
-                                <option value="one" selected>One</option>
-                                <option value="two">two</option>
-                                <option value="three">three</option>
-                            </select> */}
                         </label>
                         <label className="c-field" htmlFor="ecma-version">
                             <span className="label__text">ECMA Version</span>
                             <Select
                                 isSearchable={false}
+                                styles={customStyles}
+                                theme={theme => customTheme(theme)}
                                 defaultValue={ECMAVersionsOptions.filter((ecmaVersion) => options.parserOptions.ecmaVersion === ecmaVersion.value)}
                                 options={ECMAVersionsOptions}
                                 onChange={selected => {
@@ -41,25 +121,22 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                                     onUpdate(Object.assign({}, options));
                                 }}
                             />
-                            {/* <select name="ecma-version" id="ecma-version" className="c-custom-select">
-                                {ECMA_VERSIONS.map((ECMAVerseion) => (<option value={ECMAVerseion}>{ECMAVerseion}</option>))}
-                            </select> */}
                         </label>
                     </div>
                     <label className="c-field" htmlFor="source-type">
                         <span className="label__text">Source Type</span>
                         <Select
                             isSearchable={false}
+                            styles={customStyles}
+                            theme={theme => customTheme(theme)}
                             defaultValue={sourceTypeOptions.filter((sourceTypeOption) => options.parserOptions.sourceType === sourceTypeOption.value) }
                             options={sourceTypeOptions}
                             onChange={selected => {
                                 options.parserOptions.sourceType = selected.value;
                                 onUpdate(Object.assign({}, options));
                             }}
+                            
                         />
-                        {/* <select name="source-type" id="source-type" className="c-custom-select">
-                            {SOURCE_TYPES.map((sourceType) => (<option value={sourceType}>{sourceType}</option>))}
-                        </select> */}
                     </label>
                     <div className="combo">
                         <label id="ecma-combo-label" className="label__text">ECMA Features</label>
@@ -68,6 +145,8 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                             isMulti
                             defaultValue={ECMAFeaturesOptions.filter((ecmaFeatureName) => options.parserOptions.ecmaFeatures[ecmaFeatureName.value])}
                             isSearchable={false}
+                            styles={customStyles}
+                            theme={theme => customTheme(theme)}
                             options={ECMAFeaturesOptions}
                             onChange={selectedOptions => {
                                 options.parserOptions.ecmaFeatures = {};
@@ -77,12 +156,6 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                                 onUpdate(Object.assign({}, options));
                             }}
                         />
-                        {/* <span id="combo-remove" hidden>remove</span>
-                        <ul role="list" className="selected-options pills" id="ecma-combo-selected"></ul>
-                        <div className="combo js-multiselect">
-                            <input aria-activedescendant="" autocomplete="off" aria-autocomplete="none" aria-controls="listbox3" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="ecma-combo-label combo-selected" id="ecma-combo" className="combo-input c-field__input custom-select" role="combobox" type="text" placeholder="Choose features" />
-                            <div className="combo-menu" role="listbox" id="listbox3"></div>
-                        </div> */}
                     </div>
                 </div>
             </div>
@@ -91,6 +164,8 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                 <div data-config-section>
                     <Select
                         isMulti
+                        styles={customStyles}
+                        theme={theme => customTheme(theme)}
                         defaultValue={envNamesOptions.filter((envName) => options.env[envName.value])}
                         options={envNamesOptions}
                         onChange={selectedOptions => {
@@ -110,6 +185,8 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                     <Select
                         isClearable
                         isSearchable
+                        styles={customStyles}
+                        theme={theme => customTheme(theme)}
                         ref={ruleInputRef}
                         onChange={selected => setSelectedRule(selected.value)}
                         options={ruleNamesOptions}

@@ -90,7 +90,7 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
     const ECMAFeaturesOptions = ECMA_FEATURES.map((ecmaFeature) => ({ value: ecmaFeature, label: ecmaFeature }));
     const ECMAVersionsOptions = ECMA_VERSIONS.map((ecmaVersion) => ({ value: ecmaVersion === "latest" ? ecmaVersion : Number(ecmaVersion), label: ecmaVersion }));
     const envNamesOptions = ENV_NAMES.map((envName) => ({ value: envName, label: envName }));
-    const ruleNamesOptions = ruleNames.map((ruleName) => ({ value: ruleName, label: ruleName }));
+    const ruleNamesOptions = ruleNames.map((ruleName) => ({ value: ruleName, label: docs[ruleName].deprecated ? ruleName.concat(" (deprecated)") : ruleName }));
     const [selectedRule, setSelectedRule] = useState();
     const ruleInputRef = useRef(null);
 
@@ -194,9 +194,11 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                         role="button"
                         className="c-btn c-btn--ghost add-rule-btn"
                         onClick={() => {
-                            options.rules[selectedRule] = ["error"];
-                            onUpdate(Object.assign({}, options));
-                            ruleInputRef.current.setValue("");
+                            if (ruleNames.include(selectedRule)) {
+                                options.rules[selectedRule] = ["error"];
+                                onUpdate(Object.assign({}, options));
+                                ruleInputRef.current.setValue("");
+                            }
                         }}
                     >
                         Add this rule
@@ -204,7 +206,11 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                     <ul style={{maxHeight: "400px", overflow: "auto"}} className="config__added-rules" role="list" aria-labelledby="added-rules-label">
                         {options.rules && Object.keys(options.rules).reverse().map((ruleName) => (
                             <li key={ruleName} className="config__added-rules__item">
-                                <h4 className="config__added-rules__rule-name">{ruleName}</h4>
+                                <h4 className="config__added-rules__rule-name">
+                                    <a href={docs[ruleName].docs.url}>
+                                        {`${ruleName} ${docs[ruleName].deprecated ? "(deprecated)" : ""}`}
+                                    </a>
+                                </h4>
                                 <input
                                     id={ruleName}
                                     style={{width: "100%"}}

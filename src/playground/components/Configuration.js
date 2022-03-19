@@ -47,7 +47,6 @@ const customStyles = {
         };
     },
     input: (styles) => {
-        console.log(styles);
         return {
             ...styles,
             color: "var(--body-text-color)",
@@ -173,7 +172,7 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                             selectedOptions.forEach((selected) => {
                                 options.env[selected.value] = true;
                             })
-                            onUpdate(options);
+                            onUpdate(Object.assign({}, options));
                         }}
                     />
                 </div>
@@ -206,9 +205,16 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                         {options.rules && Object.keys(options.rules).reverse().map((ruleName) => (
                             <li key={ruleName} className="config__added-rules__item">
                                 <h4 className="config__added-rules__rule-name">{ruleName}</h4>
-                                <div className="config__added-rules__rule-content">
-                                    {JSON.stringify(options.rules[ruleName])}
-                                </div>
+                                <input
+                                    id={ruleName}
+                                    style={{width: "100%"}}
+                                    defaultValue={JSON.stringify(options.rules[ruleName])}
+                                    placeholder={`["error"]`}
+                                    onChange={(event) => {
+                                        options.rules[ruleName] = JSON.parse(event.target.value);
+                                        onUpdate(Object.assign({}, options));
+                                    }}
+                                />
                             </li>
                         ))}
                     </ul>

@@ -18,7 +18,7 @@ export default function Alert({ type, text, message, onFix, options, ...props}) 
         );
     }
 
-    const { line, column, message: alertMessage, ruleId } = message;
+    const { line, column, message: alertMessage, ruleId, fix } = message;
 
     return (
         <article aria-roledescription={type} className={`alert alert--${type}`}>
@@ -49,7 +49,7 @@ export default function Alert({ type, text, message, onFix, options, ...props}) 
                 Implementation details: https://w3c.github.io/aria-practices/examples/menu-button/menu-button-actions.html
             */}
             {options ? (
-            <>
+                <>
                     <button className="alert__fix-btn" aria-expanded="false" aria-haspopup="true" id="UNIQUE_BUTTON_ID_2" data-toggle hidden>
                         <span>Fix</span>
                         <svg width="12" height="8" aria-hidden="true" focusable="false" viewBox="0 0 12 8"><g fill="none"><path fill="currentColor" d="M1.41.59l4.59 4.58 4.59-4.58 1.41 1.41-6 6-6-6z" /><path d="M-6-8h24v24h-24z" /></g></svg>
@@ -60,12 +60,12 @@ export default function Alert({ type, text, message, onFix, options, ...props}) 
                         <li className="alert__fix-options__item" role="menuitem" tabIndex="-1">Fix using another another option</li>
                         <li className="alert__fix-options__item" role="menuitem" tabIndex="-1">ignore this message</li>
                     </ul>
-            </>
+                </>
             ) : (
-                    <button onClick={onFix} className="alert__fix-btn">
-                        Fix
-                    </button>
+                fix && (<button onClick={onFix} className="alert__fix-btn">
+                    Fix
+                </button>)
             )}
         </article>
     )
-}
+};

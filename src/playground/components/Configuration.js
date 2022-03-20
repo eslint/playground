@@ -85,12 +85,12 @@ const customTheme = (theme) => ({
     },
 });
 
-export default function Configuration({ docs, eslintVersion, onUpdate, options, ruleNames, ...props }) {
+export default function Configuration({ rulesMeta, eslintVersion, onUpdate, options, ruleNames, ...props }) {
     const sourceTypeOptions = SOURCE_TYPES.map((sourceType) => ({ value: sourceType, label: sourceType }));
     const ECMAFeaturesOptions = ECMA_FEATURES.map((ecmaFeature) => ({ value: ecmaFeature, label: ecmaFeature }));
     const ECMAVersionsOptions = ECMA_VERSIONS.map((ecmaVersion) => ({ value: ecmaVersion === "latest" ? ecmaVersion : Number(ecmaVersion), label: ecmaVersion }));
     const envNamesOptions = ENV_NAMES.map((envName) => ({ value: envName, label: envName }));
-    const ruleNamesOptions = ruleNames.map((ruleName) => ({ value: ruleName, label: docs[ruleName].deprecated ? ruleName.concat(" (deprecated)") : ruleName }));
+    const ruleNamesOptions = ruleNames.map((ruleName) => ({ value: ruleName, label: rulesMeta[ruleName].deprecated ? ruleName.concat(" (deprecated)") : ruleName }));
     const [selectedRule, setSelectedRule] = useState();
     const ruleInputRef = useRef(null);
 
@@ -207,8 +207,8 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                         {options.rules && Object.keys(options.rules).reverse().map((ruleName) => (
                             <li key={ruleName} className="config__added-rules__item">
                                 <h4 className="config__added-rules__rule-name">
-                                    <a href={docs[ruleName].docs.url}>
-                                        {`${ruleName} ${docs[ruleName].deprecated ? "(deprecated)" : ""}`}
+                                    <a href={rulesMeta[ruleName].docs.url}>
+                                        {`${ruleName} ${rulesMeta[ruleName].deprecated ? "(deprecated)" : ""}`}
                                     </a>
                                 </h4>
                                 <input
@@ -217,8 +217,12 @@ export default function Configuration({ docs, eslintVersion, onUpdate, options, 
                                     defaultValue={JSON.stringify(options.rules[ruleName])}
                                     placeholder={`["error"]`}
                                     onChange={(event) => {
-                                        options.rules[ruleName] = JSON.parse(event.target.value);
-                                        onUpdate(Object.assign({}, options));
+                                        try {
+                                            options.rules[ruleName] = JSON.parse(event.target.value);
+                                            onUpdate(Object.assign({}, options));
+                                        } catch {
+                                            // ignore
+                                        } 
                                     }}
                                 />
                             </li>

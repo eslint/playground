@@ -5,16 +5,14 @@ import Alert from "./components/Alert";
 import Footer from "./components/Footer";
 import Popup from "./components/Popup";
 import CodeEditor from "./components/CodeEditor";
-import linterModule from "./node_modules/eslint/lib/linter/linter";
-import ruleFixer from "./node_modules/eslint/lib/linter/rule-fixer";
-import FixTracker from "./node_modules/eslint/lib/rules/utils/fix-tracker";
+import { Linter, SourceCodeFixer } from "./node_modules/eslint/lib/linter/";
 import Unicode from "./utils/unicode";
 import Configuration from "./components/Configuration";
 
-const linter = new linterModule.Linter();
+const linter = new Linter();
 const rules = linter.getRules();
 const ruleNames = Array.from(rules.keys());
-const docs = Array.from(rules.entries()).reduce((result, [key, value]) => {
+const rulesMeta = Array.from(rules.entries()).reduce((result, [key, value]) => {
     result[key] = value.meta;
     return result;
 }, {});
@@ -44,7 +42,7 @@ const App = () => {
     const [text, setText] = useState(urlText || storedText || `/* eslint quotes: ["error", "double"] */\nconst a = 'b';`);
     const [fix, setFix] = useState(false);
     const [options, setOptions] = useState(
-        urlOptions || storedOptions || {
+         {
             parserOptions: {
                 ecmaVersion: "latest",
                 sourceType: "script",
@@ -103,11 +101,7 @@ const App = () => {
         const { fix } = message;
 
         if (fix && message.fix) {
-            const result = new FixTracker(ruleFixer, sourceCode)
-                .retainRange(message.fix.range)
-                .replaceTextRange(message.fix.range, message.fix.text);
-
-            const fixedCode = sourceCode.text.slice(0, fix.range[0]) + result.text + text.slice(fix.range[1])
+            const { output: fixedCode } = SourceCodeFixer.applyFixes(text, [message], true);
             setText(fixedCode);
             storeState({ newText: fixedCode});
         }
@@ -136,13 +130,12 @@ const App = () => {
                             ruleNames={ruleNames}
                             options={options}
                             onUpdate={updateOptions}
-                            docs={docs}
+                            rulesMeta={rulesMeta}
                             eslintVersion={linter.version}
                         />
                         <Footer />
                     </div>
                 </section>
-
             </div>
 
             <div className="playground__main">
@@ -159,20 +152,30 @@ const App = () => {
                     />
                 </main>
                 <section className="playground__console" aria-labelledby="playground__console-label">
-                    <div className="playground__console-announcements visually-hidden" aria-live="polite" aria-atomic="true">
+                    {/* <div className="playground__console-announcements visually-hidden" aria-live="polite" aria-atomic="true">
                         2 warnings and 1 error logged to the console.
-                    </div>
+                    </div> */}
 
                     {
                         isInvalidAutofix && <Alert type="error" text={`Invalid autofix! ${fatalMessage.message}`} />
                     }
                     {messages.length > 0 && messages.map((message) => (
-                        <Alert 
-                            key={`${message.ruleId}-${message.line}-${message.column}`}
-                            type={message.severity === 2 ? 'error' : 'warning'}
-                            message={message}
-                            onFix={() => onFix(message)}
-                        />
+                        message.suggestions ?  (
+                            <Alert 
+                                key={`${message.ruleId}-${message.line}-${message.column}`}
+                                type={message.severity === 2 ? 'error' : 'warning'}
+                                message={message}
+                                suggestions={message.suggestions}
+                                onFix={onFix}
+                            />
+                        ) : (
+                                <Alert
+                                    key={`${message.ruleId}-${message.line}-${message.column}`}
+                                    type={message.severity === 2 ? 'error' : 'warning'}
+                                    message={message}
+                                    onFix={onFix}
+                                />
+                        )
                     ))}
                 </section>
             </div>

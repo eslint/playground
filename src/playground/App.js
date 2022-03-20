@@ -42,7 +42,7 @@ const App = () => {
     const [text, setText] = useState(urlText || storedText || `/* eslint quotes: ["error", "double"] */\nconst a = 'b';`);
     const [fix, setFix] = useState(false);
     const [options, setOptions] = useState(
-         {
+        urlOptions || storedOptions || {
             parserOptions: {
                 ecmaVersion: "latest",
                 sourceType: "script",

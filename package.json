@@ -46,10 +46,19 @@
         "webpack-cli": "^4.9.2"
     },
     "dependencies": {
-        "prismjs": "^1.27.0",
-        "react": "^16.8.6",
-        "react-dom": "^16.8.6",
-        "react-select": "^5.2.2",
-        "react-simple-code-editor": "^0.11.0"
+        "@codemirror/basic-setup": "^0.19.1",
+        "@codemirror/commands": "^0.19.8",
+        "@codemirror/highlight": "^0.19.7",
+        "@codemirror/history": "^0.19.2",
+        "@codemirror/lang-javascript": "^0.19.7",
+        "@codemirror/lint": "^0.19.6",
+        "@codemirror/matchbrackets": "^0.19.4",
+        "@codemirror/state": "^0.19.9",
+        "@codemirror/view": "^0.19.47",
+        "@uiw/react-codemirror": "^4.5.1",
+        "react": "^17.0.2",
+        "react-codemirror6": "^1.0.1",
+        "react-dom": "^17.0.2",
+        "react-select": "^5.2.2"
     }
 }

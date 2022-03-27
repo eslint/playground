@@ -143,7 +143,8 @@ const App = () => {
                     <CodeEditor
                         codeValue={text}
                         errors={messages}
-                        onValueChange={(value) => {
+                        eslintOptions={options}
+                        onUpdate={(value) => {
                             setFix(false);
                             setText(value);
                             storeState({ newText: value});

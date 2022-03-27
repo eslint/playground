@@ -16,6 +16,7 @@ module.exports = {
     plugins: [
         new NodePolyfillPlugin()
     ],
+    devtool: "source-map",
     module: {
         rules: [
             {

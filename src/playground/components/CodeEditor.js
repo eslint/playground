@@ -37,22 +37,20 @@ export default function CodeEditor({ codeValue, onUpdate, errors, eslintOptions,
         <>
             <CodeMirror
                 value={codeValue}
-                minHeight="100%"
-                //theme={localStorage.getItem("theme") }
+                height="390px"
+                // theme={localStorage.getItem("theme") }
                 autoFocus={true}
-                
                 extensions={
                     [
                         history(),
                         bracketMatching(),
                         myHighlightStyle,
-                        linter(esLint(new ESLint(), eslintOptions)),
-                        // lintGutter(),
+                        linter(esLint(new ESLint(), eslintOptions), { delay: 0}),
+                        lintGutter(),
                         javascript(),
                         EditorView.theme(
                             {
                                 ".cm-editor": {
-                                    minHeight: "100%",
                                     caretColor: "var(--color-primary-500)"
                                 },
                                 ".cm-scroller": {
@@ -64,14 +62,21 @@ export default function CodeEditor({ codeValue, onUpdate, errors, eslintOptions,
                                     color: "var(--body-text-color)"
                                 },
                                 ".cm-content": {
-                                    caretColor: "var(--color-primary-500)"
+                                    caretColor: "var(--color-primary-500)"  
+                                },
+                                ".cm-cursor, .cm-dropCursor": {
+                                    borderLeftColor: "var(--link-color)"
+                                },
+                                "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection": {
+                                    backgroundColor: "var(--color-primary-800)"
+                                },
+                                "&.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket": {
+                                    backgroundColor: "var(--color-primary-800)",
+                                    color: "#fff",
+                                    outline: "1px solid #515a6b"
                                 },
                                 ".cm-activeLine, .cm-activeLineGutter": {
                                     backgroundColor: "var(--body-background-color)",
-                                    caretColor: "var(--color-primary-500)"
-                                },
-                                ".cm-line": {
-                                    caretColor: "var(--color-primary-500)"
                                 },
                                 ".cm-gutter": {
                                     paddingRight: "1px",

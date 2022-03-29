@@ -46,7 +46,6 @@ export default function CodeEditor({ codeValue, onUpdate, errors, eslintOptions,
                         bracketMatching(),
                         myHighlightStyle,
                         linter(esLint(new ESLint(), eslintOptions), { delay: 0}),
-                        lintGutter(),
                         javascript(),
                         EditorView.theme(
                             {

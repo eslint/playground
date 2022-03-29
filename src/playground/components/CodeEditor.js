@@ -5,7 +5,7 @@ import { history } from "@codemirror/history";
 import { tags as t, HighlightStyle} from "@codemirror/highlight"
 import { bracketMatching } from "@codemirror/matchbrackets";
 import { javascript, esLint } from '@codemirror/lang-javascript';
-import { linter } from "@codemirror/lint";
+import { linter } from "../utils/codemirror-linter-extension";
 import { Linter as ESLint } from "../node_modules/eslint/lib/linter/";
 
 export default function CodeEditor({ codeValue, onUpdate, errors, eslintOptions, ...props}) {

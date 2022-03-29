@@ -1,3 +1,8 @@
+/**
+ * This file is inspired from @codemirror/lint package https://github.com/codemirror/lint
+ * We added custom styles and tooltips content as per our theme and design
+ */
+
 import { Decoration, EditorView, ViewPlugin, logException, WidgetType } from '@codemirror/view';
 import { StateEffect, StateField, Facet, combineConfig } from '@codemirror/state';
 import { hoverTooltip, showTooltip } from '@codemirror/tooltip';

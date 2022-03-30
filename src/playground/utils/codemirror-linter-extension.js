@@ -3,6 +3,8 @@
  * We added custom styles and tooltips content as per our theme and design
  */
 
+import React from "react";
+import ReactDOM from 'react-dom';
 import { Decoration, EditorView, ViewPlugin, logException, WidgetType } from '@codemirror/view';
 import { StateEffect, StateField, Facet, combineConfig } from '@codemirror/state';
 import { hoverTooltip, showTooltip } from '@codemirror/tooltip';
@@ -10,6 +12,7 @@ import { showPanel, getPanel } from '@codemirror/panel';
 import { gutter, GutterMarker } from '@codemirror/gutter';
 import { RangeSet } from '@codemirror/rangeset';
 import elt from 'crelt';
+import Popup from "../components/Popup";
 
 class SelectedDiagnostic {
     constructor(from, to, diagnostic) {
@@ -140,7 +143,7 @@ function lintTooltip(view, pos, side) {
     };
 }
 function diagnosticsTooltip(view, diagnostics) {
-    return elt("ul", { class: "cm-tooltip-lint" }, diagnostics.map(d => renderDiagnostic(view, d, false)));
+    return elt("div", { style: "opacity: hidden" }, diagnostics.map(d => renderDiagnostic(view, d, false)));
 }
 /**
 Command to open and focus the lint panel.
@@ -277,7 +280,12 @@ function assignKeys(actions) {
 function renderDiagnostic(view, diagnostic, inPanel) {
     var _a;
     let keys = inPanel ? assignKeys(diagnostic.actions) : [];
-    return elt("li", { class: "cm-diagnostic cm-diagnostic-" + diagnostic.severity }, elt("span", { class: "cm-diagnosticText" }, diagnostic.message), (_a = diagnostic.actions) === null || _a === void 0 ? void 0 : _a.map((action, i) => {
+    const el = document.createElement("div");
+    ReactDOM.render(
+    <Popup message={diagnostic.message} ruleName={diagnostic.source.replace("jshint:", "")} />, el);
+    return el;
+    return React.createElement("div")
+    return elt("li", { class: "popup__main cm-diagnostic cm-diagnostic-" + diagnostic.severity }, elt("span", { class: "popup__text" }, diagnostic.message), (_a = diagnostic.actions) === null || _a === void 0 ? void 0 : _a.map((action, i) => {
         let click = (e) => {
             e.preventDefault();
             let found = findDiagnostic(view.state.field(lintState).diagnostics, diagnostic);
@@ -286,16 +294,26 @@ function renderDiagnostic(view, diagnostic, inPanel) {
         };
         let { name } = action, keyIndex = keys[i] ? name.indexOf(keys[i]) : -1;
         let nameElt = keyIndex < 0 ? name : [name.slice(0, keyIndex),
-            elt("u", name.slice(keyIndex, keyIndex + 1)),
+            elt("span", name.slice(keyIndex, keyIndex + 1)),
             name.slice(keyIndex + 1)];
+        console.log(diagnostic);
+        // return (<button className="popup__fix-btn" onClick={() => setShowOptions(!showOptions)} aria-expanded="false" aria-haspopup="true" id="ANOTHER_UNIQUE_BUTTON_ID">
+        //                 <span>Fix</span>
+        //                 <svg width="12" height="8" focusable="false" viewBox="0 0 12 8">
+        //                     <g fill="none">
+        //                         <path fill="currentColor" d="M1.41.59l4.59 4.58 4.59-4.58 1.41 1.41-6 6-6-6z" />
+        //                         <path d="M-6-8h24v24h-24z" />
+        //                     </g>
+        //                 </svg>
+        //             </button>)
         return elt("button", {
             type: "button",
-            class: "cm-diagnosticAction",
+            class: "popup__fix-btn",
             onclick: click,
             onmousedown: click,
             "aria-label": ` Action: ${name}${keyIndex < 0 ? "" : ` (access key "${keys[i]})"`}.`
         }, nameElt);
-    }), diagnostic.source && elt("div", { class: "cm-diagnosticSource" }, diagnostic.source));
+    }), diagnostic.source && elt("a", { class: "popup__refs" }, diagnostic.source.replace("jshint:", "")));
 }
 class DiagnosticWidget extends WidgetType {
     constructor(diagnostic) {
@@ -490,28 +508,6 @@ function underline(color) {
     return svg(`<path d="m0 2.5 l2 -1.5 l1 0 l2 1.5 l1 0" stroke="${color}" fill="none" stroke-width=".7"/>`, `width="6" height="3"`);
 }
 const baseTheme = /*@__PURE__*/EditorView.baseTheme({
-    ".cm-diagnostic": {
-        padding: "3px 6px 3px 8px",
-        marginLeft: "-1px",
-        display: "block",
-        whiteSpace: "pre-wrap"
-    },
-    ".cm-diagnostic-error": { borderLeft: "5px solid #d11" },
-    ".cm-diagnostic-warning": { borderLeft: "5px solid orange" },
-    ".cm-diagnostic-info": { borderLeft: "5px solid #999" },
-    ".cm-diagnosticAction": {
-        font: "inherit",
-        border: "none",
-        padding: "2px 4px",
-        backgroundColor: "#444",
-        color: "white",
-        borderRadius: "3px",
-        marginLeft: "8px"
-    },
-    ".cm-diagnosticSource": {
-        fontSize: "70%",
-        opacity: .7
-    },
     ".cm-lintRange": {
         backgroundPosition: "left bottom",
         backgroundRepeat: "repeat-x",
@@ -521,10 +517,6 @@ const baseTheme = /*@__PURE__*/EditorView.baseTheme({
     ".cm-lintRange-warning": { backgroundImage: /*@__PURE__*/underline("orange") },
     ".cm-lintRange-info": { backgroundImage: /*@__PURE__*/underline("#999") },
     ".cm-lintRange-active": { backgroundColor: "#ffdd9980" },
-    ".cm-tooltip-lint": {
-        padding: 0,
-        margin: 0
-    },
     ".cm-lintPoint": {
         position: "relative",
         "&:after": {
@@ -543,36 +535,6 @@ const baseTheme = /*@__PURE__*/EditorView.baseTheme({
     ".cm-lintPoint-info": {
         "&:after": { borderBottomColor: "#999" }
     },
-    ".cm-panel.cm-panel-lint": {
-        position: "relative",
-        "& ul": {
-            maxHeight: "100px",
-            overflowY: "auto",
-            "& [aria-selected]": {
-                backgroundColor: "#ddd",
-                "& u": { textDecoration: "underline" }
-            },
-            "&:focus [aria-selected]": {
-                background_fallback: "#bdf",
-                backgroundColor: "Highlight",
-                color_fallback: "white",
-                color: "HighlightText"
-            },
-            "& u": { textDecoration: "none" },
-            padding: 0,
-            margin: 0
-        },
-        "& [name=close]": {
-            position: "absolute",
-            top: "0",
-            right: "2px",
-            background: "inherit",
-            border: "none",
-            font: "inherit",
-            padding: 0,
-            margin: 0
-        }
-    }
 });
 class LintGutterMarker extends GutterMarker {
     constructor(diagnostics) {

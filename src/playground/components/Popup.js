@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
-export default function Popup({options, ...props}) {
+export default function Popup({options, message, ruleName, ...props}) {
     const [showOptions, setShowOptions] = useState(false);
 
     return (
         <div className="popup" contentEditable="false">
             <div className="popup__content">
                 <div className="popup__main">
-                    <p className="popup__text">'a' is constant and maybe some more text just to test how it'll wrap</p>
+                    <p className="popup__text">{message}</p>
                     <div className="popup__refs">
-                        <a href="#">padding-line-between-statements</a>
+                        <a href={`https://eslint.org/docs/rules/${ruleName}`}>{ruleName}</a>
                     </div>
                 </div>
 

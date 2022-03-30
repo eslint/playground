@@ -1,8 +1,7 @@
 .popup {
-  position: absolute;
+  position: relative;
+  //left: -15px;
   z-index: 20;
-  left: 5rem;
-  top: 15rem;
   font-family: var(--mono-font);
   font-size: var(--step--1);
   max-width: 500px;
@@ -70,46 +69,11 @@
 }
 
 .cm-tooltip {
-  z-index: 20;
   font-family: var(--mono-font);
   font-size: var(--step--1);
   max-width: 500px;
-  position: relative;
-  display: grid;
-  align-items: center;
-  gap: 0 2rem;
-  grid-template-columns: 1fr auto;
-  padding: 0.75rem;
   border-radius: var(--border-radius);
   background-color: var(--color-neutral-400);
-  color: red;
-
-  a {
-    color: var(--color-neutral-400);
-    // white-space: nowrap;
-  }
-
-  [data-theme="dark"] & {
-    background-color: var(--color-neutral-600);
-    color: #fff;
-    a {
-      color: var(--color-neutral-300);
-    }
-  }
-
-  &::before {
-    content: "";
-    width: 12px;
-    height: 12px;
-    position: absolute;
-    top: -5px;
-    left: 12px;
-    border-radius: 2px;
-    border-left: 1px solid var(--border-color);
-    border-top: 1px solid var(--border-color);
-    background: inherit;
-    transform: rotate(45deg);
-  }
 }
 
 .popup__fix-btn {

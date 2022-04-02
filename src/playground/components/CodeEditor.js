@@ -37,7 +37,8 @@ export default function CodeEditor({ codeValue, onUpdate, errors, eslintOptions,
         <>
             <CodeMirror
                 value={codeValue}
-                height="390px"
+                minWidth="100%"
+                height="100%"
                 autoFocus={true}
                 extensions={
                     [
@@ -49,10 +50,9 @@ export default function CodeEditor({ codeValue, onUpdate, errors, eslintOptions,
                         EditorView.theme(
                             {
                                 ".cm-editor": {
-                                    caretColor: "var(--color-primary-500)"
+                                    caretColor: "var(--color-primary-500)",
                                 },
                                 ".cm-scroller": {
-                                    minHeight: "100%",
                                     backgroundColor: "var(--body-background-color)",
                                     border: "1px solid #ced4da",
                                     fontFamily: `var(--mono-font), Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace`,

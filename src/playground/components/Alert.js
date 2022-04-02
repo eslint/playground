@@ -60,6 +60,7 @@ export default function Alert({ type, text, message, onFix, ...props}) {
                                 className="alert__fix-options__item"
                                 role="menuitem"
                                 tabIndex="-1"
+                                key={suggestion.desc}
                                 onClick={() => onFix(suggestion)}
                             >
                                 {suggestion.desc}

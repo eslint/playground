@@ -1092,9 +1092,13 @@ ul.selected-options {
   z-index: 10; }
 
 .playground__editor {
+  display: flex;
   padding: 1rem;
   overflow: auto;
   flex: 1; }
+
+.cm-theme-light {
+  min-width: 100%; }
 
 @media all and (min-width: 1023px) {
   .playground__config-and-footer {

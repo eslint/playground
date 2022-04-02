@@ -3,7 +3,6 @@ import "regenerator-runtime/runtime";
 import React, { useState } from "react";
 import Alert from "./components/Alert";
 import Footer from "./components/Footer";
-import Popup from "./components/Popup";
 import CodeEditor from "./components/CodeEditor";
 import { Linter, SourceCodeFixer } from "./node_modules/eslint/lib/linter/";
 import Unicode from "./utils/unicode";
@@ -93,7 +92,7 @@ const App = () => {
         window.location.hash = Unicode.encodeToBase64(serializedState);
     }
 
-    const { messages, output, fatalMessage, error } = lint();
+    const { messages, output, fatalMessage } = lint();
     const isInvalidAutofix = fatalMessage && text !== output;
     const sourceCode = linter.getSourceCode();
 

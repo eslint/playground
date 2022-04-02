@@ -248,16 +248,6 @@ function linter(source, config = {}) {
     return lintSource.of({ source, delay: (_a = config.delay) !== null && _a !== void 0 ? _a : 750 });
 }
 
-/**
-Forces any linters [configured](https://codemirror.net/6/docs/ref/#lint.linter) to run when the
-editor is idle to run right away.
-*/
-function forceLinting(view) {
-    let plugin = view.plugin(lintPlugin);
-    if (plugin)
-        plugin.force();
-}
-
 function assignKeys(actions) {
     let assigned = [];
     if (actions)
@@ -274,7 +264,7 @@ function assignKeys(actions) {
     return assigned;
 }
 
-function renderDiagnostic(view, diagnostic, inPanel) {
+function renderDiagnostic(view, diagnostic) {
     const element = document.createElement("div");
     ReactDOM.render(
         <Popup

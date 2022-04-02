@@ -46,22 +46,16 @@
         "webpack-cli": "^4.9.2"
     },
     "dependencies": {
-        "@codemirror/basic-setup": "^0.19.1",
-        "@codemirror/commands": "^0.19.8",
         "@codemirror/highlight": "^0.19.7",
         "@codemirror/history": "^0.19.2",
         "@codemirror/lang-javascript": "^0.19.7",
         "@codemirror/matchbrackets": "^0.19.4",
         "@codemirror/state": "^0.19.9",
         "@codemirror/view": "^0.19.47",
-        "@codemirror/gutter": "^0.19.4",
-        "@codemirror/panel": "^0.19.0",
-        "@codemirror/rangeset": "^0.19.1",
         "@codemirror/tooltip": "^0.19.16",
-        "crelt": "^1.0.5",
         "@uiw/react-codemirror": "^4.5.1",
+        "crelt": "^1.0.5",
         "react": "^17.0.2",
-        "react-codemirror6": "^1.0.1",
         "react-dom": "^17.0.2",
         "react-select": "^5.2.2"
     }

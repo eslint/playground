@@ -32,13 +32,16 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/u,
+                test: /\.[s]css$/u,
                 use: [
                     {
                         loader: "style-loader"
                     },
                     {
                         loader: "css-loader"
+                    },
+                    {
+                        loader: "sass-loader"
                     },
                 ]
             },

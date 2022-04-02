@@ -39,9 +39,6 @@
   overflow: auto;
   flex: 1; }
 
-.cm-theme-light {
-  min-width: 100%; }
-
 @media all and (min-width: 1023px) {
   .playground__config-and-footer {
     height: calc(100vh - 75px);

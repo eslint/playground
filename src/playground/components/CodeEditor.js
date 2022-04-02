@@ -7,6 +7,7 @@ import { bracketMatching } from "@codemirror/matchbrackets";
 import { javascript, esLint } from '@codemirror/lang-javascript';
 import { linter } from "../utils/codemirror-linter-extension";
 import { Linter as ESLint } from "../node_modules/eslint/lib/linter/";
+import "../scss/editor.scss";
 
 export default function CodeEditor({ codeValue, onUpdate, errors, eslintOptions, ...props}) {
     const myHighlightStyle = HighlightStyle.define([
@@ -49,40 +50,13 @@ export default function CodeEditor({ codeValue, onUpdate, errors, eslintOptions,
                         javascript(),
                         EditorView.theme(
                             {
-                                ".cm-editor": {
-                                    caretColor: "var(--color-primary-500)",
-                                },
-                                ".cm-scroller": {
-                                    backgroundColor: "var(--body-background-color)",
-                                    border: "1px solid #ced4da",
-                                    fontFamily: `var(--mono-font), Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace`,
-                                    fontSize: "1em",
-                                    color: "var(--body-text-color)"
-                                },
-                                ".cm-content": {
-                                    caretColor: "var(--color-primary-500)"  
-                                },
-                                ".cm-cursor, .cm-dropCursor": {
-                                    borderLeftColor: "var(--link-color)"
-                                },
-                                "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection": {
-                                    backgroundColor: "var(--color-primary-800)"
-                                },
                                 "&.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket": {
                                     backgroundColor: "var(--color-primary-800)",
                                     color: "#fff",
                                     outline: "1px solid #515a6b"
                                 },
-                                ".cm-activeLine, .cm-activeLineGutter": {
-                                    backgroundColor: "var(--body-background-color)",
-                                },
-                                ".cm-gutter": {
-                                    paddingRight: "1px",
-                                    backgroundColor: "var(--body-background-color)",
-                                }
                             }
                         ),
-                        
                     ]
                 }
                 onChange={(value) => {

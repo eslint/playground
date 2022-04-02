@@ -1097,9 +1097,6 @@ ul.selected-options {
   overflow: auto;
   flex: 1; }
 
-.cm-theme-light {
-  min-width: 100%; }
-
 @media all and (min-width: 1023px) {
   .playground__config-and-footer {
     height: calc(100vh - 75px);
@@ -1518,10 +1515,6 @@ a.c-btn {
     border-radius: 2px;
     background: inherit;
     transform: rotate(45deg); }
-
-.cm-tooltip {
-  background-color: transparent !important;
-  border: none !important; }
 
 .popup__fix-btn {
   display: flex;

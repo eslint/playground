@@ -38,7 +38,6 @@ export default function CodeEditor({ codeValue, onUpdate, errors, eslintOptions,
             <CodeMirror
                 value={codeValue}
                 height="390px"
-                // theme={localStorage.getItem("theme") }
                 autoFocus={true}
                 extensions={
                     [

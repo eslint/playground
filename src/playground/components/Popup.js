@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-export default function Popup({options, message, ruleName, ...props}) {
+export default function Popup({options, message, ruleName, onFix, ...props}) {
     const [showOptions, setShowOptions] = useState(false);
 
     return (
-        <div className="popup" contentEditable="false">
+        <div className="popup">
             <div className="popup__content">
                 <div className="popup__main">
                     <p className="popup__text">{message}</p>
@@ -23,10 +23,12 @@ export default function Popup({options, message, ruleName, ...props}) {
                             </g>
                         </svg>
                     </button>
-                ): (
-                        <button className="popup__fix-btn" aria-expanded="false" aria-haspopup="true" id="ANOTHER_UNIQUE_BUTTON_ID">
-                            <span>Fix</span>
-                        </button>
+                ) : (
+                        onFix && (
+                            <button onClick={onFix} className="popup__fix-btn" aria-expanded="false" aria-haspopup="true" id="ANOTHER_UNIQUE_BUTTON_ID">
+                                <span>Fix</span>
+                            </button>
+                        )
                 )}
             </div>
             {showOptions && (

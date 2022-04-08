@@ -1,11 +1,11 @@
 {
     "name": "ESLint-Playground",
     "version": "1.0.0",
+    "private": true,
     "description": "",
     "main": "index.js",
     "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "license": "Apache-2.0",
     "scripts": {
         "images": "imagemin '_site/assets/images' --out-dir='_site/assets/images'",
         "install:playground": "cd src/playground && npm install --no-package-lock",
@@ -52,8 +52,8 @@
         "@codemirror/lang-javascript": "^0.19.7",
         "@codemirror/matchbrackets": "^0.19.4",
         "@codemirror/state": "^0.19.9",
-        "@codemirror/view": "^0.19.47",
         "@codemirror/tooltip": "^0.19.16",
+        "@codemirror/view": "^0.19.47",
         "@uiw/react-codemirror": "^4.5.1",
         "crelt": "^1.0.5",
         "react": "^17.0.2",

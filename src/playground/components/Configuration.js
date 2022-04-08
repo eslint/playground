@@ -204,7 +204,7 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                         Add this rule
                     </button>
                     <ul style={{maxHeight: "400px", overflow: "auto"}} className="config__added-rules" role="list" aria-labelledby="added-rules-label">
-                        {options.rules && Object.keys(options.rules).reverse().map((ruleName) => (
+                        {options.rules && Object.keys(options.rules).sort().map((ruleName) => (
                             <li key={ruleName} className="config__added-rules__item">
                                 <h4 className="config__added-rules__rule-name">
                                     <a href={rulesMeta[ruleName].docs.url}>

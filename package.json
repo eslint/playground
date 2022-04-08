@@ -15,6 +15,7 @@
         "build:sass": "node-sass src/assets/scss -o src/assets/css",
         "build:eleventy": "eleventy --quiet",
         "build:webpack": "webpack --mode=production",
+        "prestart": "npm run build",
         "start": "node tools/dev-server.js",
         "build": "npm-run-all install:playground build:eleventy build:sass build:webpack images",
         "postinstall": "npm run install:playground"

@@ -9,15 +9,15 @@
     "scripts": {
         "images": "imagemin '_site/assets/images' --out-dir='_site/assets/images'",
         "install:playground": "cd src/playground && npm install --no-package-lock",
-        "watch:sass": "sass src/assets/scss:src/assets/css",
+        "watch:sass": "node-sass --watch src/assets/scss -o src/assets/css",
         "watch:eleventy": "eleventy --serve --port=2024",
         "watch:webpack": "webpack watch --mode=development",
-        "build:sass": "sass src/assets/scss:src/assets/css",
+        "build:sass": "node-sass src/assets/scss -o src/assets/css",
         "build:eleventy": "eleventy --quiet",
         "build:webpack": "webpack --mode=production",
         "prestart": "npm run build",
         "start": "node tools/dev-server.js",
-        "build": "npm-run-all install:playground build:eleventy build:sass build:webpack images",
+        "build": "npm-run-all install:playground build:sass build:eleventy build:webpack images",
         "postinstall": "npm run install:playground"
     },
     "devDependencies": {

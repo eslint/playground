@@ -7,16 +7,8 @@
     border: none !important;
 }
 
-.cm-editor {
-    caret-color: var(--color-primary-500);
-}
-
-.cm-content {
-    caret-color: var(--color-primary-500);
-}
-
 .cm-cursor, .cm-dropCursor {
-    border-left-color: var(--link-color) !important;
+    border-left: 1px solid var(--link-color) !important;
 }
 
 .cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection {

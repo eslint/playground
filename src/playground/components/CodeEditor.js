@@ -6,6 +6,7 @@ import { tags as t, HighlightStyle} from "@codemirror/highlight"
 import { bracketMatching } from "@codemirror/matchbrackets";
 import { javascript, esLint } from '@codemirror/lang-javascript';
 import { linter } from "../utils/codemirror-linter-extension";
+import { oneDarkTheme } from "../utils/codemirror-theme";
 import { Linter as ESLint } from "../node_modules/eslint/lib/linter/";
 import "../scss/editor.scss";
 
@@ -48,21 +49,22 @@ export default function CodeEditor({ codeValue, onUpdate, errors, eslintOptions,
                         myHighlightStyle,
                         linter(esLint(new ESLint(), eslintOptions), { delay: 0}),
                         javascript(),
-                        EditorView.theme(
-                            {
-                                "&.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket": {
-                                    backgroundColor: "var(--color-primary-800)",
-                                    color: "#fff",
-                                    outline: "1px solid #515a6b"
-                                },
-                                ".cm-content": {
-                                    caretColor: "var(--link-color)"
-                                },
-                                ".cm-cursor, .cm-dropCursor": {
-                                    borderLeftColor: "var(--link-color)"
-                                },
-                            }
-                        ),
+                        oneDarkTheme,
+                        // EditorView.theme(
+                        //     {
+                        //         "&.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket": {
+                        //             backgroundColor: "var(--color-primary-800)",
+                        //             color: "#fff",
+                        //             outline: "1px solid #515a6b"
+                        //         },
+                        //         ".cm-content": {
+                        //             caretColor: "var(--link-color)"
+                        //         },
+                        //         ".cm-cursor, .cm-dropCursor": {
+                        //             borderLeftColor: "var(--link-color)"
+                        //         },
+                        //     }
+                        // ),
                     ]
                 }
                 onChange={(value) => {

@@ -41,7 +41,6 @@ export default function CodeEditor({ codeValue, onUpdate, errors, eslintOptions,
                 minWidth="100%"
                 height="100%"
                 autoFocus={true}
-                theme="dark"
                 extensions={
                     [
                         history(),

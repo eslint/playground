@@ -16,7 +16,7 @@ export const ESLintPlaygroundTheme = EditorView.theme({
    ".cm-cursor, .cm-dropCursor": {
        borderLeftColor: "var(--link-color)"
    },
-})
+}, { dark: true });
 
 /// The highlighting style for code in the One Dark theme.
 export const ESLintPlaygroundHighlightStyle = HighlightStyle.define([

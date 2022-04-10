@@ -55,6 +55,9 @@ export default function CodeEditor({ codeValue, onUpdate, errors, eslintOptions,
                                     color: "#fff",
                                     outline: "1px solid #515a6b"
                                 },
+                                ".cm-cursor": {
+                                    "border-left": "1px solid var(--link-color)",
+                                }
                             }
                         ),
                     ]

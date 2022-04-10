@@ -8,7 +8,11 @@
 }
 
 .cm-cursor {
-    border-left: 1px solid var(--link-color) !important;
+    border: 1px solid var(--link-color) !important;
+    color: red;
+    &::before {
+        content: "asasas";
+    }
 }
 
 .cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection {

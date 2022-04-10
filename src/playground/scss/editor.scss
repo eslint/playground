@@ -2,30 +2,8 @@
     min-width: 100%;
 }
 
-.cm-tooltip {
-    background-color: transparent !important;
-    border: none !important;
-}
-
 .cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection {
     & {
         background-color: var(--color-primary-800) !important;
     }
-}
-
-.cm-scroller {
-    background-color: var(--body-background-color);
-    border: 1px solid #ced4da ;
-    font-family: var(--mono-font), Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-    font-size: 1em;
-    color: var(--body-text-color);
-}
-
-.cm-gutter {
-    padding-right: 1px;
-    background-color: var(--body-background-color);
-}
-
-.cm-activeLine, .cm-activeLineGutter {
-    background-color: var(--body-background-color) !important;
 }

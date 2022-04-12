@@ -124,7 +124,7 @@ const App = () => {
                         </svg>
                     </button>
                     <span className="visually-hidden" id="infobox">Changing configurations will apply the selected changes to the playground.</span>
-                    <div className="playground__config-options" id="playground__config-options">
+                    <div className="playground__config-options" id="playground__config-options" data-open="false">
                         <Configuration
                             ruleNames={ruleNames}
                             options={options}

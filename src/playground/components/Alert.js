@@ -38,7 +38,7 @@ export default function Alert({ type, text, message, onFix, ...props}) {
                     {alertMessage}
                     {ruleId && (
                         <>
-                            &#40;<a href={`https://eslint.org/docs/rules/${ruleId}`} target="_blank">{ruleId}</a>&#41;
+                            &nbsp; &#40;<a href={`https://eslint.org/docs/rules/${ruleId}`} target="_blank">{ruleId}</a>&#41;
                         </>
                     )}
                 </div>

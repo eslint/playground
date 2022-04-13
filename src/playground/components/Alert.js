@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Alert({ type, text, message, onFix, ...props}) {
+export default function Alert({ type, text, message, onFix }) {
     if (!message) {
         return (
             <article aria-roledescription={type} className={`alert alert--${type}`}>
@@ -28,17 +28,17 @@ export default function Alert({ type, text, message, onFix, ...props}) {
                         <path d="M9.49999 6.66667V10M9.49999 13.3333H9.50832M17.8333 10C17.8333 14.6024 14.1024 18.3333 9.49999 18.3333C4.89762 18.3333 1.16666 14.6024 1.16666 10C1.16666 5.39763 4.89762 1.66667 9.49999 1.66667C14.1024 1.66667 17.8333 5.39763 17.8333 10Z" stroke="currentColor" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     <span className="visually-hidden">Error</span>
-                    <a href="#" className="alert__line-number">
+                    <p className="alert__line-number">
                         <span className="line-number">{line}</span>
                         <span aria-hidden="true">:</span>
                         <span className="colun-number">{column}</span>
-                    </a>
+                    </p>
                 </div>
                 <div className="alert__text">
                     {alertMessage}
                     {ruleId && (
                         <>
-                            &nbsp; &#40;<a href={`https://eslint.org/docs/rules/${ruleId}`} target="_blank">{ruleId}</a>&#41;
+                            &nbsp; &#40;<a href={`https://eslint.org/docs/rules/${ruleId}`} target="_blank" rel="noreferrer">{ruleId}</a>&#41;
                         </>
                     )}
                 </div>
@@ -59,6 +59,7 @@ export default function Alert({ type, text, message, onFix, ...props}) {
                             <li
                                 className="alert__fix-options__item"
                                 role="menuitem"
+                                onKeyPress={() => onFix(suggestion)}
                                 tabIndex="-1"
                                 key={suggestion.desc}
                                 onClick={() => onFix(suggestion)}
@@ -76,5 +77,5 @@ export default function Alert({ type, text, message, onFix, ...props}) {
                 )
             )}
         </article>
-    )
-};
+    );
+}

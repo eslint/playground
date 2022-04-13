@@ -1,17 +1,21 @@
 // helper functions
 // get an element's next sibling that matches a selector
-var getNextSibling = function(elem, selector) {
-    var sibling = elem.nextElementSibling;
+const getNextSibling = function(elem, selector) {
+    let sibling = elem.nextElementSibling;
+
     while (sibling) {
-        if (sibling.matches(selector)) return sibling;
-        sibling = sibling.nextElementSibling
+        if (sibling.matches(selector)) {
+            return sibling;
+        }
+        sibling = sibling.nextElementSibling;
     }
 };
 
 // get an element's closest ancestor that matches a selector
-var getClosest = function (elem, selector) {
-	// Element.matches() polyfill
-	if (!Element.prototype.matches) {
+const getClosest = function(elem, selector) {
+
+    // Element.matches() polyfill
+    if (!Element.prototype.matches) {
 	    Element.prototype.matches =
 	        Element.prototype.matchesSelector ||
 	        Element.prototype.mozMatchesSelector ||
@@ -19,56 +23,61 @@ var getClosest = function (elem, selector) {
 	        Element.prototype.oMatchesSelector ||
 	        Element.prototype.webkitMatchesSelector ||
 	        function(s) {
-	            var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+	            let matches = (this.document || this.ownerDocument).querySelectorAll(s),
 	                i = matches.length;
+
 	            while (--i >= 0 && matches.item(i) !== this) {}
 	            return i > -1;
 	        };
-	}
+    }
 
-	// Get the closest matching element
-	for ( ; elem && elem !== document; elem = elem.parentNode ) {
-		if ( elem.matches( selector ) ) return elem;
-	}
-	return null;
+    // Get the closest matching element
+    for (; elem && elem !== document; elem = elem.parentNode) {
+        if (elem.matches(selector)) {
+            return elem;
+        }
+    }
+    return null;
 
 };
 
 // general function that handles all toggles and panels that are created as siblings in the DOM, and have the data-toggle and data-panel set on them
 // for example: the alerts that show up in the console use this pattern
 (function() {
-    var triggers = document.querySelectorAll("[data-toggle]");
+    const triggers = document.querySelectorAll("[data-toggle]");
 
     // if (triggers) {
-        triggers.forEach(trigger => {
-            trigger.removeAttribute('hidden');
-            let panel = getNextSibling(trigger, '[data-panel]');
-            var open = false;
+    triggers.forEach(trigger => {
+        trigger.removeAttribute("hidden");
+        const panel = getNextSibling(trigger, "[data-panel]");
+        let open = false;
 
-            trigger.addEventListener("click", () => {
+        trigger.addEventListener("click", () => {
 
-                if (!open) {
-                    trigger.setAttribute("aria-expanded", "true");
-                    panel.removeAttribute("hidden");
-                    open = true;
-                } else {
-                    trigger.setAttribute("aria-expanded", "false");
-                    panel.setAttribute("hidden", "");
-                    open = false;
-                }
-            }, false);
-        })
+            if (!open) {
+                trigger.setAttribute("aria-expanded", "true");
+                panel.removeAttribute("hidden");
+                open = true;
+            } else {
+                trigger.setAttribute("aria-expanded", "false");
+                panel.setAttribute("hidden", "");
+                open = false;
+            }
+        }, false);
+    });
+
     // }
-})();
+}());
 
 // main nav responsive behavior (open/close using the nav button)
 (function() {
-    var nav_trigger = document.getElementById("nav-toggle"),
+    let nav_trigger = document.getElementById("nav-toggle"),
         nav = document.getElementById("nav-panel"),
         open = false;
 
     if (matchMedia) {
         const mq = window.matchMedia("(max-width: 1023px)");
+
         mq.addListener(WidthChange);
         WidthChange(mq);
     }
@@ -99,17 +108,18 @@ var getClosest = function (elem, selector) {
             open = false;
         }
     }
-})();
+}());
 
 // the mobile toggle behavior for the playground configuration
 (function() {
-    var config_trigger = document.getElementById("playground__config-toggle"),
+    let config_trigger = document.getElementById("playground__config-toggle"),
         config = document.getElementById("playground__config-options"),
         body = document.getElementsByTagName("body")[0],
         open = false;
 
     if (matchMedia) {
         const mq = window.matchMedia("(max-width: 1023px)");
+
         mq.addListener(WidthChange);
         WidthChange(mq);
     }
@@ -145,10 +155,10 @@ var getClosest = function (elem, selector) {
             open = false;
         }
     }
-})();
+}());
 
 //  helpful utilities
-var util = {
+const util = {
     keyCodes: {
         UP: 38,
         DOWN: 40,
@@ -159,35 +169,33 @@ var util = {
         ENTER: 13,
         SPACE: 32,
         DELETE: 46,
-        TAB: 9,
+        TAB: 9
     },
 
-    generateID: function(base) {
+    generateID(base) {
         return base + Math.floor(Math.random() * 999);
     },
 
-    getDirectChildren: function(elm, selector) {
-        return Array.prototype.filter.call(elm.children, function(child) {
-            return child.matches(selector);
-        });
-    },
+    getDirectChildren(elm, selector) {
+        return Array.prototype.filter.call(elm.children, child => child.matches(selector));
+    }
 };
 
 // make sections in the config section collapsible
 // enhances the headings in the config sections into buttons and handles the toggling of their respective panels
 (function(w, doc, undefined) {
-    var CollapsibleConfigOptions = {
+    const CollapsibleConfigOptions = {
         allCollapsed: false,
-        icon: '<svg class="config-icon" width="12" height="8" aria-hidden="true" focusable="false" viewBox="0 0 12 8"><g fill="none"><path fill="currentColor" d="M1.41.59l4.59 4.58 4.59-4.58 1.41 1.41-6 6-6-6z"/><path d="M-6-8h24v24h-24z"/></g></svg>',
+        icon: '<svg class="config-icon" width="12" height="8" aria-hidden="true" focusable="false" viewBox="0 0 12 8"><g fill="none"><path fill="currentColor" d="M1.41.59l4.59 4.58 4.59-4.58 1.41 1.41-6 6-6-6z"/><path d="M-6-8h24v24h-24z"/></g></svg>'
     };
-    var CollapsibleConfig = function(inst, options) {
-        var _options = Object.assign(CollapsibleConfigOptions, options);
-        var el = inst;
-        var configToggles = el.querySelectorAll(".playground__config-options [data-config-section-title]");
-        var configPanels = el.querySelectorAll(".playground__config-options [data-config-section]");
-        var accID = util.generateID("c-config-");
+    const CollapsibleConfig = function(inst, options) {
+        const _options = Object.assign(CollapsibleConfigOptions, options);
+        const el = inst;
+        const configToggles = el.querySelectorAll(".playground__config-options [data-config-section-title]");
+        const configPanels = el.querySelectorAll(".playground__config-options [data-config-section]");
+        const accID = util.generateID("c-config-");
 
-        var init = function() {
+        const init = function() {
             el.classList.add("config-js");
 
             setupconfigToggles(configToggles);
@@ -196,24 +204,28 @@ var util = {
 
 
         var setupconfigToggles = function(configToggles) {
-            Array.from(configToggles).forEach(function(item, index) {
-                var $this = item;
-                let text = $this.innerText;
-                let headingButton = document.createElement("button");
-                if (_options.allCollapsed) headingButton.setAttribute("aria-expanded", "false");
-                else headingButton.setAttribute("aria-expanded", "true");
+            Array.from(configToggles).forEach((item, index) => {
+                const $this = item;
+                const text = $this.innerText;
+                const headingButton = document.createElement("button");
+
+                if (_options.allCollapsed) {
+                    headingButton.setAttribute("aria-expanded", "false");
+                } else {
+                    headingButton.setAttribute("aria-expanded", "true");
+                }
                 headingButton.setAttribute("data-config-section-toggle", "");
-                headingButton.setAttribute("id", accID + "__heading-" + index);
+                headingButton.setAttribute("id", `${accID}__heading-${index}`);
                 headingButton.setAttribute(
                     "aria-controls",
-                    accID + "__panel-" + index
+                    `${accID}__panel-${index}`
                 );
                 headingButton.innerText = text;
                 $this.innerHTML = "";
                 $this.appendChild(headingButton);
                 headingButton.innerHTML += _options.icon;
 
-                headingButton.addEventListener("click", function(e) {
+                headingButton.addEventListener("click", e => {
                     e.preventDefault();
                     togglePanel(headingButton);
                 }, true);
@@ -221,21 +233,24 @@ var util = {
         };
 
         var setupconfigPanels = function(configPanels) {
-            Array.from(configPanels).forEach(function(item, config) {
-                let $this = item;
+            Array.from(configPanels).forEach((item, config) => {
+                const $this = item;
 
-                $this.setAttribute("id", accID + "__panel-" + config);
+                $this.setAttribute("id", `${accID}__panel-${config}`);
                 $this.setAttribute(
                     "aria-labelledby",
-                    accID + "__item-" + config
+                    `${accID}__item-${config}`
                 );
-                if (_options.allCollapsed) $this.setAttribute("hidden", "");
-                else $this.removeAttribute("hidden");
+                if (_options.allCollapsed) {
+                    $this.setAttribute("hidden", "");
+                } else {
+                    $this.removeAttribute("hidden");
+                }
             });
         };
 
         var togglePanel = function(toggleButton) {
-            var thepanel = toggleButton.parentNode.nextElementSibling;
+            const thepanel = toggleButton.parentNode.nextElementSibling;
 
             if (toggleButton.getAttribute("aria-expanded") == "true") {
                 toggleButton.setAttribute("aria-expanded", "false");
@@ -252,10 +267,11 @@ var util = {
     }; // CollapsibleConfig()
 
     w.CollapsibleConfig = CollapsibleConfig;
-})(window, document);
+}(window, document));
 
 // init
-var config = document.getElementById('playground__config-options');
+let config = document.getElementById("playground__config-options");
+
 if (config) {
     config = new CollapsibleConfig(config, {
         allCollapsed: true

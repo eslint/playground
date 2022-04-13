@@ -108,7 +108,7 @@
 .alert__line-number {
     font-weight: 500;
     margin-bottom: .25rem;
-
+    border-bottom: 1px solid currentColor;
     .alert--error & {
         color: var(--color-rose-700);
 

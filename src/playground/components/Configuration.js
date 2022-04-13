@@ -5,85 +5,75 @@ import ShareURL from "./ShareURL";
 import { ECMA_FEATURES, ECMA_VERSIONS, SOURCE_TYPES, ENV_NAMES } from "../utils/constants";
 
 const customStyles = {
-    singleValue: (styles) => ({
+    singleValue: styles => ({
+        ...styles,
+        color: "var(--body-text-color)"
+    }),
+    control: styles => ({
+        ...styles,
+        backgroundColor: "var(--body-background-color)",
+        border: "1px solid var(--border-color)",
+        color: "var(--body-text-color)",
+        padding: 0,
+        ":hover": {
+            ...styles[":hover"],
+            borderColor: "var(--color-primary-700)"
+        },
+        ":focus": {
+            borderColor: "var(--color-primary-700)"
+        },
+        ":active": {
+            borderColor: "var(--color-primary-700)"
+        }
+    }),
+    option: styles => ({
+        ...styles,
+        backgroundColor: "var(--body-background-color)",
+        color: "var(--body-text-color)",
+        cursor: "pointer",
+        border: "1px solid var(--border-color)",
+        margin: "-4px 0 -4px 0",
+        ":hover": {
+            ...styles[":hover"],
+            backgroundColor: "var(--color-primary-700)",
+            color: "white"
+        },
+        ":active": {
+            ...styles[":active"],
+            backgroundColor: "var(--color-primary-700)"
+        }
+    }),
+    input: styles => ({
         ...styles,
         color: "var(--body-text-color)",
+        caretShape: "underscore"
     }),
-    control: (styles) => {
-        return {
-            ...styles,
-            backgroundColor: 'var(--body-background-color)',
-            border: '1px solid var(--border-color)',
-            color: "var(--body-text-color)",
-            padding: 0,
-            ':hover': {
-                ...styles[':hover'],
-                borderColor: "var(--color-primary-700)"
-            },
-            ':focus': {
-                borderColor: "var(--color-primary-700)"
-            },
-            ':active': {
-                borderColor: "var(--color-primary-700)"
-            },
-        }
-    },
-    option: (styles) => {
-        return {
-            ...styles,
-            backgroundColor: "var(--body-background-color)",
-            color: "var(--body-text-color)",
-            cursor: 'pointer',
-            border: '1px solid var(--border-color)',
-            margin: '-4px 0 -4px 0',
-            ':hover': {
-                ...styles[':hover'],
-                backgroundColor: "var(--color-primary-700)",
-                color: "white",
-            },
-            ':active': {
-                ...styles[':active'],
-                backgroundColor: "var(--color-primary-700)"
-            },
-        };
-    },
-    input: (styles) => {
-        return {
-            ...styles,
-            color: "var(--body-text-color)",
-            caretShape: "underscore",
-        };
-    },
-    multiValue: (styles) => {
-        return {
-            ...styles,
-            color: "var(--body-text-color)",
-            backgroundColor: "var(--lighter-background-color)",
-            border: '1px solid var(--border-color)',
-        };
-    },
-    multiValueLabel: (styles) => ({
+    multiValue: styles => ({
+        ...styles,
+        color: "var(--body-text-color)",
+        backgroundColor: "var(--lighter-background-color)",
+        border: "1px solid var(--border-color)"
+    }),
+    multiValueLabel: styles => ({
         ...styles,
         color: "var(--headings-color)",
         backgroundColor: "var(--lighter-background-color)"
     }),
-    multiValueRemove: (styles) => {
-       return {
-           ...styles,
-           color: "var(--headings-color)",
-           cursor: "pointer",
-           backgroundColor: "var(--lighter-background-color)",
-       }
-    },
+    multiValueRemove: styles => ({
+        ...styles,
+        color: "var(--headings-color)",
+        cursor: "pointer",
+        backgroundColor: "var(--lighter-background-color)"
+    })
 };
 
-const customTheme = (theme) => ({
+const customTheme = theme => ({
     ...theme,
     colors: {
         ...theme.colors,
-        primary25: 'var(--color-primary-500)',
-        primary: 'var(--color-primary-700)',
-    },
+        primary25: "var(--color-primary-500)",
+        primary: "var(--color-primary-700)"
+    }
 });
 
 export default function Configuration({ rulesMeta, eslintVersion, onUpdate, options, ruleNames, ...props }) {
@@ -118,7 +108,7 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                                 isSearchable={false}
                                 styles={customStyles}
                                 theme={theme => customTheme(theme)}
-                                defaultValue={ECMAVersionsOptions.filter((ecmaVersion) => options.parserOptions.ecmaVersion === ecmaVersion.value)}
+                                defaultValue={ECMAVersionsOptions.filter(ecmaVersion => options.parserOptions.ecmaVersion === ecmaVersion.value)}
                                 options={ECMAVersionsOptions}
                                 onChange={selected => {
                                     options.parserOptions.ecmaVersion = selected.value;
@@ -133,28 +123,28 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                             isSearchable={false}
                             styles={customStyles}
                             theme={theme => customTheme(theme)}
-                            defaultValue={sourceTypeOptions.filter((sourceTypeOption) => options.parserOptions.sourceType === sourceTypeOption.value) }
+                            defaultValue={sourceTypeOptions.filter(sourceTypeOption => options.parserOptions.sourceType === sourceTypeOption.value) }
                             options={sourceTypeOptions}
                             onChange={selected => {
                                 options.parserOptions.sourceType = selected.value;
                                 onUpdate(Object.assign({}, options));
                             }}
-                            
+
                         />
                     </label>
                     <div className="combo">
-                        <label id="ecma-combo-label" className="label__text">ECMA Features</label>
+                        <label id="ecma-combo-label" htmlFor="ECMA Feature" className="label__text">ECMA Features</label>
                         <Select
                             isClearable
                             isMulti
-                            defaultValue={ECMAFeaturesOptions.filter((ecmaFeatureName) => options.parserOptions.ecmaFeatures[ecmaFeatureName.value])}
+                            defaultValue={ECMAFeaturesOptions.filter(ecmaFeatureName => options.parserOptions.ecmaFeatures[ecmaFeatureName.value])}
                             isSearchable={false}
                             styles={customStyles}
                             theme={theme => customTheme(theme)}
                             options={ECMAFeaturesOptions}
                             onChange={selectedOptions => {
                                 options.parserOptions.ecmaFeatures = {};
-                                selectedOptions.forEach((selected) => {
+                                selectedOptions.forEach(selected => {
                                     options.parserOptions.ecmaFeatures[selected.value] = true;
                                 });
                                 onUpdate(Object.assign({}, options));
@@ -170,13 +160,13 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                         isMulti
                         styles={customStyles}
                         theme={theme => customTheme(theme)}
-                        defaultValue={envNamesOptions.filter((envName) => options.env[envName.value])}
+                        defaultValue={envNamesOptions.filter(envName => options.env[envName.value])}
                         options={envNamesOptions}
                         onChange={selectedOptions => {
                             options.env = {};
-                            selectedOptions.forEach((selected) => {
+                            selectedOptions.forEach(selected => {
                                 options.env[selected.value] = true;
-                            })
+                            });
                             onUpdate(Object.assign({}, options));
                         }}
                     />
@@ -196,7 +186,6 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                         options={ruleNamesOptions}
                     />
                     <button
-                        role="button"
                         className="c-btn c-btn--ghost add-rule-btn"
                         onClick={() => {
                             if (ruleNames.includes(selectedRule)) {
@@ -230,16 +219,17 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                                 </h4>
                                 <input
                                     id={ruleName}
-                                    style={{width: "100%"}}
+                                    style={{ width: "100%" }}
                                     defaultValue={JSON.stringify(options.rules[ruleName])}
-                                    placeholder={`["error"]`}
-                                    onChange={(event) => {
+                                    placeholder={"[\"error\"]"}
+                                    onChange={event => {
                                         try {
                                             options.rules[ruleName] = JSON.parse(event.target.value);
                                             onUpdate(Object.assign({}, options));
                                         } catch {
+
                                             // ignore
-                                        } 
+                                        }
                                     }}
                                 />
                             </RuleItem>
@@ -259,7 +249,7 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                                             <path class ="cm" d="M12 5L6.5 10.5L4 8" stroke="transparent" strokeWidth="1.6666" strokeLinecap="round" strokeLinejoin="round" />
                                             <rect class ="border" x="0.5" y="0.5" width="15" height="15" rx="3.5" stroke="var(--border-color)" />
                                             </svg>
-                                        </label> --> 
+                                        </label> -->
                     <div className="combo">
                         <label id="plugins-combo-label" className="combo-label visually-hidden">Select plugins</label>
                         <span id="combo-remove" hidden>remove</span>
@@ -271,7 +261,7 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                     </div>
                 </div>
             </div> */}
-            <a 
+            <a
                 href={
                     `data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(options, null, 4))}`
                 }
@@ -281,5 +271,5 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                 Download this config file
             </a>
         </div>
-    )
+    );
 }

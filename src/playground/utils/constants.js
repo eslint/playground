@@ -51,5 +51,5 @@ export const ECMA_VERSIONS = [
 
 export const SOURCE_TYPES = [
     "script",
-    "module",
+    "module"
 ];

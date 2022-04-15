@@ -1,6 +1,21 @@
+@mixin firefox-only {
+  @at-root {
+    @-moz-document url-prefix() {
+      & {
+        @content;
+      }
+    }
+  }
+}
+
 .alert {
     position: relative;
-    font-family: var(--mono-font);
+    font-family: var(--text-font);
+    font-weight: 800;
+    @include firefox-only {
+      font-weight: 500;
+    }
+    letter-spacing: 0.02em;
     display: grid;
     gap: 0 2rem;
     grid-template-columns: 1fr auto;
@@ -12,7 +27,7 @@
 
     &.alert--error {
         background-color: var(--color-rose-25);
-        color: var(--color-rose-600);
+        color: var(--color-rose-700);
 
         .alert__fix-options__item:hover {
             background-color: var(--color-rose-50);

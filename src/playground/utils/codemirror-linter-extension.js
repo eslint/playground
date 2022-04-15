@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define, no-param-reassign */
 /**
  * This file is inspired from @codemirror/lint package https://github.com/codemirror/lint
  * We added custom styles and tooltips content as per our theme and design
@@ -18,33 +19,6 @@ class SelectedDiagnostic {
         this.to = to;
         this.diagnostic = diagnostic;
     }
-}
-
-class DiagnosticWidget extends WidgetType {
-    constructor(diagnostic) {
-        super();
-        this.diagnostic = diagnostic;
-    }
-    eq(other) {
-        return other.diagnostic === this.diagnostic;
-    }
-    toDOM() {
-        return elt("span", { class: `cm-lintPoint cm-lintPoint-${this.diagnostic.severity}` });
-    }
-}
-
-function findDiagnostic(diagnostics, diagnostic = null, after = 0) {
-    let found = null;
-
-    diagnostics.between(after, 1e9, (from, to, { spec }) => {
-        if (diagnostic && spec.diagnostic !== diagnostic) {
-            return;
-        }
-        found = new SelectedDiagnostic(from, to, spec.diagnostic);
-        // eslint-disable-next-line consistent-return
-        return false;
-    });
-    return found;
 }
 
 class LintState {
@@ -71,45 +45,52 @@ class LintState {
     }
 }
 
-function svg(content, attrs = "viewBox=\"0 0 40 40\"") {
-    return `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" ${attrs}>${encodeURIComponent(content)}</svg>')`;
-}
-function underline(color) {
-    return svg(`<path d="m0 2.5 l2 -1.5 l1 0 l2 1.5 l1 0" stroke="${color}" fill="none" stroke-width=".7"/>`, "width=\"6\" height=\"3\"");
-}
-const baseTheme = /* @__PURE__*/EditorView.baseTheme({
-    ".cm-lintRange": {
-        backgroundPosition: "left bottom",
-        backgroundRepeat: "repeat-x",
-        paddingBottom: "0.7px"
-    },
-    ".cm-lintRange-error": { backgroundImage: /* @__PURE__*/underline("#d11") },
-    ".cm-lintRange-warning": { backgroundImage: /* @__PURE__*/underline("orange") },
-    ".cm-lintRange-info": { backgroundImage: /* @__PURE__*/underline("#999") },
-    ".cm-lintRange-active": { backgroundColor: "#ffdd9980" },
-    ".cm-lintPoint": {
-        position: "relative",
-        "&:after": {
-            content: '""',
-            position: "absolute",
-            bottom: 0,
-            left: "-2px",
-            borderLeft: "3px solid transparent",
-            borderRight: "3px solid transparent",
-            borderBottom: "4px solid #d11"
+function findDiagnostic(diagnostics, diagnostic = null, after = 0) {
+    let found = null;
+
+    diagnostics.between(after, 1e9, (from, to, { spec }) => {
+        if (diagnostic && spec.diagnostic !== diagnostic) {
+            return;
         }
-    },
-    ".cm-lintPoint-warning": {
-        "&:after": { borderBottomColor: "orange" }
-    },
-    ".cm-lintPoint-info": {
-        "&:after": { borderBottomColor: "#999" }
-    }
-});
+        found = new SelectedDiagnostic(from, to, spec.diagnostic);
+        // eslint-disable-next-line consistent-return
+        return false;
+    });
+    return found;
+}
+
+function maybeEnableLint(state, effects) {
+    return state.field(lintState, false) ? effects : effects.concat(StateEffect.appendConfig.of([
+        lintState,
+        // eslint-disable-next-line no-shadow
+        EditorView.decorations.compute([lintState], state => {
+            const { selected, panel } = state.field(lintState);
+
+            return !selected || !panel || selected.from === selected.to ? Decoration.none : Decoration.set([
+                activeMark.range(selected.from, selected.to)
+            ]);
+        }),
+        hoverTooltip(lintTooltip),
+        baseTheme
+    ]));
+}
 
 /**
-The state effect that updates the set of active diagnostics. Can
-be useful when writing an extension that needs to track these.
+ * Returns a transaction spec which updates the current set of
+ * diagnostics, and enables the lint extension if if wasn't already
+ * active.
+ * @param state
+ * @param diagnostics
+ */
+function setDiagnostics(state, diagnostics) {
+    return {
+        effects: maybeEnableLint(state, [setDiagnosticsEffect.of(diagnostics)])
+    };
+}
+
+/**
+ * The state effect that updates the set of active diagnostics. Can
+ * be useful when writing an extension that needs to track these.
  */
 const setDiagnosticsEffect = /* @__PURE__*/StateEffect.define();
 const togglePanel = /* @__PURE__*/StateEffect.define();
@@ -129,18 +110,14 @@ const lintState = /* @__PURE__*/StateField.define({
 
                 selected = findDiagnostic(mapped, value.selected.diagnostic, selPos) || findDiagnostic(mapped, null, selPos);
             }
-            // eslint-disable-next-line no-param-reassign
             value = new LintState(mapped, value.panel, selected);
         }
         for (const effect of tr.effects) {
             if (effect.is(setDiagnosticsEffect)) {
-                // eslint-disable-next-line no-param-reassign
                 value = LintState.init(effect.value, value.panel, tr.state);
             } else if (effect.is(togglePanel)) {
-                // eslint-disable-next-line no-param-reassign, no-use-before-define
                 value = new LintState(value.diagnostics, effect.value ? LintPanel.open : null, value.selected);
             } else if (effect.is(movePanelSelection)) {
-                // eslint-disable-next-line no-param-reassign
                 value = new LintState(value.diagnostics, value.panel, effect.value);
             }
         }
@@ -150,23 +127,7 @@ const lintState = /* @__PURE__*/StateField.define({
         EditorView.decorations.from(f, s => s.diagnostics)]
 });
 
-function renderDiagnostic(view, diagnostic) {
-    const element = document.createElement("div");
-
-    ReactDOM.render(
-        <Popup
-            message={diagnostic.message}
-            onFix={diagnostic.actions && (() => diagnostic.actions[0].apply(view, diagnostic.from, diagnostic.to))}
-            ruleName={diagnostic.source.replace("jshint:", "")}
-        />,
-        element
-    );
-    return element;
-}
-
-function diagnosticsTooltip(view, diagnostics) {
-    return elt("div", { style: "opacity: hidden" }, diagnostics.map(d => renderDiagnostic(view, d, false)));
-}
+const activeMark = /* @__PURE__*/Decoration.mark({ class: "cm-lintRange cm-lintRange-active" });
 
 function lintTooltip(view, pos, side) {
     const { diagnostics } = view.state.field(lintState);
@@ -194,31 +155,14 @@ function lintTooltip(view, pos, side) {
         }
     };
 }
-
-const activeMark = /* @__PURE__*/Decoration.mark({ class: "cm-lintRange cm-lintRange-active" });
-
-function maybeEnableLint(state, effects) {
-    return state.field(lintState, false) ? effects : effects.concat(StateEffect.appendConfig.of([
-        lintState,
-        // eslint-disable-next-line no-shadow
-        EditorView.decorations.compute([lintState], state => {
-            const { selected, panel } = state.field(lintState);
-
-            return !selected || !panel || selected.from === selected.to ? Decoration.none : Decoration.set([
-                activeMark.range(selected.from, selected.to)
-            ]);
-        }),
-        hoverTooltip(lintTooltip),
-        baseTheme
-    ]));
+function diagnosticsTooltip(view, diagnostics) {
+    return elt("div", { style: "opacity: hidden" }, diagnostics.map(d => renderDiagnostic(view, d, false)));
 }
 
-function setDiagnostics(state, diagnostics) {
-    return {
-        effects: maybeEnableLint(state, [setDiagnosticsEffect.of(diagnostics)])
-    };
-}
-
+/**
+ * Command to close the lint panel, when open.
+ * @param view
+ */
 const closeLintPanel = view => {
     const field = view.state.field(lintState, false);
 
@@ -228,14 +172,6 @@ const closeLintPanel = view => {
     view.dispatch({ effects: togglePanel.of(false) });
     return true;
 };
-
-const lintSource = /* @__PURE__*/Facet.define({
-    combine(input) {
-        return { sources: input.map(i => i.source), delay: input.length ? Math.max(...input.map(i => i.delay)) : 750 };
-    },
-    // eslint-disable-next-line no-use-before-define
-    enables: lintPlugin
-});
 
 const lintPlugin = /* @__PURE__*/ViewPlugin.fromClass(class {
     constructor(view) {
@@ -291,10 +227,17 @@ const lintPlugin = /* @__PURE__*/ViewPlugin.fromClass(class {
     }
 });
 
+const lintSource = /* @__PURE__*/Facet.define({
+    combine(input) {
+        return { sources: input.map(i => i.source), delay: input.length ? Math.max(...input.map(i => i.delay)) : 750 };
+    },
+    enables: lintPlugin
+});
+
 /**
-Given a diagnostic source, this function returns an extension that
-enables linting with that source. It will be called whenever the
-editor is idle (after its content changed).
+ * Given a diagnostic source, this function returns an extension that
+ * enables linting with that source. It will be called whenever the
+ * editor is idle (after its content changed).
  * @param source
  * @param config
  */
@@ -324,6 +267,33 @@ function assignKeys(actions) {
         }
     }
     return assigned;
+}
+
+function renderDiagnostic(view, diagnostic) {
+    const element = document.createElement("div");
+
+    ReactDOM.render(
+        <Popup
+            message={diagnostic.message}
+            onFix={diagnostic.actions && (() => diagnostic.actions[0].apply(view, diagnostic.from, diagnostic.to))}
+            ruleName={diagnostic.source.replace("jshint:", "")}
+        />,
+        element
+    );
+    return element;
+}
+
+class DiagnosticWidget extends WidgetType {
+    constructor(diagnostic) {
+        super();
+        this.diagnostic = diagnostic;
+    }
+    eq(other) {
+        return other.diagnostic === this.diagnostic;
+    }
+    toDOM() {
+        return elt("span", { class: `cm-lintPoint cm-lintPoint-${this.diagnostic.severity}` });
+    }
 }
 
 class PanelItem {
@@ -521,5 +491,40 @@ class LintPanel {
         return new LintPanel(view);
     }
 }
+function svg(content, attrs = "viewBox=\"0 0 40 40\"") {
+    return `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" ${attrs}>${encodeURIComponent(content)}</svg>')`;
+}
+function underline(color) {
+    return svg(`<path d="m0 2.5 l2 -1.5 l1 0 l2 1.5 l1 0" stroke="${color}" fill="none" stroke-width=".7"/>`, "width=\"6\" height=\"3\"");
+}
+const baseTheme = /* @__PURE__*/EditorView.baseTheme({
+    ".cm-lintRange": {
+        backgroundPosition: "left bottom",
+        backgroundRepeat: "repeat-x",
+        paddingBottom: "0.7px"
+    },
+    ".cm-lintRange-error": { backgroundImage: /* @__PURE__*/underline("#d11") },
+    ".cm-lintRange-warning": { backgroundImage: /* @__PURE__*/underline("orange") },
+    ".cm-lintRange-info": { backgroundImage: /* @__PURE__*/underline("#999") },
+    ".cm-lintRange-active": { backgroundColor: "#ffdd9980" },
+    ".cm-lintPoint": {
+        position: "relative",
+        "&:after": {
+            content: '""',
+            position: "absolute",
+            bottom: 0,
+            left: "-2px",
+            borderLeft: "3px solid transparent",
+            borderRight: "3px solid transparent",
+            borderBottom: "4px solid #d11"
+        }
+    },
+    ".cm-lintPoint-warning": {
+        "&:after": { borderBottomColor: "orange" }
+    },
+    ".cm-lintPoint-info": {
+        "&:after": { borderBottomColor: "#999" }
+    }
+});
 
 export { linter, setDiagnostics, setDiagnosticsEffect };

@@ -270,6 +270,8 @@ ul.config__added-rules {
 .config__added-rules__rule-name {
     font: inherit;
     margin: 0 0 .25rem 0;
+    display: flex;
+    justify-content: space-between;
 }
 
 .config__added-rules__rule-content {

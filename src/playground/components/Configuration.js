@@ -210,6 +210,18 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                                     <a href={rulesMeta[ruleName].docs.url}>
                                         {`${ruleName} ${rulesMeta[ruleName].deprecated ? "(deprecated)" : ""}`}
                                     </a>
+                                    <button
+                                        aria-label={`Remove ${ruleName}`}
+                                        title={`Remove ${ruleName}`}
+                                        onClick={() => {
+                                            delete options.rules[ruleName];
+                                            onUpdate(Object.assign({}, options));
+                                        }}
+                                    >
+                                        <svg width="25" height="25" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M28.5 16L16.5 28M16.5 16L28.5 28" stroke="var(--link-color)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
                                 </h4>
                                 <input
                                     id={ruleName}

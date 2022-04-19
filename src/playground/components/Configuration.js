@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import Select from "react-select";
+import RuleItem from "./RuleItem";
 import ShareURL from "./ShareURL";
 import { ECMA_FEATURES, ECMA_VERSIONS, SOURCE_TYPES, ENV_NAMES } from "../utils/constants";
 
@@ -90,7 +91,11 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
     const ECMAFeaturesOptions = ECMA_FEATURES.map((ecmaFeature) => ({ value: ecmaFeature, label: ecmaFeature }));
     const ECMAVersionsOptions = ECMA_VERSIONS.map((ecmaVersion) => ({ value: ecmaVersion === "latest" ? ecmaVersion : Number(ecmaVersion), label: ecmaVersion }));
     const envNamesOptions = ENV_NAMES.map((envName) => ({ value: envName, label: envName }));
-    const ruleNamesOptions = ruleNames.map((ruleName) => ({ value: ruleName, label: rulesMeta[ruleName].deprecated ? ruleName.concat(" (deprecated)") : ruleName }));
+    // filter rules which are already added to the configuration
+    const ruleNamesOptions = ruleNames.filter((ruleName) => options.rules && !options.rules[ruleName]).map((ruleName) => ({
+        value: ruleName,
+        label: rulesMeta[ruleName].deprecated ? ruleName.concat(" (deprecated)") : ruleName
+    }));
     const [selectedRule, setSelectedRule] = useState();
     const ruleInputRef = useRef(null);
 
@@ -204,8 +209,8 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                         Add this rule
                     </button>
                     <ul style={{maxHeight: "400px", overflow: "auto"}} className="config__added-rules" role="list" aria-labelledby="added-rules-label">
-                        {options.rules && Object.keys(options.rules).reverse().map((ruleName) => (
-                            <li key={ruleName} className="config__added-rules__item">
+                        {options.rules && Object.keys(options.rules).sort().map((ruleName) => (
+                            <RuleItem key={ruleName}>
                                 <h4 className="config__added-rules__rule-name">
                                     <a href={rulesMeta[ruleName].docs.url}>
                                         {`${ruleName} ${rulesMeta[ruleName].deprecated ? "(deprecated)" : ""}`}
@@ -237,7 +242,7 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                                         } 
                                     }}
                                 />
-                            </li>
+                            </RuleItem>
                         ))}
                     </ul>
                 </div>

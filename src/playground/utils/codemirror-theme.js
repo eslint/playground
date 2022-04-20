@@ -1,5 +1,8 @@
 import { EditorView } from "@codemirror/view";
-import { HighlightStyle, tags as t } from "@codemirror/highlight";
+import { HighlightStyle, tags } from "@codemirror/highlight";
+
+
+const a = "";
 
 export const ESLintPlaygroundTheme = EditorView.theme({
     ".cm-tooltip": {
@@ -43,23 +46,36 @@ export const ESLintPlaygroundTheme = EditorView.theme({
 // The highlighting style for code in the ESLint playground theme.
 export const ESLintPlaygroundHighlightStyle = HighlightStyle.define([
     {
-        tag: [t.name, t.deleted, t.character, t.propertyName, t.macroName],
-        color: "var(--link-color)"
+        tag: tags.string,
+        color: "var(--editor-string-color)"
     },
     {
-        tag: t.strong,
+        tag: tags.keyword,
+        color: "var(--editor-keyword-color)",
         fontWeight: "bold"
     },
     {
-        tag: t.emphasis,
+        tag: [tags.lineComment, tags.blockComment],
+        color: "var(--editor-comment-color)"
+    },
+    {
+        tag: [tags.name, tags.deleted, tags.character, tags.propertyName, tags.macroName],
+        color: "var(--editor-name-color)"
+    },
+    {
+        tag: tags.strong,
+        fontWeight: "bold"
+    },
+    {
+        tag: tags.emphasis,
         fontStyle: "italic"
     },
     {
-        tag: t.strikethrough,
+        tag: tags.strikethrough,
         textDecoration: "line-through"
     },
     {
-        tag: t.heading,
+        tag: tags.heading,
         fontWeight: "bold",
         color: "var(--headings-color)"
     }

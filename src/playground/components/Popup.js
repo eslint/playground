@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Popup({options, message, ruleName, onFix, ...props}) {
+export default function Popup({ options, message, ruleName, onFix }) {
     const [showOptions, setShowOptions] = useState(false);
 
     return (
@@ -24,11 +24,11 @@ export default function Popup({options, message, ruleName, onFix, ...props}) {
                         </svg>
                     </button>
                 ) : (
-                        onFix && (
-                            <button onClick={onFix} className="popup__fix-btn" aria-expanded="false" aria-haspopup="true" id="ANOTHER_UNIQUE_BUTTON_ID">
-                                <span>Fix</span>
-                            </button>
-                        )
+                    onFix && (
+                        <button onClick={onFix} className="popup__fix-btn" aria-expanded="false" aria-haspopup="true" id="ANOTHER_UNIQUE_BUTTON_ID">
+                            <span>Fix</span>
+                        </button>
+                    )
                 )}
             </div>
             {showOptions && (
@@ -40,5 +40,5 @@ export default function Popup({options, message, ruleName, onFix, ...props}) {
                 </ul>
             )}
         </div>
-    )
+    );
 }

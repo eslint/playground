@@ -1,4 +1,3 @@
-
 // Provides conversion functions between a unicode string and a base64 string.
 // See also: https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/btoa#Unicode_strings
 

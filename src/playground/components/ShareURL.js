@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function ShareURL({url, ...props}) {
+export default function ShareURL({ url }) {
     const [isDataCopied, setIsDataCopied] = useState(false);
 
     return (
@@ -10,12 +10,13 @@ export default function ShareURL({url, ...props}) {
                 <div className="share-url-wrapper">
                     <div className="share-url">
                         <input type="text" id="code-snippet" value={url || window.location} aria-readonly="true" readOnly tabIndex="-1" />
-                        <button 
-                            className="share-url__btn" 
-                            id="copyBtn" 
-                            aria-labelledby="copy-button-label" 
+                        <button
+                            className="share-url__btn"
+                            id="copyBtn"
+                            aria-labelledby="copy-button-label"
                             onClick={() => {
-                                const copyText = document.getElementById('code-snippet');
+                                const copyText = document.getElementById("code-snippet");
+
                                 copyText.select();
                                 navigator.clipboard.writeText(copyText.value);
                                 setIsDataCopied(true);
@@ -38,5 +39,5 @@ export default function ShareURL({url, ...props}) {
                 </div>
             </div>
         </div>
-    )
-};
+    );
+}

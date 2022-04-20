@@ -18,6 +18,8 @@
         "prestart": "npm run build",
         "start": "node tools/dev-server.js",
         "build": "npm-run-all install:playground build:sass build:eleventy build:webpack images",
+        "lint": "eslint --ext=.js,.jsx .",
+        "fix": "npm run lint -- --fix",
         "postinstall": "npm run install:playground"
     },
     "devDependencies": {
@@ -32,6 +34,12 @@
         "cross-env": "^7.0.3",
         "css-loader": "^6.7.1",
         "dom-parser": "^0.1.6",
+        "eslint": "^8.13.0",
+        "eslint-config-eslint": "^7.0.0",
+        "eslint-plugin-jsdoc": "^39.2.0",
+        "eslint-plugin-jsx-a11y": "^6.5.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-react": "^7.29.4",
         "express": "^4.17.3",
         "imagemin": "^8.0.1",
         "imagemin-cli": "^7.0.0",

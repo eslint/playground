@@ -15,5 +15,5 @@ export default function ThemeSwitcher() {
                 </button>
             </div>
         </div>
-    )
+    );
 }

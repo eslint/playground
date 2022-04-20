@@ -1,13 +1,15 @@
+"use strict";
+
 const path = require("path");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
 module.exports = {
     entry: {
-        playground: path.resolve(__dirname, "src/playground/index.js"),
+        playground: path.resolve(__dirname, "src/playground/index.js")
     },
     output: {
         filename: "[name].js",
-        path: path.resolve(__dirname, "_site/assets/js"),
+        path: path.resolve(__dirname, "_site/assets/js")
     },
     resolve: {
         extensions: [".js", ".jsx"],
@@ -42,9 +44,9 @@ module.exports = {
                     },
                     {
                         loader: "sass-loader"
-                    },
+                    }
                 ]
-            },
+            }
         ]
     },
     stats: "errors-only"

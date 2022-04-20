@@ -37,8 +37,7 @@ const hasLocalStorage = () => {
 const App = () => {
     const { text: storedText, options: storedOptions } = JSON.parse(window.localStorage.getItem("linterDemoState") || "{}");
     const { text: urlText, options: urlOptions } = getUrlState();
-
-    const [text, setText] = useState(urlText || storedText || `/* eslint quotes: ["error", "double"] */\nconst a = 'b';`);
+    const [text, setText] = useState(urlText || storedText || "/* eslint quotes: [\"error\", \"double\"] */\nconst a = 'b';");
     const [fix, setFix] = useState(false);
     const [options, setOptions] = useState(
         urlOptions || storedOptions || {
@@ -80,7 +79,7 @@ const App = () => {
                 error
             };
         }
-    }
+    };
 
     const storeState = ({ newText, newOptions }) => {
         const serializedState = JSON.stringify({ text: newText || text, options: newOptions || options });
@@ -90,23 +89,22 @@ const App = () => {
         }
 
         window.location.hash = Unicode.encodeToBase64(serializedState);
-    }
+    };
 
     const { messages, output, fatalMessage } = lint();
     const isInvalidAutofix = fatalMessage && text !== output;
     const sourceCode = linter.getSourceCode();
 
-    const onFix = (message) => {
-        const { fix } = message;
-
-        if (fix && message.fix) {
+    const onFix = message => {
+        if (message.fix) {
             const { output: fixedCode } = SourceCodeFixer.applyFixes(text, [message], true);
-            setText(fixedCode);
-            storeState({ newText: fixedCode});
-        }
-    }
 
-    const updateOptions = (newOptions) => {
+            setText(fixedCode);
+            storeState({ newText: fixedCode });
+        }
+    };
+
+    const updateOptions = newOptions => {
         setOptions(newOptions);
         storeState({ newOptions });
     };
@@ -138,15 +136,16 @@ const App = () => {
             </div>
 
             <div className="playground__main">
-                <main className="playground__editor" id="main" tabIndex="0" aria-label="Editor">
+                <main className="playground__editor" id="main" aria-label="Editor">
                     <CodeEditor
+                        tabIndex="0"
                         codeValue={text}
                         errors={messages}
                         eslintOptions={options}
-                        onUpdate={(value) => {
+                        onUpdate={value => {
                             setFix(false);
                             setText(value);
-                            storeState({ newText: value});
+                            storeState({ newText: value });
                         }}
                         getIndexFromLoc={sourceCode && sourceCode.getIndexFromLoc.bind(sourceCode)}
                     />
@@ -159,28 +158,28 @@ const App = () => {
                     {
                         isInvalidAutofix && <Alert type="error" text={`Invalid autofix! ${fatalMessage.message}`} />
                     }
-                    {messages.length > 0 && messages.map((message) => (
-                        message.suggestions ?  (
-                            <Alert 
+                    {messages.length > 0 && messages.map(message => (
+                        message.suggestions ? (
+                            <Alert
                                 key={`${message.ruleId}-${message.line}-${message.column}`}
-                                type={message.severity === 2 ? 'error' : 'warning'}
+                                type={message.severity === 2 ? "error" : "warning"}
                                 message={message}
                                 suggestions={message.suggestions}
                                 onFix={onFix}
                             />
                         ) : (
-                                <Alert
-                                    key={`${message.ruleId}-${message.line}-${message.column}`}
-                                    type={message.severity === 2 ? 'error' : 'warning'}
-                                    message={message}
-                                    onFix={onFix}
-                                />
+                            <Alert
+                                key={`${message.ruleId}-${message.line}-${message.column}`}
+                                type={message.severity === 2 ? "error" : "warning"}
+                                message={message}
+                                onFix={onFix}
+                            />
                         )
                     ))}
                 </section>
             </div>
         </div>
-    )
+    );
 };
 
 export default App;

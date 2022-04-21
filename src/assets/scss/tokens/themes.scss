@@ -95,6 +95,12 @@
     --editor-comment-color: var(--color-success-700);
     --editor-keyword-color: var(--color-primary-900);
     --editor-name-color: var(--color-primary-700);
+    --editor-bracket-match-outline-color: var(--color-neutral-200);
+    --editor-bracket-match-background-color: var(--color-neutral-100);
+    --editor-bracket-match-color: none;
+    --editor-bracket-no-match-outline-color: var(--color-rose-500);
+    --editor-bracket-no-match-background-color: none;
+    --editor-bracket-no-match-color: none;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -143,6 +149,9 @@ html[data-theme="light"] {
     --editor-comment-color: var(--color-success-700);
     --editor-keyword-color: var(--color-primary-900);
     --editor-name-color: var(--color-primary-700);
+    --editor-bracket-match-outline-color: var(--color-neutral-200);
+    --editor-bracket-match-background-color: var(--color-neutral-100);
+    --editor-bracket-match-color: none;
 }
 
 html[data-theme="dark"] {
@@ -168,4 +177,7 @@ html[data-theme="dark"] {
     --editor-comment-color: var(--color-success-500);
     --editor-keyword-color: var(--color-primary-500);
     --editor-name-color: var(--color-primary-300);
+    --editor-bracket-match-outline-color: var(--color-neutral-600);
+    --editor-bracket-match-background-color: var(--color-neutral-700);
+    --editor-bracket-match-color: var(--color-neutral-25);
 }

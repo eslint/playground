@@ -27,10 +27,15 @@ export const ESLintPlaygroundTheme = EditorView.theme({
     ".cm-content": {
         caretColor: "var(--link-color)"
     },
-    "&.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket": {
-        backgroundColor: "var(--color-primary-800)",
-        color: "#fff",
-        outline: "1px solid #515a6b"
+    "&.cm-focused .cm-matchingBracket": {
+        backgroundColor: "var(--editor-bracket-match-background-color)",
+        color: "var(--editor-bracket-match-color)",
+        outline: "1px solid var(--editor-bracket-match-outline-color)"
+    },
+    "&.cm-focused .cm-nonmatchingBracket": {
+        backgroundColor: "var(--editor-bracket-no-match-background-color)",
+        color: "var(--editor-bracket-no-match-color)",
+        outline: "1px solid var(--editor-bracket-no-match-outline-color)"
     },
     ".cm-cursor, .cm-dropCursor": {
         borderLeftColor: "var(--link-color)"

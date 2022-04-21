@@ -1,9 +1,6 @@
 import { EditorView } from "@codemirror/view";
 import { HighlightStyle, tags } from "@codemirror/highlight";
 
-
-const a = "";
-
 export const ESLintPlaygroundTheme = EditorView.theme({
     ".cm-tooltip": {
         backgroundColor: "transparent",

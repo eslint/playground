@@ -76,13 +76,14 @@ const customTheme = theme => ({
     }
 });
 
-export default function Configuration({ rulesMeta, eslintVersion, onUpdate, options, ruleNames, ...props }) {
-    const sourceTypeOptions = SOURCE_TYPES.map((sourceType) => ({ value: sourceType, label: sourceType }));
-    const ECMAFeaturesOptions = ECMA_FEATURES.map((ecmaFeature) => ({ value: ecmaFeature, label: ecmaFeature }));
-    const ECMAVersionsOptions = ECMA_VERSIONS.map((ecmaVersion) => ({ value: ecmaVersion === "latest" ? ecmaVersion : Number(ecmaVersion), label: ecmaVersion }));
-    const envNamesOptions = ENV_NAMES.map((envName) => ({ value: envName, label: envName }));
+export default function Configuration({ rulesMeta, eslintVersion, onUpdate, options, ruleNames }) {
+    const sourceTypeOptions = SOURCE_TYPES.map(sourceType => ({ value: sourceType, label: sourceType }));
+    const ECMAFeaturesOptions = ECMA_FEATURES.map(ecmaFeature => ({ value: ecmaFeature, label: ecmaFeature }));
+    const ECMAVersionsOptions = ECMA_VERSIONS.map(ecmaVersion => ({ value: ecmaVersion === "latest" ? ecmaVersion : Number(ecmaVersion), label: ecmaVersion }));
+    const envNamesOptions = ENV_NAMES.map(envName => ({ value: envName, label: envName }));
+
     // filter rules which are already added to the configuration
-    const ruleNamesOptions = ruleNames.filter((ruleName) => options.rules && !options.rules[ruleName]).map((ruleName) => ({
+    const ruleNamesOptions = ruleNames.filter(ruleName => options.rules && !options.rules[ruleName]).map(ruleName => ({
         value: ruleName,
         label: rulesMeta[ruleName].deprecated ? ruleName.concat(" (deprecated)") : ruleName
     }));
@@ -197,8 +198,8 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                     >
                         Add this rule
                     </button>
-                    <ul style={{maxHeight: "400px", overflow: "auto"}} className="config__added-rules" role="list" aria-labelledby="added-rules-label">
-                        {options.rules && Object.keys(options.rules).sort().map((ruleName) => (
+                    <ul style={{ maxHeight: "400px", overflow: "auto" }} className="config__added-rules" aria-labelledby="added-rules-label">
+                        {options.rules && Object.keys(options.rules).sort().map(ruleName => (
                             <RuleItem key={ruleName}>
                                 <h4 className="config__added-rules__rule-name">
                                     <a href={rulesMeta[ruleName].docs.url}>

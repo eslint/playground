@@ -250,10 +250,6 @@ ul.config__added-rules {
     padding: 0;
     list-style: none;
     font-family: var(--mono-font);
-    /* IE and Edge */
-    -ms-overflow-style: none;
-    /* Firefox */
-    scrollbar-width: none;
 
     li {
         margin: 0 0 1rem 0;
@@ -266,11 +262,6 @@ ul.config__added-rules {
 
 .config__added-rules__item {
     padding: 0 .25rem;
-}
-
-.config__added-rules::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
 }
 
 .config__added-rules__rule-name {

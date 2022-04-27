@@ -1,5 +1,5 @@
 import { EditorView } from "@codemirror/view";
-import { HighlightStyle, tags as t } from "@codemirror/highlight";
+import { HighlightStyle, tags } from "@codemirror/highlight";
 
 export const ESLintPlaygroundTheme = EditorView.theme({
     ".cm-tooltip": {
@@ -24,10 +24,15 @@ export const ESLintPlaygroundTheme = EditorView.theme({
     ".cm-content": {
         caretColor: "var(--link-color)"
     },
-    "&.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket": {
-        backgroundColor: "var(--color-primary-800)",
-        color: "#fff",
-        outline: "1px solid #515a6b"
+    "&.cm-focused .cm-matchingBracket": {
+        backgroundColor: "var(--editor-bracket-match-background-color)",
+        color: "var(--editor-bracket-match-color)",
+        outline: "1px solid var(--editor-bracket-match-outline-color)"
+    },
+    "&.cm-focused .cm-nonmatchingBracket": {
+        backgroundColor: "var(--editor-bracket-no-match-background-color)",
+        color: "var(--editor-bracket-no-match-color)",
+        outline: "1px solid var(--editor-bracket-no-match-outline-color)"
     },
     ".cm-cursor, .cm-dropCursor": {
         borderLeftColor: "var(--link-color)"
@@ -43,23 +48,36 @@ export const ESLintPlaygroundTheme = EditorView.theme({
 // The highlighting style for code in the ESLint playground theme.
 export const ESLintPlaygroundHighlightStyle = HighlightStyle.define([
     {
-        tag: [t.name, t.deleted, t.character, t.propertyName, t.macroName],
-        color: "var(--link-color)"
+        tag: tags.string,
+        color: "var(--editor-string-color)"
     },
     {
-        tag: t.strong,
+        tag: tags.keyword,
+        color: "var(--editor-keyword-color)",
         fontWeight: "bold"
     },
     {
-        tag: t.emphasis,
+        tag: [tags.lineComment, tags.blockComment],
+        color: "var(--editor-comment-color)"
+    },
+    {
+        tag: [tags.name, tags.deleted, tags.character, tags.propertyName, tags.macroName],
+        color: "var(--editor-name-color)"
+    },
+    {
+        tag: tags.strong,
+        fontWeight: "bold"
+    },
+    {
+        tag: tags.emphasis,
         fontStyle: "italic"
     },
     {
-        tag: t.strikethrough,
+        tag: tags.strikethrough,
         textDecoration: "line-through"
     },
     {
-        tag: t.heading,
+        tag: tags.heading,
         fontWeight: "bold",
         color: "var(--headings-color)"
     }

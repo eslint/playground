@@ -26,10 +26,10 @@ const customStyles = {
             borderColor: "var(--color-primary-700)"
         }
     }),
-    option: styles => ({
+    option: (styles, state) => ({
         ...styles,
-        backgroundColor: "var(--body-background-color)",
-        color: "var(--body-text-color)",
+        backgroundColor: state.isFocused ? "var(--color-primary-700)" : "var(--body-background-color)",
+        color: state.isFocused ? "white" : "var(--body-text-color)",
         cursor: "pointer",
         border: "1px solid var(--border-color)",
         margin: "-4px 0 -4px 0",

@@ -8,7 +8,6 @@
     <!-- SEO -->
     <title>{{ title }}</title>
     <meta name="description" content="{{ desc }}">
-    <link rel="canonical" href="https://docs.eslint.org{{ page.url | url }}">
 
     <!-- favicon -->
     <link rel="icon" href="/favicon.ico" sizes="any"><!-- 32×32 -->
@@ -24,7 +23,7 @@
     <meta property="og:image:alt" content="{{ coverAlt }}">
     <meta property="og:locale" content="en_GB">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ metadata.url }}{{ page.url }}">
+    <meta property="og:url" content="https://eslint.org/play">
     <!-- Twitter -->
     <meta name="twitter:title" content="{{ title }}">
     <meta name="twitter:card" content="summary_large_image">
@@ -99,9 +98,9 @@
             });
         }
     </script>
-    <script src="{{ '/assets/js/themes.js' | url }}"></script>
+    <script src="{{ 'assets/js/themes.js' | url }}"></script>
 
-    <link rel="stylesheet" type="text/css" href="{{ '/assets/css/styles.css' | url }}">
+    <link rel="stylesheet" type="text/css" href="{{ 'assets/css/styles.css' | url }}">
 </head>
 
 <body class="{{ hook }} docs">
@@ -109,11 +108,11 @@
 
     {{ content | safe }}
 
-    <script src="{{ '/assets/js/css-vars-ponyfill@2.js' | url }}"></script>
-    <script src="{{ '/assets/js/focus-visible.js' | url }}"></script>
-    <script src="{{ '/assets/js/select.js' | url }}"></script>
-    <script src="{{ '/assets/js/themes.js' | url }}"></script>
-    <script src="{{ '/assets/js/main.js' | url }}"></script>
+    <script src="{{ 'assets/js/css-vars-ponyfill@2.js' | url }}"></script>
+    <script src="{{ 'assets/js/focus-visible.js' | url }}"></script>
+    <script src="{{ 'assets/js/select.js' | url }}"></script>
+    <script src="{{ 'assets/js/themes.js' | url }}"></script>
+    <script src="{{ 'assets/js/main.js' | url }}"></script>
 </body>
 
 </html>

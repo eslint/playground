@@ -25,6 +25,13 @@ module.exports = function(eleventyConfig) {
     return {
         passthroughFileCopy: true,
 
+        /*
+         * When deployed, this app is loaded from /play and proxied to
+         * the correct server. To ensure that URLs are correct, we need
+         * to apply a prefix.
+         */
+        pathPrefix: "/play",
+
         markdownTemplateEngine: 'njk',
         dataTemplateEngine: 'njk',
         htmlTemplateEngine: 'njk',

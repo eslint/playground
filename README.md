@@ -1,21 +1,19 @@
 # ESLint Playground
 
-This contains the code running on [play.eslint.org](https://play.eslint.org).
+This repository contains the code for the [ESLint Playground](https://new.eslint.org/play).
+
+This application is built with [Eleventy](https://www.11ty.io) and [React](https://reactjs.org/) and is hosted on [Netlify](https://www.netlify.com). We proxy from `/play` on the main website to this app, but the two are deployed separately.
 
 ## Developer Setup
-
-This website is built with [Eleventy](https://www.11ty.io) and [React](https://reactjs.org/) and is hosted on [Netlify](https://www.netlify.com).
-
-### Local development
 
 To set up a local development environment, install [Node.js](https://nodejs.org/) (be sure to follow the instructions for your platform) and follow the steps below:
 
 ```sh
 # Clone the repository
-git clone git@github.com:eslint/play.eslint.org.git
+git clone git@github.com:eslint/playground.git
 
 # Navigate to the root directory
-cd play.eslint.org
+cd playground
 
 # Install dependencies
 npm install

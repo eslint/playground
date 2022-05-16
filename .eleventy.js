@@ -29,8 +29,13 @@ module.exports = function(eleventyConfig) {
          * When deployed, this app is loaded from /play and proxied to
          * the correct server. To ensure that URLs are correct, we need
          * to apply a prefix.
+         * 
+         * To ensure that we can get valid deploy previews, we need to
+         * omit the path prefix in that context. `CONTEXT` is an env
+         * variable defined by Netlify that specifies where the app
+         * is being deployed.
          */
-        pathPrefix: "/play",
+        pathPrefix: process.env.CONTEXT === "deploy-preview" ? "" : "/play",
 
         markdownTemplateEngine: 'njk',
         dataTemplateEngine: 'njk',

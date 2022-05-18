@@ -2,6 +2,7 @@ import "regenerator-runtime/runtime";
 
 import React, { useState } from "react";
 import Alert from "./components/Alert";
+import CrashAlert from "./components/CrashAlert";
 import Footer from "./components/Footer";
 import CodeEditor from "./components/CodeEditor";
 import { Linter, SourceCodeFixer } from "./node_modules/eslint/lib/linter/";
@@ -91,7 +92,7 @@ const App = () => {
         window.location.hash = Unicode.encodeToBase64(serializedState);
     };
 
-    const { messages, output, fatalMessage } = lint();
+    const { messages, output, fatalMessage, error: crashError } = lint();
     const isInvalidAutofix = fatalMessage && text !== output;
     const sourceCode = linter.getSourceCode();
 
@@ -157,6 +158,9 @@ const App = () => {
 
                     {
                         isInvalidAutofix && <Alert type="error" text={`Invalid autofix! ${fatalMessage.message}`} />
+                    }
+                    {
+                        crashError && <CrashAlert error={crashError}/>
                     }
                     {messages.length > 0 && messages.map(message => (
                         message.suggestions ? (

@@ -7,7 +7,7 @@ export default function Footer() {
         <footer className="footer">
             <SocialIcons/>
             <div className="copyright">
-                &copy; OpenJS Foundation and other contributors, <a href="www.openjsf.org">www.openjsf.org</a>
+                &copy; OpenJS Foundation and other contributors, <a href="https://www.openjsf.org">www.openjsf.org</a>
             </div>
             <ThemeSwitcher/>
         </footer>

@@ -81,6 +81,10 @@
     gap: .5rem;
     flex: 1;
     padding: .5rem;
+
+    a {
+        color: var(--link-color);
+    }
 }
 
 .alert__position {

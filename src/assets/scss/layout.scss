@@ -9,10 +9,13 @@
 .playground__main {
     grid-column: 1 / 2;
     grid-row: 1;
-
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 75px);
+    height: calc(100vh - 77px - 41px);
+
+    @media all and (min-width: 1023px) {
+        height: calc(100vh - 77px);
+    }
 }
 
 .playground__config-and-footer {
@@ -50,7 +53,7 @@
 
 .playground__config-and-footer {
     @media all and (min-width: 1023px) {
-        height: calc(100vh - 75px);
+        height: calc(100vh - 77px);
         overflow-y: auto;
     }
 }

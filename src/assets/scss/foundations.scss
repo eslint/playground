@@ -58,8 +58,7 @@ html {
     background-color: var(--body-background-color);
     height: 100%;
     font-family: var(--text-font);
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: scroll;
     caret-color: var(--link-color);
 }
 

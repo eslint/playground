@@ -22,7 +22,7 @@ npm install
 Once you have set up your environment, you can run a copy of the website locally using this command:
 
 ```sh
-npm start
+watch:eleventy
 ```
 
 This will watch for changes to the source code and rebuild the website, which will be hosted at `http://localhost:2024/`.

@@ -278,3 +278,25 @@ ul.config__added-rules {
     color: var(--headings-color);
     border-radius: var(--border-radius);
 }
+
+.config__added-rules__rule-error {
+    color: var(--color-rose-800);
+    margin-top: .75rem;
+    [data-theme="dark"] & {
+        color: var(--color-rose-400);
+    }
+}
+
+.config__added-rules__rule-input-error {
+    border-color: var(--color-rose-700);
+
+    &:focus{
+        border-color: var(--color-rose-700);
+        background-color: var(--color-rose-100);
+        box-shadow: 0 0 0 2px var(--color-rose-700);
+
+        [data-theme="dark"] & {
+            background-color: transparent;
+        }
+    }
+}

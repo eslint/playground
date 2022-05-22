@@ -89,6 +89,7 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
     }));
     const [selectedRule, setSelectedRule] = useState();
     const ruleInputRef = useRef(null);
+    const [rulesWithInvalidConfigs, setRulesWithInvalidConfigs] = useState(new Set([]));
 
     return (
         <div className="playground__config-options__sections">
@@ -220,19 +221,23 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                                 </h4>
                                 <input
                                     id={ruleName}
+                                    className={rulesWithInvalidConfigs.has(ruleName) ? "config__added-rules__rule-input-error" : ""}
                                     style={{ width: "100%" }}
                                     defaultValue={JSON.stringify(options.rules[ruleName])}
                                     placeholder={"[\"error\"]"}
                                     onChange={event => {
                                         try {
                                             options.rules[ruleName] = JSON.parse(event.target.value);
+                                            setRulesWithInvalidConfigs(new Set([...rulesWithInvalidConfigs].filter(rule => rule !== ruleName)));
                                             onUpdate(Object.assign({}, options));
                                         } catch {
-
-                                            // ignore
+                                            setRulesWithInvalidConfigs(new Set([...rulesWithInvalidConfigs, ruleName]));
                                         }
                                     }}
                                 />
+                                {rulesWithInvalidConfigs.has(ruleName) && (
+                                    <p className="config__added-rules__rule-error">Invalid rule configuration. Please use a valid JSON format.</p>
+                                )}
                             </RuleItem>
                         ))}
                     </ul>

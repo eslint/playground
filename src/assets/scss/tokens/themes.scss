@@ -104,6 +104,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
+html {
     --body-background-color: var(--color-neutral-900);
     --body-text-color: var(--color-neutral-300);
     --headings-color: #fff;
@@ -129,6 +130,7 @@
     --editor-bracket-match-outline-color: var(--color-neutral-600);
     --editor-bracket-match-background-color: var(--color-neutral-700);
     --editor-bracket-match-color: var(--color-neutral-25);
+}
 }
 
 html[data-theme="light"] {

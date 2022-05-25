@@ -211,6 +211,7 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                                         title={`Remove ${ruleName}`}
                                         onClick={() => {
                                             delete options.rules[ruleName];
+                                            setRulesWithInvalidConfigs(new Set([...rulesWithInvalidConfigs].filter(rule => rule !== ruleName)));
                                             onUpdate(Object.assign({}, options));
                                         }}
                                     >

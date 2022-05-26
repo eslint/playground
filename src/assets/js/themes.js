@@ -15,8 +15,11 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         var switcher = document.getElementById('js-theme-switcher');
-        switcher.removeAttribute('hidden');
 
+        if(!switcher)
+        return;
+
+        switcher.removeAttribute('hidden');
         var light_theme_toggle = document.getElementById('light-theme-toggle'),
             dark_theme_toggle = document.getElementById('dark-theme-toggle');
 

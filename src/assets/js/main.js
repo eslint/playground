@@ -108,6 +108,9 @@ var getClosest = function (elem, selector) {
         body = document.getElementsByTagName("body")[0],
         open = false;
 
+    if(!config_trigger)
+       return;
+
     if (matchMedia) {
         const mq = window.matchMedia("(max-width: 1023px)");
         mq.addListener(WidthChange);

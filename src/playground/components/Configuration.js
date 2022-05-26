@@ -184,7 +184,13 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                         styles={customStyles}
                         theme={theme => customTheme(theme)}
                         ref={ruleInputRef}
-                        onChange={selected => setSelectedRule(selected.value)}
+                        onChange={selected => {
+                            if (!selected) {
+                                setSelectedRule(null);
+                            } else {
+                                setSelectedRule(selected.value);
+                            }
+                        }}
                         options={ruleNamesOptions}
                     />
                     <button

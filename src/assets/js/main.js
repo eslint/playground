@@ -69,7 +69,7 @@ var getClosest = function (elem, selector) {
 
     if (matchMedia) {
         const mq = window.matchMedia("(max-width: 1023px)");
-        mq.addListener(WidthChange);
+        mq.addEventListener('change', WidthChange);
         WidthChange(mq);
     }
 
@@ -110,7 +110,7 @@ var getClosest = function (elem, selector) {
 
     if (matchMedia) {
         const mq = window.matchMedia("(max-width: 1023px)");
-        mq.addListener(WidthChange);
+        mq.addEventListener('change', WidthChange);
         WidthChange(mq);
     }
 

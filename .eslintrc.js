@@ -34,7 +34,7 @@ module.exports = {
     overrides: [
         {
             files: ["src/playground/**/*.{js,jsx}"],
-            plugins: ["react", "jsx-a11y"],
+            plugins: ["react", "jsx-a11y", "react-hooks"],
             extends: ["plugin:react/recommended", "plugin:jsx-a11y/recommended"],
             parserOptions: {
                 sourceType: "module",
@@ -59,7 +59,9 @@ module.exports = {
                 // It might be a good idea to enable these in the future.
                 "jsx-a11y/no-onchange": "off",
                 "react/prop-types": "off",
-                "jsdoc/require-jsdoc": "off"
+                "jsdoc/require-jsdoc": "off",
+                "react-hooks/rules-of-hooks": "error",
+                "react-hooks/exhaustive-deps": "warn"
             }
         }
     ]

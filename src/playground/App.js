@@ -140,7 +140,7 @@ const App = () => {
 
             <div className="playground__main">
                 <Split
-                    className="split"
+                    className="resizable__container"
                     direction="vertical"
                     minSize={180}
                     gutterAlign="start"

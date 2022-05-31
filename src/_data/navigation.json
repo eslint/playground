@@ -21,5 +21,8 @@
       "url": "/play"
     }
   ],
-  "donate": "/donate"
+  "donate": {
+    "text": "donate",
+    "url": "/donate"
+  }
 }

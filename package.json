@@ -17,7 +17,7 @@
         "build:webpack": "webpack --mode=production",
         "prestart": "npm run build",
         "start": "node tools/dev-server.js",
-        "build": "npm-run-all --parallel install:playground build:* images",
+        "build": "npm-run-all build:sass --parallel install:playground build:eleventy build:webpack images",
         "lint": "eslint --ext=.js,.jsx .",
         "fix": "npm run lint -- --fix",
         "postinstall": "npm run install:playground"

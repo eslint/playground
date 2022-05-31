@@ -30,7 +30,7 @@ export default function Alert({ type, text, message, onFix }) {
                     <span className="visually-hidden">Error</span>
                     <p className="alert__line-number">
                         <span className="line-number">{line}</span>
-                        <span aria-hidden="true">:</span>
+                        {line && column && <span aria-hidden="true">:</span>}
                         <span className="colun-number">{column}</span>
                     </p>
                 </div>

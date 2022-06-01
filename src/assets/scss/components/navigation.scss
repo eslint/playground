@@ -153,3 +153,9 @@
     }
 
 }
+
+@media (max-width: 679px) {
+    #nav-panel[data-open="true"] {
+        display: block;
+    }
+}

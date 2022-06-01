@@ -20,5 +20,9 @@
       "text": "Playground",
       "url": "/play"
     }
-  ]
+  ],
+  "donate": {
+    "text": "Donate",
+    "url": "/donate"
+  }
 }

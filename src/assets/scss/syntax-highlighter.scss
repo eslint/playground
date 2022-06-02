@@ -1,5 +1,6 @@
 code[class*="language-"],
 pre[class*="language-"] {
+    font-variant-ligatures: none;
     font-family: var(--mono-font), Consolas,
         Monaco,
         'Andale Mono',

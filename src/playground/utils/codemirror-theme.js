@@ -10,6 +10,7 @@ export const ESLintPlaygroundTheme = EditorView.theme({
         backgroundColor: "var(--body-background-color)",
         minWidth: "100%",
         border: "1px solid var(--body-text-color)",
+        fontVariantLigatures: "none",
         fontFamily: "var(--mono-font), Consolas, Monaco, \"Andale Mono\", \"Ubuntu Mono\", monospace",
         fontSize: "1em",
         color: "var(--body-text-color)"

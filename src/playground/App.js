@@ -6,6 +6,7 @@ import CrashAlert from "./components/CrashAlert";
 import Footer from "./components/Footer";
 import CodeEditor from "./components/CodeEditor";
 import { Linter, SourceCodeFixer } from "./node_modules/eslint/lib/linter/";
+import { Legacy } from "@eslint/eslintrc/universal";
 import Unicode from "./utils/unicode";
 import Configuration from "./components/Configuration";
 import Split from "react-split";
@@ -63,6 +64,9 @@ const App = () => {
 
     const lint = () => {
         try {
+            const validator = new Legacy.ConfigValidator();
+
+            validator.validate(options);
             const { messages, output } = linter.verifyAndFix(text, options, { fix });
             let fatalMessage;
 

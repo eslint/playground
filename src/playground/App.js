@@ -64,9 +64,17 @@ const App = () => {
 
     const lint = () => {
         try {
-            const validator = new Legacy.ConfigValidator();
+            const validator = new Legacy.ConfigValidator({ builtInRules: rules });
 
             validator.validate(options);
+        } catch (error) {
+            return {
+                messages: [],
+                output: text,
+                validationError: error
+            };
+        }
+        try {
             const { messages, output } = linter.verifyAndFix(text, options, { fix });
             let fatalMessage;
 
@@ -98,7 +106,7 @@ const App = () => {
         window.location.hash = Unicode.encodeToBase64(serializedState);
     };
 
-    const { messages, output, fatalMessage, error: crashError } = lint();
+    const { messages, output, fatalMessage, error: crashError, validationError } = lint();
     const isInvalidAutofix = fatalMessage && text !== output;
     const sourceCode = linter.getSourceCode();
 
@@ -173,6 +181,9 @@ const App = () => {
                         }
                         {
                             crashError && <CrashAlert error={crashError} />
+                        }
+                        {
+                            validationError && <Alert type="error" text={validationError.message} />
                         }
                         {messages.length > 0 && messages.map(message => (
                             message.suggestions ? (

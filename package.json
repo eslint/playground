@@ -6,6 +6,9 @@
     "main": "index.js",
     "keywords": [],
     "license": "Apache-2.0",
+    "repository": "eslint/playground",
+    "funding": "https://opencollective.com/eslint",
+    "bugs": "https://github.com/eslint/playground/issues/",
     "scripts": {
         "images": "imagemin '_site/assets/images' --out-dir='_site/assets/images'",
         "install:playground": "cd src/playground && npm install --no-package-lock",

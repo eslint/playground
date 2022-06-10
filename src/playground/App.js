@@ -96,7 +96,6 @@ const App = () => {
 
     const { messages, output, fatalMessage, error: crashError } = lint();
     const isInvalidAutofix = fatalMessage && text !== output;
-    const sourceCode = linter.getSourceCode();
 
     const onFix = message => {
         if (message.fix) {

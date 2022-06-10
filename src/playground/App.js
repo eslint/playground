@@ -143,6 +143,7 @@ const App = () => {
                             options={options}
                             onUpdate={updateOptions}
                             rulesMeta={rulesMeta}
+                            validationError={validationError}
                             eslintVersion={linter.version}
                         />
                         <Footer />

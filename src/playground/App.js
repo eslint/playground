@@ -96,7 +96,6 @@ const App = () => {
 
     const { messages, output, fatalMessage, error: crashError } = lint();
     const isInvalidAutofix = fatalMessage && text !== output;
-    const sourceCode = linter.getSourceCode();
 
     const onFix = message => {
         if (message.fix) {
@@ -149,14 +148,12 @@ const App = () => {
                         <CodeEditor
                             tabIndex="0"
                             codeValue={text}
-                            errors={messages}
                             eslintOptions={options}
                             onUpdate={value => {
                                 setFix(false);
                                 setText(value);
                                 storeState({ newText: value });
                             }}
-                            getIndexFromLoc={sourceCode && sourceCode.getIndexFromLoc.bind(sourceCode)}
                         />
                     </main>
                     <section className="playground__console" aria-labelledby="playground__console-label">

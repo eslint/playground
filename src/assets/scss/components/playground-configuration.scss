@@ -292,6 +292,11 @@ ul.config__added-rules {
     box-shadow: 0 0 0 2px var(--color-rose-700);
     background-color: var(--color-rose-100);
 
+    &:focus {
+        border-color: var(--color-rose-700);
+        box-shadow: 0 0 0 2px var(--color-rose-700);
+    }
+
     [data-theme="dark"] & {
         background-color: transparent;
         border-color: var(--color-rose-700);

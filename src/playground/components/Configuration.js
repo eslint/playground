@@ -228,7 +228,7 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                                 </h4>
                                 <input
                                     id={ruleName}
-                                    className={rulesWithInvalidConfigs.has(ruleName) || validationError?.message.includes(ruleName) ? "config__added-rules__rule-input-error" : ""}
+                                    className={rulesWithInvalidConfigs.has(ruleName) || validationError?.message.includes(`"${ruleName}"`) ? "config__added-rules__rule-input-error" : ""}
                                     style={{ width: "100%" }}
                                     defaultValue={JSON.stringify(options.rules[ruleName])}
                                     placeholder={"[\"error\"]"}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config.lang }}" class="no-js">
+<html lang="{{ site.language.code }}" class="no-js">
 
 <head>
     <meta charset="UTF-8">
@@ -21,9 +21,9 @@
     <meta property="og:description" content="{{ desc }}">
     <meta property="og:image" content="{{ cover }}" />
     <meta property="og:image:alt" content="{{ coverAlt }}">
-    <meta property="og:locale" content="en_GB">
+    <meta property="og:locale" content="{{ site.locale | replace(" -", "_" ) }}">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://eslint.org/play">
+    <meta property="og:url" content="https://{{ site.hostname }}/play">
     <!-- Twitter -->
     <meta name="twitter:title" content="{{ title }}">
     <meta name="twitter:card" content="summary_large_image">
@@ -104,7 +104,7 @@
 </head>
 
 <body class="{{ hook }} docs">
-    <a href="#main" class="c-btn c-btn--primary" id="skip-link">Skip to main content</a>
+    <a href="#main" class="c-btn c-btn--primary" id="skip-link">{{ site.shared.skip_to_content }}</a>
 
     {{ content | safe }}
 
@@ -113,6 +113,8 @@
     <script src="{{ '/assets/js/select.js' | url }}"></script>
     <script src="{{ '/assets/js/themes.js' | url }}"></script>
     <script src="{{ '/assets/js/main.js' | url }}"></script>
+    {% include 'partials/analytics.html' %}
+
 </body>
 
 </html>

@@ -2,15 +2,15 @@
   "items": [
     {
       "text": "Team",
-      "url": "/team/"
+      "url": "https://eslint.org/team/"
     },
     {
       "text": "Blog",
-      "url": "/blog/"
+      "url": "https://eslint.org/blog/"
     },
     {
       "text": "Docs",
-      "url": "/docs"
+      "url": "https://eslint.org/docs/"
     },
     {
       "text": "Store",
@@ -18,11 +18,7 @@
     },
     {
       "text": "Playground",
-      "url": "/play"
+      "url": "https://eslint.org/play"
     }
-  ],
-  "donate": {
-    "text": "Donate",
-    "url": "/donate"
-  }
+  ]
 }

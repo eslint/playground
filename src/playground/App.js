@@ -6,6 +6,7 @@ import CrashAlert from "./components/CrashAlert";
 import Footer from "./components/Footer";
 import CodeEditor from "./components/CodeEditor";
 import { Linter, SourceCodeFixer } from "./node_modules/eslint/lib/linter/";
+import { Legacy } from "@eslint/eslintrc/universal";
 import Unicode from "./utils/unicode";
 import Configuration from "./components/Configuration";
 import Split from "react-split";
@@ -63,6 +64,17 @@ const App = () => {
 
     const lint = () => {
         try {
+            const validator = new Legacy.ConfigValidator({ builtInRules: rules });
+
+            validator.validate(options);
+        } catch (error) {
+            return {
+                messages: [],
+                output: text,
+                validationError: error
+            };
+        }
+        try {
             const { messages, output } = linter.verifyAndFix(text, options, { fix });
             let fatalMessage;
 
@@ -94,7 +106,7 @@ const App = () => {
         window.location.hash = Unicode.encodeToBase64(serializedState);
     };
 
-    const { messages, output, fatalMessage, error: crashError } = lint();
+    const { messages, output, fatalMessage, error: crashError, validationError } = lint();
     const isInvalidAutofix = fatalMessage && text !== output;
 
     const onFix = message => {
@@ -130,6 +142,7 @@ const App = () => {
                             options={options}
                             onUpdate={updateOptions}
                             rulesMeta={rulesMeta}
+                            validationError={validationError}
                             eslintVersion={linter.version}
                         />
                         <Footer />
@@ -166,6 +179,9 @@ const App = () => {
                         }
                         {
                             crashError && <CrashAlert error={crashError} />
+                        }
+                        {
+                            validationError && <Alert type="error" text={validationError.message} />
                         }
                         {messages.length > 0 && messages.map(message => (
                             message.suggestions ? (

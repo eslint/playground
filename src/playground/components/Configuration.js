@@ -76,7 +76,7 @@ const customTheme = theme => ({
     }
 });
 
-export default function Configuration({ rulesMeta, eslintVersion, onUpdate, options, ruleNames }) {
+export default function Configuration({ rulesMeta, eslintVersion, onUpdate, options, ruleNames, validationError }) {
     const sourceTypeOptions = SOURCE_TYPES.map(sourceType => ({ value: sourceType, label: sourceType }));
     const ECMAFeaturesOptions = ECMA_FEATURES.map(ecmaFeature => ({ value: ecmaFeature, label: ecmaFeature }));
     const ECMAVersionsOptions = ECMA_VERSIONS.map(ecmaVersion => ({ value: ecmaVersion === "latest" ? ecmaVersion : Number(ecmaVersion), label: ecmaVersion }));
@@ -228,7 +228,7 @@ export default function Configuration({ rulesMeta, eslintVersion, onUpdate, opti
                                 </h4>
                                 <input
                                     id={ruleName}
-                                    className={rulesWithInvalidConfigs.has(ruleName) ? "config__added-rules__rule-input-error" : ""}
+                                    className={rulesWithInvalidConfigs.has(ruleName) || validationError?.message.includes(`"${ruleName}"`) ? "config__added-rules__rule-input-error" : ""}
                                     style={{ width: "100%" }}
                                     defaultValue={JSON.stringify(options.rules[ruleName])}
                                     placeholder={"[\"error\"]"}

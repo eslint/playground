@@ -1,6 +1,15 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const yaml = require("js-yaml");
 
 module.exports = function(eleventyConfig) {
+
+    // Load site-specific data
+    const siteName = process.env.ESLINT_SITE_NAME || "en";
+    eleventyConfig.addGlobalData("site_name", siteName);
+
+    // Support YAML data files
+    eleventyConfig.addDataExtension("yml", contents => yaml.load(contents));
+
 
     /*****************************************************************************************
      *  Plugins

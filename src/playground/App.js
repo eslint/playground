@@ -103,7 +103,10 @@ const App = () => {
             window.localStorage.setItem("linterDemoState", serializedState);
         }
 
-        window.location.hash = Unicode.encodeToBase64(serializedState);
+        const url = new URL(location);
+
+        url.hash = Unicode.encodeToBase64(serializedState);
+        history.replaceState(null, null, url);
     };
 
     const { messages, output, fatalMessage, error: crashError, validationError } = lint();

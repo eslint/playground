@@ -16,7 +16,7 @@
         "build:eleventy": "eleventy --quiet",
         "build:webpack": "webpack --mode=production --progress",
         "start": "node tools/dev-server.js",
-        "build": "npm-run-all build:sass --parallel install:playground build:eleventy build:webpack images",
+        "build": "npm-run-all install:playground build:sass build:eleventy build:webpack images",
         "lint": "eslint --ext=.js,.jsx .",
         "fix": "npm run lint -- --fix",
         "postinstall": "npm run install:playground"

@@ -150,6 +150,7 @@ app.get("*", async (req, res, next) => {
 // 404 Handler
 app.use((req, res) => res.status(404).sendFile(path.join(__dirname, "../_site/404.html")));
 app.listen(PORT, () => {
+    spawnChildProcess("npm", ["run", "build:sass"]);
     spawnChildProcess("npm", ["run", "watch:sass"]);
     spawnChildProcess("npm", ["run", "watch:webpack"]);
     spawnChildProcess("npm", ["run", "watch:eleventy"]);

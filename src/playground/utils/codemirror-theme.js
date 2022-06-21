@@ -10,6 +10,7 @@ export const ESLintPlaygroundTheme = EditorView.theme({
         backgroundColor: "var(--body-background-color)",
         minWidth: "100%",
         border: "1px solid var(--body-text-color)",
+        fontVariantLigatures: "none",
         fontFamily: "var(--mono-font), Consolas, Monaco, \"Andale Mono\", \"Ubuntu Mono\", monospace",
         fontSize: "1em",
         color: "var(--body-text-color)"
@@ -42,6 +43,13 @@ export const ESLintPlaygroundTheme = EditorView.theme({
     },
     ".cm-gutterElement": {
         color: "var(--body-text-color)"
+    },
+    ".cm-tooltip-autocomplete": {
+        backgroundColor: "var(--color-neutral-800)",
+        color: "#fff"
+    },
+    ".cm-completionIcon": {
+        width: "1.2rem"
     }
 }, { dark: true });
 

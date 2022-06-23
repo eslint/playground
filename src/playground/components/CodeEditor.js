@@ -10,25 +10,23 @@ import "../scss/editor.scss";
 
 export default function CodeEditor({ codeValue, onUpdate, eslintOptions }) {
     return (
-        <>
-            <CodeMirror
-                value={codeValue}
-                minWidth="100%"
-                height="100%"
-                extensions={
-                    [
-                        history(),
-                        bracketMatching(),
-                        linter(esLint(new ESLint(), eslintOptions), { delay: 0 }),
-                        javascript(),
-                        ESLintPlaygroundTheme,
-                        ESLintPlaygroundHighlightStyle
-                    ]
-                }
-                onChange={value => {
-                    onUpdate(value);
-                }}
-            />
-        </>
+        <CodeMirror
+            value={codeValue}
+            minWidth="100%"
+            height="100%"
+            extensions={
+                [
+                    history(),
+                    bracketMatching(),
+                    linter(esLint(new ESLint(), eslintOptions), { delay: 0 }),
+                    javascript(),
+                    ESLintPlaygroundTheme,
+                    ESLintPlaygroundHighlightStyle
+                ]
+            }
+            onChange={value => {
+                onUpdate(value);
+            }}
+        />
     );
 }

@@ -1,6 +1,6 @@
 # ESLint Playground
 
-This repository contains the code for the [ESLint Playground](https://new.eslint.org/play).
+This repository contains the code for the [ESLint Playground](https://eslint.org/play).
 
 This application is built with [Eleventy](https://www.11ty.io) and [React](https://reactjs.org/) and is hosted on [Netlify](https://www.netlify.com). We proxy from `/play` on the main website to this app, but the two are deployed separately.
 

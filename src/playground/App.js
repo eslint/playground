@@ -130,7 +130,7 @@ const App = () => {
         <div className="playground-wrapper">
             <div className="playground__config-and-footer">
                 <section className="playground__config" aria-labelledby="playground__config-toggle">
-                    <button className="playground__config-toggle" id="playground__config-toggle" hidden>
+                    <button className="playground__config-toggle" id="playground__config-toggle">
                         <span>Configuration</span>
                         <svg width="20" height="20" viewBox="20 20 60 60" aria-hidden="true" focusable="false">
                             <path id="ham-top" d="M30,37 L70,37 Z" stroke="currentColor"></path>

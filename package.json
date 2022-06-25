@@ -18,7 +18,6 @@
         "build:sass": "sass --style=compressed src/assets/scss:src/assets/css --no-source-map",
         "build:eleventy": "eleventy --quiet",
         "build:webpack": "webpack --mode=production --progress",
-        "prestart": "npm run build",
         "start": "node tools/dev-server.js",
         "build": "npm-run-all install:playground build:sass build:eleventy build:webpack images",
         "lint": "eslint --ext=.js,.jsx .",

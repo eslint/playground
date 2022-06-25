@@ -53,6 +53,7 @@ module.exports = {
                 }
             },
             rules: {
+                "react/jsx-no-useless-fragment": "error",
                 "react/jsx-no-target-blank": "error",
 
                 // Disable rules that the codebase doesn't currently follow.

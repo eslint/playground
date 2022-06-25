@@ -19,8 +19,6 @@ export default function CrashAlert({ error }) {
     );
 
     return (
-        <React.Fragment>
-            <Alert type="error" text={AlertMessage} />
-        </React.Fragment>
+        <Alert type="error" text={AlertMessage} />
     );
 }

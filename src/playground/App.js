@@ -6,8 +6,11 @@ import CrashAlert from "./components/CrashAlert";
 import Footer from "./components/Footer";
 import CodeEditor from "./components/CodeEditor";
 import { Linter, SourceCodeFixer } from "./node_modules/eslint/lib/linter/";
+import { Legacy } from "@eslint/eslintrc/universal";
 import Unicode from "./utils/unicode";
 import Configuration from "./components/Configuration";
+import Split from "react-split";
+import "./scss/split-pane.scss";
 
 const linter = new Linter();
 const rules = linter.getRules();
@@ -61,6 +64,17 @@ const App = () => {
 
     const lint = () => {
         try {
+            const validator = new Legacy.ConfigValidator({ builtInRules: rules });
+
+            validator.validate(options);
+        } catch (error) {
+            return {
+                messages: [],
+                output: text,
+                validationError: error
+            };
+        }
+        try {
             const { messages, output } = linter.verifyAndFix(text, options, { fix });
             let fatalMessage;
 
@@ -89,12 +103,14 @@ const App = () => {
             window.localStorage.setItem("linterDemoState", serializedState);
         }
 
-        window.location.hash = Unicode.encodeToBase64(serializedState);
+        const url = new URL(location);
+
+        url.hash = Unicode.encodeToBase64(serializedState);
+        history.replaceState(null, null, url);
     };
 
-    const { messages, output, fatalMessage, error: crashError } = lint();
+    const { messages, output, fatalMessage, error: crashError, validationError } = lint();
     const isInvalidAutofix = fatalMessage && text !== output;
-    const sourceCode = linter.getSourceCode();
 
     const onFix = message => {
         if (message.fix) {
@@ -129,6 +145,7 @@ const App = () => {
                             options={options}
                             onUpdate={updateOptions}
                             rulesMeta={rulesMeta}
+                            validationError={validationError}
                             eslintVersion={linter.version}
                         />
                         <Footer />
@@ -137,50 +154,58 @@ const App = () => {
             </div>
 
             <div className="playground__main">
-                <main className="playground__editor" id="main" aria-label="Editor">
-                    <CodeEditor
-                        tabIndex="0"
-                        codeValue={text}
-                        errors={messages}
-                        eslintOptions={options}
-                        onUpdate={value => {
-                            setFix(false);
-                            setText(value);
-                            storeState({ newText: value });
-                        }}
-                        getIndexFromLoc={sourceCode && sourceCode.getIndexFromLoc.bind(sourceCode)}
-                    />
-                </main>
-                <section className="playground__console" aria-labelledby="playground__console-label">
-                    {/* <div className="playground__console-announcements visually-hidden" aria-live="polite" aria-atomic="true">
+                <Split
+                    className="resizable__container"
+                    direction="vertical"
+                    minSize={180}
+                    gutterAlign="start"
+                >
+                    <main className="playground__editor" id="main" aria-label="Editor">
+                        <CodeEditor
+                            tabIndex="0"
+                            codeValue={text}
+                            eslintOptions={options}
+                            onUpdate={value => {
+                                setFix(false);
+                                setText(value);
+                                storeState({ newText: value });
+                            }}
+                        />
+                    </main>
+                    <section className="playground__console" aria-labelledby="playground__console-label">
+                        {/* <div className="playground__console-announcements visually-hidden" aria-live="polite" aria-atomic="true">
                         2 warnings and 1 error logged to the console.
                     </div> */}
 
-                    {
-                        isInvalidAutofix && <Alert type="error" text={`Invalid autofix! ${fatalMessage.message}`} />
-                    }
-                    {
-                        crashError && <CrashAlert error={crashError}/>
-                    }
-                    {messages.length > 0 && messages.map(message => (
-                        message.suggestions ? (
-                            <Alert
-                                key={`${message.ruleId}-${message.line}-${message.column}`}
-                                type={message.severity === 2 ? "error" : "warning"}
-                                message={message}
-                                suggestions={message.suggestions}
-                                onFix={onFix}
-                            />
-                        ) : (
-                            <Alert
-                                key={`${message.ruleId}-${message.line}-${message.column}`}
-                                type={message.severity === 2 ? "error" : "warning"}
-                                message={message}
-                                onFix={onFix}
-                            />
-                        )
-                    ))}
-                </section>
+                        {
+                            isInvalidAutofix && <Alert type="error" text={`Invalid autofix! ${fatalMessage.message}`} />
+                        }
+                        {
+                            crashError && <CrashAlert error={crashError} />
+                        }
+                        {
+                            validationError && <Alert type="error" text={validationError.message} />
+                        }
+                        {messages.length > 0 && messages.map(message => (
+                            message.suggestions ? (
+                                <Alert
+                                    key={`${message.ruleId}-${message.line}-${message.column}`}
+                                    type={message.severity === 2 ? "error" : "warning"}
+                                    message={message}
+                                    suggestions={message.suggestions}
+                                    onFix={onFix}
+                                />
+                            ) : (
+                                <Alert
+                                    key={`${message.ruleId}-${message.line}-${message.column}`}
+                                    type={message.severity === 2 ? "error" : "warning"}
+                                    message={message}
+                                    onFix={onFix}
+                                />
+                            )
+                        ))}
+                    </section>
+                </Split>
             </div>
         </div>
     );

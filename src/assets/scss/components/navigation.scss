@@ -153,3 +153,27 @@
     }
 
 }
+
+@media (max-width: 679px) {
+    #nav-panel[data-open="true"] {
+        display: block !important;
+    }
+}
+
+
+.no-js #nav-toggle {
+    display: none !important;
+}
+@media all and (min-width: 680px) {
+    .enhanced #nav-toggle{
+        display: none;
+    }
+}
+@media all and (max-width: 679px) {
+    .no-js #nav-panel {
+        display: block !important;
+    }
+    .enhanced #nav-panel{
+        display: none;
+    }
+}

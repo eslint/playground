@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import ReactDOM from "react-dom";
+import * as ReactDOM from "react-dom/client";
 import { Decoration, EditorView, ViewPlugin, logException, WidgetType } from "@codemirror/view";
 import { StateEffect, StateField, Facet } from "@codemirror/state";
 import { hoverTooltip } from "@codemirror/tooltip";
@@ -271,14 +271,16 @@ function assignKeys(actions) {
 
 function renderDiagnostic(view, diagnostic) {
     const element = document.createElement("div");
+    const root = ReactDOM.createRoot(element);
 
-    ReactDOM.render(
-        <Popup
-            message={diagnostic.message}
-            onFix={diagnostic.actions && (() => diagnostic.actions[0].apply(view, diagnostic.from, diagnostic.to))}
-            ruleName={diagnostic.source.replace("jshint:", "")}
-        />,
-        element
+    root.render(
+        <React.StrictMode>
+            <Popup
+                message={diagnostic.message}
+                onFix={diagnostic.actions && (() => diagnostic.actions[0].apply(view, diagnostic.from, diagnostic.to))}
+                ruleName={diagnostic.source.replace("jshint:", "").replace("jshint", "")}
+            />
+        </React.StrictMode>
     );
     return element;
 }

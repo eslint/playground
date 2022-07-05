@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import ReactDOM from "react-dom";
+import * as ReactDOMServer from "react-dom/server";
 import { Decoration, EditorView, ViewPlugin, logException, WidgetType } from "@codemirror/view";
 import { StateEffect, StateField, Facet } from "@codemirror/state";
 import { hoverTooltip } from "@codemirror/tooltip";
@@ -272,14 +272,15 @@ function assignKeys(actions) {
 function renderDiagnostic(view, diagnostic) {
     const element = document.createElement("div");
 
-    ReactDOM.render(
+    const html = ReactDOMServer.renderToStaticMarkup(
         <Popup
             message={diagnostic.message}
             onFix={diagnostic.actions && (() => diagnostic.actions[0].apply(view, diagnostic.from, diagnostic.to))}
             ruleName={diagnostic.source.replace("jshint:", "")}
-        />,
-        element
+        />
     );
+
+    element.innerHTML = html;
     return element;
 }
 

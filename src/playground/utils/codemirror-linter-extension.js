@@ -273,12 +273,23 @@ function renderDiagnostic(view, diagnostic) {
     const element = document.createElement("div");
     const root = ReactDOM.createRoot(element);
 
+    let ruleName = "";
+
+    if (diagnostic.source === "jshint") {
+
+        // leave ruleName blank
+    } else {
+
+        // remove 'jshint:' in the beginning
+        ruleName = diagnostic.source.replace(/^jshint:/u, "");
+    }
+
     root.render(
         <React.StrictMode>
             <Popup
                 message={diagnostic.message}
                 onFix={diagnostic.actions && (() => diagnostic.actions[0].apply(view, diagnostic.from, diagnostic.to))}
-                ruleName={diagnostic.source.replace("jshint:", "").replace("jshint", "")}
+                ruleName={ruleName}
             />
         </React.StrictMode>
     );

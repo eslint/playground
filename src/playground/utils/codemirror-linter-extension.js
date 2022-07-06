@@ -273,6 +273,8 @@ function renderDiagnostic(view, diagnostic) {
     const element = document.createElement("div");
     const root = ReactDOM.createRoot(element);
 
+    // clean up ruleName first
+    // see https://github.com/codemirror/lang-javascript/blob/main/src/eslint.ts#L51
     let ruleName = "";
 
     if (diagnostic.source === "jshint") {

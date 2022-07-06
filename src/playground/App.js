@@ -125,14 +125,14 @@ const App = () => {
         setOptions(newOptions);
         storeState({ newOptions });
     };
-    const [showConfigMenu, toggleConfigMenu] = useState(false);
-    const [isConfigHidden, toggleConfig] = useState(window.matchMedia("(min-width: 1023px)").matches);
+    const [showConfigMenu, setShowConfigMenu] = useState(false);
+    const [isConfigHidden, setIsConfigHidden] = useState(window.matchMedia("(min-width: 1023px)").matches);
 
     useEffect(() => {
         const mq = window.matchMedia("(min-width: 1023px)");
 
         const ConfigToggler = () => {
-            toggleConfig(mq.matches);
+            setIsConfigHidden(mq.matches);
         };
 
         mq.addEventListener("change", ConfigToggler);
@@ -147,7 +147,7 @@ const App = () => {
             <div className="playground__config-and-footer">
                 <section className="playground__config" aria-labelledby="playground__config-toggle">
                     <button className="playground__config-toggle" id="playground__config-toggle" onClick={ () => {
-                        toggleConfigMenu(value => !value);
+                        setShowConfigMenu(value => !value);
                     }}
                     aria-expanded={showConfigMenu}
                     hidden={isConfigHidden}

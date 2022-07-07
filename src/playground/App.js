@@ -1,6 +1,6 @@
 import "regenerator-runtime/runtime";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Alert from "./components/Alert";
 import CrashAlert from "./components/CrashAlert";
 import Footer from "./components/Footer";
@@ -125,12 +125,33 @@ const App = () => {
         setOptions(newOptions);
         storeState({ newOptions });
     };
+    const [showConfigMenu, setShowConfigMenu] = useState(false);
+    const [isConfigHidden, setIsConfigHidden] = useState(window.matchMedia("(min-width: 1023px)").matches);
+
+    useEffect(() => {
+        const mq = window.matchMedia("(min-width: 1023px)");
+
+        const ConfigToggler = () => {
+            setIsConfigHidden(mq.matches);
+        };
+
+        mq.addEventListener("change", ConfigToggler);
+
+
+        return () => mq.removeEventListener("change", ConfigToggler);
+    }, []);
+
 
     return (
         <div className="playground-wrapper">
             <div className="playground__config-and-footer">
                 <section className="playground__config" aria-labelledby="playground__config-toggle">
-                    <button className="playground__config-toggle" id="playground__config-toggle" hidden>
+                    <button className="playground__config-toggle" id="playground__config-toggle" onClick={ () => {
+                        setShowConfigMenu(value => !value);
+                    }}
+                    aria-expanded={showConfigMenu}
+                    hidden={isConfigHidden}
+                    >
                         <span>Configuration</span>
                         <svg width="20" height="20" viewBox="20 20 60 60" aria-hidden="true" focusable="false">
                             <path id="ham-top" d="M30,37 L70,37 Z" stroke="currentColor"></path>
@@ -139,7 +160,7 @@ const App = () => {
                         </svg>
                     </button>
                     <span className="visually-hidden" id="infobox">Changing configurations will apply the selected changes to the playground.</span>
-                    <div className="playground__config-options" id="playground__config-options" data-open="false">
+                    <div className="playground__config-options" id="playground__config-options" data-open={isConfigHidden ? true : showConfigMenu }>
                         <Configuration
                             ruleNames={ruleNames}
                             options={options}

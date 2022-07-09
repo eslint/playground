@@ -2,11 +2,13 @@ import React, { useState } from "react";
 
 export default function ThemeSwitcher() {
     const [theme, setTheme] = useState(document.documentElement.getAttribute("data-theme"));
-    const toggleTheme= (theme)=>{
-        setTheme(theme)
-        document.documentElement.setAttribute("data-theme", theme);
-        window.localStorage.setItem("theme", theme);
-    }
+
+    const toggleTheme = newTheme => {
+        setTheme(newTheme);
+        document.documentElement.setAttribute("data-theme", newTheme);
+        window.localStorage.setItem("theme", newTheme);
+    };
+
     return (
         <div role="region" className="theme-switcher" aria-labelledby="theme-switcher-label" id="js-theme-switcher">
             <h2 className="theme-switcher-label visually-hidden" id="theme-switcher-label">Theme <span className="visually-hidden">Switcher</span></h2>
